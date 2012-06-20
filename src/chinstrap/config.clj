@@ -140,7 +140,7 @@
     (get-str "chinstrap.mongodb.bucket")))
 
 (required
-  (defprop listen-port
+  (defprop db-listen-port
     "The port to listen to for incoming connections."
     (get-int "chinstrap.app.listen-port")))
 
