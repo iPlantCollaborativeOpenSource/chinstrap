@@ -85,39 +85,64 @@
   (dosync (alter required-props conj prop)))
 
 (required
-  (defprop listen-port
-    "The port to listen to for incoming connections."
-    (get-int "chinstrap.listen-port")))
-
-(required
-  (defprop db-vendor
-    "The name of the database vendor (e.g. postgresql)."
-    (get-str "chinstrap.db.vendor")))
-
-(required
   (defprop db-host
     "the host name or IP address used to connect to the database."
-    (get-str "chinstrap.db.host")))
+    (get-str "chinstrap.mongodb.host")))
 
 (required
   (defprop db-port
     "The port used to connect to the database."
-    (get-str "chinstrap.db.port")))
+    (get-int "chinstrap.mongodb.port")))
 
 (required
-  (defprop db-name
+  (defprop db-database
     "The name of the database."
-    (get-str "chinstrap.db.name")))
+    (get-str "chinstrap.mongodb.database")))
 
 (required
-  (defprop db-user
-    "The username used to authenticate to the databse."
-    (get-str "chinstrap.db.user")))
+  (defprop db-connections-per-host
+    "The max number of connections one host can have."
+    (get-int "chinstrap.mongodb.connections-per-host")))
 
 (required
-  (defprop db-max-idle-time
-    "The maximum amount of time to retain idle database connections."
-    (* (get-int "chinstrap.db.max-idle-minutes") 60)))
+  (defprop db-threads-allowed-to-block-for-connection-multiplier
+    "The max number of connections one host can have."
+    (get-int "chinstrap.mongodb.threads-allowed-to-block-for-connection-multiplier")))
+
+(required
+  (defprop db-max-wait-time
+    "The maximum wait time in milliseconds that a thread may wait for a connection to become available. A value of 0 means that it will not wait. A negative value means to wait indefinitely."
+    (get-int "chinstrap.mongodb.max-wait-time")))
+
+(required
+  (defprop db-connect-timeout
+    "Time it takes for the database connection to timeout in milliseconds"
+    (get-int "chinstrap.mongodb.connect-timeout")))
+
+(required
+  (defprop db-socket-timeout
+    "Time it takes for the socket connection to timeout in milliseconds"
+    (get-int "chinstrap.mongodb.socket-timeout")))
+
+(required
+  (defprop db-auto-connect-retry
+    "Whether or not the database should attempt to auto-connect"
+    (get-str "chinstrap.mongodb.auto-connect-retry")))
+
+(required
+  (defprop db-max-auto-connect-retry-time
+    "The amount of time that the database should attempt to auto-connect"
+    (get-int "chinstrap.mongodb.max-auto-connect-retry-time")))
+
+(required
+  (defprop db-bucket
+    "The bucket in the database whose data will be accessed."
+    (get-str "chinstrap.mongodb.bucket")))
+
+(required
+  (defprop listen-port
+    "The port to listen to for incoming connections."
+    (get-int "chinstrap.app.listen-port")))
 
 (defn configuration-valid
   "Ensures that all required properties are valued."

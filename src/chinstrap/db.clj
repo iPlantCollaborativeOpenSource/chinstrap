@@ -25,3 +25,8 @@
   (when (not (configuration-valid))
     (log/warn "THE CONFIGURATION IS INVALID - EXITING NOW")
     (System/exit 1)))
+
+(defn db-config
+  "Sets up calls to the db."
+  []
+  (load-configuration))
