@@ -1,13 +1,10 @@
-(ns chinstrap.views.welcome
-  (:require [chinstrap.views.common :as common])
+(ns chinstrap.views.pages
+  (:require [chinstrap.views.common :as template])
   (:use [noir.core :only [defpage]]))
 
 (defpage "/" []
-    (common/layout
+    (template/start
+        [:br][:br][:br][:br][:br][:br]
+        [:br][:br][:br][:br][:br][:br]
         [:h1 "The Chinstrap has you."]
-        [:h2 "The Chinstrap has you."]
-        [:h3 "The Chinstrap has you."]
-        [:h4 "The Chinstrap has you."]
-        [:h5 "The Chinstrap has you."]
-        [:h6 "The Chinstrap has you."]
     ))
