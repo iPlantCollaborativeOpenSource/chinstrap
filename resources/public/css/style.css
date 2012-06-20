@@ -1,0 +1,10 @@
+body{
+background-color: black;
+color: green;
+font-family: 'Gloria Hallelujah', cursive;
+}
+
+#margin{
+margin: 0px auto;
+text-align: center;
+}
