@@ -8,4 +8,6 @@
         [:h2 "The Chinstrap has you."]
         [:h3 "The Chinstrap has you."]
         [:h4 "The Chinstrap has you."]
+        [:h5 "The Chinstrap has you."]
+        [:h6 "The Chinstrap has you."]
     ))
