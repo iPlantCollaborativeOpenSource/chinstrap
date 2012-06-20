@@ -68,12 +68,6 @@
     (catch NumberFormatException e
       (do (record-invalid-prop prop-name e) 0))))
 
-(defn- get-vector
-  "Gets a vector property from the properties that were loaded from
-   Zookeeper."
-  [prop-name]
-  (split (get-str prop-name) #",\s*"))
-
 (defmacro defprop
   "Defines a property."
   [sym docstr & init-forms]
@@ -127,12 +121,7 @@
 (required
   (defprop db-auto-connect-retry
     "Whether or not the database should attempt to auto-connect"
-    (get-str "chinstrap.mongodb.auto-connect-retry")))
-
-(required
-  (defprop db-max-auto-connect-retry-time
-    "The amount of time that the database should attempt to auto-connect"
-    (get-int "chinstrap.mongodb.max-auto-connect-retry-time")))
+    (if (= (get-str "chinstrap.mongodb.auto-connect-retry") "true") true false)))
 
 (required
   (defprop db-bucket

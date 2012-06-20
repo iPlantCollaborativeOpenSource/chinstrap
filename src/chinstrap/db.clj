@@ -5,11 +5,7 @@
     (:require [clojure.tools.logging :as log]
               [clojure-commons.clavin-client :as cl]))
 
-(let [^MongoOptions opts
-          (mg/mongo-options
-              :threads-allowed-to-block-for-connection-multiplier 300)
-      ^ServerAddress sa  (mg/server-address "127.0.0.1" 27017)]
-    (mg/connect! sa opts))
+
 
 (defn load-configuration
   "Loads the configuration properties from Zookeeper."
@@ -38,11 +34,28 @@
    :connect-timeout (db-connect-timeout)
    :socket-timeout (db-socket-timeout)
    :auto-connect-retry (db-auto-connect-retry)
-   :max-auto-connect-retry-time (db-max-auto-connect-retry-time)
    :bucket (db-bucket)
    :listen-port (db-listen-port)})
+
+(defn db-connect
+  "Connects to the mongoDB using the settings passed in from zookeeper to monger."
+  []
+  (let [^MongoOptions opts
+            (mg/mongo-options
+                :connections-per-host (db-connections-per-host)
+                :threads-allowed-to-block-for-connection-multiplier (db-threads-allowed-to-block-for-connection-multiplier)
+                :max-wait-time (db-max-wait-time)
+                :connect-timeout (db-connect-timeout)
+                :socket-timeout (db-socket-timeout)
+                :auto-connect-retry (db-auto-connect-retry))
+        ^ServerAddress sa
+            (mg/server-address (db-host) (db-port))]
+       (mg/connect! sa opts))
+  (mg/set-db! (mg/get-db (db-database))))
 
 (defn db-config
   "Sets up a connection to the database using config data loaded from zookeeper into Monger."
   []
-  (load-configuration))
+  (load-configuration)
+  (db-connect)
+  )

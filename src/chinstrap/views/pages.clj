@@ -19,6 +19,6 @@
         [:br][:br][:br][:br][:br][:br]
         (image "/img/logo.png")
         [:h1 "Config Data (For Testing Only)"]
-        [:p ""(interpose "<br>" (db-spec))]
+        [:p (interpose "<br>" (db-spec))]
         [:br][:br][:br][:br][:br][:br]
     ))
