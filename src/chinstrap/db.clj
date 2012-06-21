@@ -5,8 +5,6 @@
     (:require [clojure.tools.logging :as log]
               [clojure-commons.clavin-client :as cl]))
 
-
-
 (defn load-configuration
   "Loads the configuration properties from Zookeeper."
   []

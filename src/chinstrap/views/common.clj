@@ -1,6 +1,6 @@
 (ns chinstrap.views.common
     (:use [noir.core :only [defpartial]]
-          [hiccup.page :only [include-css html5]]))
+          [hiccup.page]))
 
 (defpartial start [& content]
     (html5
@@ -14,7 +14,8 @@
 (defpartial page [& content]
     (html5
         [:head
-            [:title "Discovery Enviroment Job Statuses"]
+            [:title "Discovery Enviroment Jobs Status"]
             (include-css "/css/reset.css"
-                         "/css/style.css")]
-        [:body [:div#wrapper content]]))
+                         "/css/style.css")
+            (include-js  "/js/ajax-jobs.js")]
+        [:body {:onload "getJobs()"} [:div#wrapper content]]))
