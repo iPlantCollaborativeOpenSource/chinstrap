@@ -7,14 +7,6 @@
         [hiccup.element]))
 
 (defpage "/" []
-  (template/start
-    [:br][:br][:br][:br][:br][:br]
-    [:br][:br][:br][:br][:br][:br]
-    [:h1 (link-to "/status" "The Chinstrap has you.")]
-    [:br][:br][:br][:br][:br][:br]
-    (image "/img/logo.png")))
-
-(defpage "/status" []
   (template/page
     [:br][:br][:br][:br][:br][:br]
     (image "/img/logo.png")
