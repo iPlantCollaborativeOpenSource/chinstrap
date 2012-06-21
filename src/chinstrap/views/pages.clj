@@ -1,8 +1,8 @@
 (ns chinstrap.views.pages
-  (:require [chinstrap.views.common :as template])
+  (:require [chinstrap.views.common :as template]
+            [monger.collection :as mc])
   (:use [noir.core :only [defpage]]
         [chinstrap.db]
-        [clojure.pprint]
         [hiccup.element]))
 
 (defpage "/" []
@@ -14,11 +14,12 @@
         (image "/img/logo.png")
     ))
 
-(defpage "/status/" []
+(defpage "/status" []
     (template/page
         [:br][:br][:br][:br][:br][:br]
         (image "/img/logo.png")
-        [:h1 "Config Data (For Testing Only)"]
-        [:p (interpose "<br>" (db-spec))]
-        [:br][:br][:br][:br][:br][:br]
-    ))
+        [:br][:br]
+        [:div#info
+            [:h1 "Running Jobs: " (mc/count "jobs" {:state.status "Running"})]
+            [:h1 "Submitted Jobs: " (mc/count "jobs" {:state.status "Submitted"})]
+            [:h1 "Completed Jobs: " (mc/count "jobs" {:state.status "Completed"})]]))
