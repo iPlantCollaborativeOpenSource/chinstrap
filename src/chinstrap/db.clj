@@ -1,8 +1,8 @@
 (ns chinstrap.db
-    (:use [monger.core :as mg]
-          [chinstrap.config])
+    (:use [chinstrap.config])
     (:import [com.mongodb MongoOptions ServerAddress])
     (:require [clojure.tools.logging :as log]
+              [monger.core :as mg ]
               [clojure-commons.clavin-client :as cl]))
 
 (defn load-configuration
@@ -55,5 +55,4 @@
   "Sets up a connection to the database using config data loaded from zookeeper into Monger."
   []
   (load-configuration)
-  (db-connect)
-  )
+  (db-connect))
