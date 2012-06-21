@@ -20,15 +20,13 @@
     (image "/img/logo.png")
     [:br][:br]
     [:div#test]
-;    (javascript-tag "window.setInterval(getJobs,1000);")
+    (javascript-tag "window.setInterval(getJobs,36000);")
     [:h1 "Running Jobs: " [:span#running]]
     [:h1 "Submitted Jobs: " [:span#submitted]]
     [:h1 "Completed Jobs: " [:span#completed]]))
 
-(def running (mc/count "jobs" {:state.status "Running"}))
-(def submitted (mc/count "jobs" {:state.status "Submitted"}))
-(def completed (mc/count "jobs" {:state.status "Completed"}))
-
 (defpage "/get-jobs"
   []
-  (json-str {:running running, :submitted submitted, :completed completed}))
+  (json-str {:running (mc/count "jobs" {:state.status "Running"}),
+             :submitted (mc/count "jobs" {:state.status "Submitted"}),
+             :completed (mc/count "jobs" {:state.status "Completed"})}))
