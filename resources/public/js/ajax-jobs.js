@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", getJobs);
+
 function getJobs() {
 
 	var request = new XMLHttpRequest();

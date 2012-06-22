@@ -1,5 +1,6 @@
 (ns chinstrap.views.pages
   (:require [chinstrap.views.common :as template]
+            [noir.response :as nr]
             [monger.collection :as mc])
   (:use [noir.core :only [defpage]]
         [chinstrap.db]
@@ -8,17 +9,16 @@
 
 (defpage "/" []
   (template/page
-    [:br][:br][:br][:br][:br][:br]
     (image "/img/logo.png")
-    [:br][:br]
-    [:div#test]
     (javascript-tag "window.setInterval(getJobs,36000);")
-    [:h1 "Running Jobs: " [:span#running]]
-    [:h1 "Submitted Jobs: " [:span#submitted]]
-    [:h1 "Completed Jobs: " [:span#completed]]))
+    [:h1 "Discovery Environment:"]
+    [:div#inner
+      [:h2.text "Running Apps: " [:span#running]]
+      [:h2.text "Submitted Apps: " [:span#submitted]]
+      [:h2.text "Completed Apps: " [:span#completed]]]))
 
 (defpage "/get-jobs"
   []
-  (json-str {:running (mc/count "jobs" {:state.status "Running"}),
+  (nr/json {:running (mc/count "jobs" {:state.status "Running"}),
              :submitted (mc/count "jobs" {:state.status "Submitted"}),
              :completed (mc/count "jobs" {:state.status "Completed"})}))
