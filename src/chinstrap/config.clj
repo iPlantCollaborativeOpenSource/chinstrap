@@ -113,54 +113,59 @@
     "The database password."
     (get-str "chinstrap.postgresdb.password")))
 
+(required
+  (defprop postgresdb-max-idle-time
+    "The max idle time for the database in minutes."
+    (get-str "chinstrap.postgresdb.max-idle-time")))
+
 ;MongoDB connection properties
 (required
-  (defprop db-host
+  (defprop mongodb-host
     "the host name or IP address used to connect to the database."
     (get-str "chinstrap.mongodb.host")))
 
 (required
-  (defprop db-port
+  (defprop mongodb-port
     "The port used to connect to the database."
     (get-int "chinstrap.mongodb.port")))
 
 (required
-  (defprop db-database
+  (defprop mongodb-database
     "The name of the database."
     (get-str "chinstrap.mongodb.database")))
 
 (required
-  (defprop db-connections-per-host
+  (defprop mongodb-connections-per-host
     "The max number of connections one host can have."
     (get-int "chinstrap.mongodb.connections-per-host")))
 
 (required
-  (defprop db-max-wait-time
+  (defprop mongodb-max-wait-time
     "The maximum wait time in milliseconds that a thread may wait for a connection to become available. A value of 0 means that it will not wait. A negative value means to wait indefinitely."
     (get-int "chinstrap.mongodb.max-wait-time")))
 
 (required
-  (defprop db-connect-timeout
+  (defprop mongodb-connect-timeout
     "Time it takes for the database connection to timeout in milliseconds"
     (get-int "chinstrap.mongodb.connect-timeout")))
 
 (required
-  (defprop db-socket-timeout
+  (defprop mongodb-socket-timeout
     "Time it takes for the socket connection to timeout in milliseconds"
     (get-int "chinstrap.mongodb.socket-timeout")))
 
 (required
-  (defprop db-auto-connect-retry
+  (defprop mongodb-auto-connect-retry
     "Whether or not the database should attempt to auto-connect"
     (if (= (get-str "chinstrap.mongodb.auto-connect-retry") "true") true false)))
 
 (required
-  (defprop db-bucket
+  (defprop mongodb-bucket
     "The bucket in the database whose data will be accessed."
     (get-str "chinstrap.mongodb.bucket")))
 
 (required
-  (defprop db-listen-port
+  (defprop mongodb-listen-port
     "The port to listen to for incoming connections."
     (get-int "chinstrap.app.listen-port")))
 

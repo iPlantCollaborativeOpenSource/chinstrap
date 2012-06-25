@@ -21,36 +21,33 @@
     (System/exit 1)))
 
 (defn db-spec
-  "Constructs a database connection specification from the configuration settings."
+  "Constructs a database connection specification from the configuration
+   settings."
   []
-  {:host (db-host)
-   :port (db-port)
-   :dbname (db-database)
-   :connections-per-host (db-connections-per-host)
-   :max-wait-time (db-max-wait-time)
-   :connect-timeout (db-connect-timeout)
-   :socket-timeout (db-socket-timeout)
-   :auto-connect-retry (db-auto-connect-retry)
-   :bucket (db-bucket)
-   :listen-port (db-listen-port)})
+  {:classname (postgresdb-driver)
+   :subprotocol (postgresdb-subprotocol)
+   :subname (str "//" (postgresdb-host) ":" (postgresdb-port) "/" (postgresdb-database))
+   :user (postgresdb-user)
+   :password (postgresdb-password)
+   :max-idle-time (postgresdb-max-idle-time)})
 
-(defn db-connect
+(defn mongodb-connect
   "Connects to the mongoDB using the settings passed in from zookeeper to monger."
   []
   (let [^MongoOptions opts
             (mg/mongo-options
-                :connections-per-host (db-connections-per-host)
-                :max-wait-time (db-max-wait-time)
-                :connect-timeout (db-connect-timeout)
-                :socket-timeout (db-socket-timeout)
-                :auto-connect-retry (db-auto-connect-retry))
+                :connections-per-host (mongodb-connections-per-host)
+                :max-wait-time (mongodb-max-wait-time)
+                :connect-timeout (mongodb-connect-timeout)
+                :socket-timeout (mongodb-socket-timeout)
+                :auto-connect-retry (mongodb-auto-connect-retry))
         ^ServerAddress sa
-            (mg/server-address (db-host) (db-port))]
+            (mg/server-address (mongodb-host) (mongodb-port))]
        (mg/connect! sa opts))
-  (mg/set-db! (mg/get-db (db-database))))
+  (mg/set-db! (mg/get-db (mongodb-database))))
 
 (defn db-config
   "Sets up a connection to the database using config data loaded from zookeeper into Monger."
   []
   (load-configuration)
-  (db-connect))
+  (mongodb-connect))
