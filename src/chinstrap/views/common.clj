@@ -10,7 +10,7 @@
                      "/css/style.css"
                      "http://fonts.googleapis.com/css?family=Arvo:400"
                      "http://fonts.googleapis.com/css?family=Ubuntu")
-        (include-js  "/js/get-running-de-jobs.js")]
+        (include-js  "/js/get-de-jobs.js")]
       [:body [:div#wrapper content]]))
 
 (defpartial Components-Page [& content]
@@ -20,5 +20,6 @@
         (include-css "/css/reset.css"
                      "/css/style.css"
                      "http://fonts.googleapis.com/css?family=Arvo:400"
-                     "http://fonts.googleapis.com/css?family=Ubuntu")]
+                     "http://fonts.googleapis.com/css?family=Ubuntu")
+        (include-js  "/js/get-components.js")]
       [:body [:div#wrapper content]]))

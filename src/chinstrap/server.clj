@@ -1,6 +1,5 @@
 (ns chinstrap.server
-  (:use [chinstrap.db]
-        [chinstrap.kormaconfig])
+  (:use [chinstrap.db])
   (:require [noir.server :as server]))
 
 (server/load-views-ns 'chinstrap.views)

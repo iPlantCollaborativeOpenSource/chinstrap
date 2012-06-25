@@ -4,6 +4,8 @@
             [monger.collection :as mc])
   (:use [noir.core :only [defpage]]
         [chinstrap.db]
+        [korma.core]
+        [kameleon.entities]
         [hiccup.element]))
 
 ;Page listing the count of different states of DE Jobs.
@@ -18,7 +20,7 @@
       [:h2.text "Submitted Apps: " [:span#submitted]]
       [:h2.text "Completed Apps: " [:span#completed]]]))
 
-;AJAX call from the Javascript file 'get-running-de-jobs.js'.
+;AJAX call from the Javascript file 'get-de-jobs.js'.
 (defpage "/get-jobs" []
   (nr/json {:running (mc/count "jobs" {:state.status "Running"}),
             :submitted (mc/count "jobs" {:state.status "Submitted"}),
@@ -31,4 +33,11 @@
     (image "/img/logo.png")
     [:p "Components Found Without Transformation Activities"]
     [:br]
-    [:div#inner]))
+    [:div#inner
+      [:h4.text "Deployed Components: " [:span#all]]
+      [:h4.text "Without Associated Transformations: " [:span#without]]
+      [:h4.text "With Associated Transformations: " [:span#with]]
+    ]))
+
+;AJAX call from the Javascript file 'get-deployed-components.js'.
+(defpage "/get-components" [])

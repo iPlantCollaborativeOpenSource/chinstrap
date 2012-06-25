@@ -1,5 +1,6 @@
 (ns chinstrap.db
-    (:use [chinstrap.config])
+    (:use [chinstrap.config]
+          [korma.db])
     (:import [com.mongodb MongoOptions ServerAddress])
     (:require [clojure.tools.logging :as log]
               [monger.core :as mg ]
@@ -31,6 +32,13 @@
    :password (postgresdb-password)
    :max-idle-time (postgresdb-max-idle-time)})
 
+(defn korma-define
+  "Defines a korma representation of the database using the settings passed in from zookeeper."
+  []
+  (let [spec (db-spec)]
+    (defonce de (create-db spec))
+    (default-connection de)))
+
 (defn mongodb-connect
   "Connects to the mongoDB using the settings passed in from zookeeper to monger."
   []
@@ -47,7 +55,8 @@
   (mg/set-db! (mg/get-db (mongodb-database))))
 
 (defn db-config
-  "Sets up a connection to the database using config data loaded from zookeeper into Monger."
+  "Sets up a connection to the database using config data loaded from zookeeper into Monger and Korma."
   []
   (load-configuration)
-  (mongodb-connect))
+  (mongodb-connect)
+  (korma-define))
