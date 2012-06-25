@@ -5,6 +5,7 @@
             [monger.collection :as mc])
   (:use [noir.core]
         [chinstrap.db]
+        [clojure.data.json :only (json-str)]
         [hiccup.element]))
 
 (defpage "/" []
@@ -46,6 +47,6 @@
 
 ;AJAX call from the Javascript file 'get-deployed-components.js'.
 (defpage "/get-components" []
-  nr/content-type "text" {:all     (str(cq/all-count))
-           :with    (str(cq/with-count))
-           :without (str(cq/without-count))})
+  (nr/json {:all (cq/all-count)
+            :with (cq/with-count)
+            :without (cq/without-count)}))
