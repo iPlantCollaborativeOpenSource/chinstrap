@@ -77,7 +77,43 @@
   "Registers a property in the list of required properties."
   [prop]
   (dosync (alter required-props conj prop)))
+;postgres connection properties
+(required
+  (defprop postgresdb-driver
+    "The database driver."
+    (get-str "chinstrap.postgresdb.driver")))
 
+(required
+  (defprop postgresdb-subprotocol
+    "The database subprotocol."
+    (get-str "chinstrap.postgresdb.subprotocol")))
+
+(required
+  (defprop postgresdb-host
+    "the host name or IP address used to connect to the database."
+    (get-str "chinstrap.postgresdb.host")))
+
+(required
+  (defprop postgresdb-port
+    "The port used to connect to the database."
+    (get-int "chinstrap.postgresdb.port")))
+
+(required
+  (defprop postgresdb-database
+    "The name of the database."
+    (get-str "chinstrap.postgresdb.database")))
+
+(required
+  (defprop postgresdb-user
+    "The database username."
+    (get-str "chinstrap.postgresdb.user")))
+
+(required
+  (defprop postgresdb-password
+    "The database password."
+    (get-str "chinstrap.postgresdb.password")))
+
+;MongoDB connection properties
 (required
   (defprop db-host
     "the host name or IP address used to connect to the database."
@@ -97,11 +133,6 @@
   (defprop db-connections-per-host
     "The max number of connections one host can have."
     (get-int "chinstrap.mongodb.connections-per-host")))
-
-(required
-  (defprop db-threads-allowed-to-block-for-connection-multiplier
-    "The max number of connections one host can have."
-    (get-int "chinstrap.mongodb.threads-allowed-to-block-for-connection-multiplier")))
 
 (required
   (defprop db-max-wait-time
