@@ -27,7 +27,6 @@
    :port (db-port)
    :dbname (db-database)
    :connections-per-host (db-connections-per-host)
-   :tatbfcm (db-threads-allowed-to-block-for-connection-multiplier)
    :max-wait-time (db-max-wait-time)
    :connect-timeout (db-connect-timeout)
    :socket-timeout (db-socket-timeout)
@@ -41,7 +40,6 @@
   (let [^MongoOptions opts
             (mg/mongo-options
                 :connections-per-host (db-connections-per-host)
-                :threads-allowed-to-block-for-connection-multiplier (db-threads-allowed-to-block-for-connection-multiplier)
                 :max-wait-time (db-max-wait-time)
                 :connect-timeout (db-connect-timeout)
                 :socket-timeout (db-socket-timeout)
