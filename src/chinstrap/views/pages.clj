@@ -1,11 +1,10 @@
 (ns chinstrap.views.pages
   (:require [chinstrap.views.common :as template]
             [noir.response :as nr]
+            [chinstrap.queries :as cq]
             [monger.collection :as mc])
   (:use [noir.core]
         [chinstrap.db]
-        [korma.core]
-        [kameleon.entities]
         [hiccup.element]))
 
 (defpage "/" []
@@ -46,4 +45,7 @@
     (link-to "/jobs" "Discovery Environment Job Status")))
 
 ;AJAX call from the Javascript file 'get-deployed-components.js'.
-(defpage "/get-components" [])
+(defpage "/get-components" []
+  nr/content-type "text" {:all     (str(cq/all-count))
+           :with    (str(cq/with-count))
+           :without (str(cq/without-count))})
