@@ -8,7 +8,7 @@
         [hiccup.element]))
 
 (defpage "/" []
-  (template/page
+  (template/DE-Page
     (image "/img/logo.png")
     (javascript-tag "window.setInterval(getJobs,36000);")
     [:h1 "Discovery Environment:"]
@@ -17,8 +17,13 @@
       [:h2.text "Submitted Apps: " [:span#submitted]]
       [:h2.text "Completed Apps: " [:span#completed]]]))
 
-(defpage "/get-jobs"
-  []
+(defpage "/get-jobs" []
   (nr/json {:running (mc/count "jobs" {:state.status "Running"}),
              :submitted (mc/count "jobs" {:state.status "Submitted"}),
              :completed (mc/count "jobs" {:state.status "Completed"})}))
+
+(defpage "/components" []
+  (template/Components-Page
+    (image "/img/logo.png")
+    [:h2 "Components Found Without Transformation Activities:"]
+    [:div#inner]))

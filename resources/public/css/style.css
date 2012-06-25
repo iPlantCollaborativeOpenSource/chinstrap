@@ -28,7 +28,7 @@ height: 90px;
 margin: 0px auto;
 margin-top: 150px;
 border: 1px solid #A2A2A2;
-border-radius: 2mm;
+border-radius: 4px;
 background-color: #E5E5E5;
 width: 500px;
 padding: 75px;
@@ -38,10 +38,10 @@ padding-bottom: 60px;
 
 #inner
 {
-border: none;
 border-top: 1px solid #2C848C;
-border-bottom: 1px solid #E0F3F5;
-border-radius: 2mm;
+border-left: 1px solid #2C848C;
+border-bottom: 1px solid white;
+border-right: 1px solid white;
 width: 300px;
 margin: 0px auto;
 background-color: #64C5CE;
