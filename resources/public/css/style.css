@@ -23,6 +23,11 @@ width: 350px;
 height: 90px;
 }
 
+a
+{
+text-decoration: none;
+}
+
 #wrapper
 {
 margin: 0px auto;

@@ -2,23 +2,28 @@
   (:require [chinstrap.views.common :as template]
             [noir.response :as nr]
             [monger.collection :as mc])
-  (:use [noir.core :only [defpage]]
+  (:use [noir.core]
         [chinstrap.db]
         [korma.core]
         [kameleon.entities]
         [hiccup.element]))
 
-;Page listing the count of different states of DE Jobs.
 (defpage "/" []
+  (render "/jobs"))
+
+;Page listing the count of different states of DE Jobs.
+(defpage "/jobs" []
   (template/DE-Page
     (image "/img/logo.png")
     (javascript-tag "window.setInterval(getJobs,36000);")
-    [:p "Discovery Environment Job Statuses"]
+    [:h3 "Discovery Environment Job Statuses"]
     [:br]
     [:div#inner
-      [:h2.text "Running Apps: " [:span#running]]
-      [:h2.text "Submitted Apps: " [:span#submitted]]
-      [:h2.text "Completed Apps: " [:span#completed]]]))
+      [:h3.text "Running Apps: " [:span#running]]
+      [:h3.text "Submitted Apps: " [:span#submitted]]
+      [:h3.text "Completed Apps: " [:span#completed]]]
+    [:br]
+    (link-to "/components" "Components")))
 
 ;AJAX call from the Javascript file 'get-de-jobs.js'.
 (defpage "/get-jobs" []
@@ -31,13 +36,14 @@
 (defpage "/components" []
   (template/Components-Page
     (image "/img/logo.png")
-    [:p "Components Found Without Transformation Activities"]
+    [:h3 "Deployed Components"]
     [:br]
     [:div#inner
-      [:h4.text "Deployed Components: " [:span#all]]
-      [:h4.text "Without Associated Transformations: " [:span#without]]
-      [:h4.text "With Associated Transformations: " [:span#with]]
-    ]))
+      [:h3.text "Deployed Components: " [:span#all]]
+      [:h3.text "Without Transformations: " [:span#without]]
+      [:h3.text "With Transformations: " [:span#with]]]
+    [:br]
+    (link-to "/jobs" "Discovery Environment Job Status")))
 
 ;AJAX call from the Javascript file 'get-deployed-components.js'.
 (defpage "/get-components" [])
