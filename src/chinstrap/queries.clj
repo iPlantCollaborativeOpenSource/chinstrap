@@ -30,3 +30,12 @@
       (join "left outer" :template
         (= :template.component_id :deployed_components.id))
       (where {:template.component_id nil})))))
+
+(defn without-list
+  "Returns a list of all the queried deployed components in the DB without
+   associated transformation activities."  []
+  (select deployed_components
+    (fields :name :version)
+    (join "left outer" :template
+      (= :template.component_id :deployed_components.id))
+    (where {:template.component_id nil})))

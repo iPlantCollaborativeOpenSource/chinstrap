@@ -39,13 +39,25 @@
     [:h3 "Deployed Components"]
     [:br]
     [:div#inner
-      [:h3.text "Deployed Components: " [:span#all]]
       [:h3.text "Without Transformations: " [:span#without]]
-      [:h3.text "With Transformations: " [:span#with]]]
-    [:br]
-    (link-to "/jobs" "Discovery Environment Job Status")))
+      [:h3.text "With Transformations: " [:span#with]]
+      [:h3.text "Total Components: " [:span#all]]]
+      [:br]
+      (link-to "/jobs" "Discovery Environment Job Status")
+      [:br]
+      [:br]
+      [:table
+        [:caption [:h4 "Components Without Transformations Details:"]]
+        [:tr [:th "Name"]
+             [:th "Version"]]
+        (for [list
+               (map identity (cq/without-list))]
+             [:tr
+               [:td (str (:name list))]
+               [:td (str (or (:version list)"null"))]])]
+      [:br]))
 
-;AJAX call from the Javascript file 'get-deployed-components.js'.
+;AJAX call from the Javascript file 'get-components.js'.
 (defpage "/get-components" []
   (nr/json {:all (cq/all-count)
             :with (cq/with-count)

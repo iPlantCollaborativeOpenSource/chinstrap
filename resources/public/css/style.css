@@ -16,6 +16,15 @@ margin-bottom: 10px;
 text-align: left;
 }
 
+table,td
+{
+margin: 0px auto;
+background-color: #F6F6F6;
+text-align: left;
+padding: 2px;
+border: 1px solid black;
+}
+
 img
 {
 margin-bottom: 10px;
