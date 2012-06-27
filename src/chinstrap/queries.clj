@@ -36,6 +36,7 @@
    associated transformation activities."  []
   (select deployed_components
     (fields :name :version)
+    (order :name :asc)
     (join "left outer" :template
       (= :template.component_id :deployed_components.id))
     (where {:template.component_id nil})))

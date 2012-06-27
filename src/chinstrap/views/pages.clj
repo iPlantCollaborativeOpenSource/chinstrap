@@ -36,12 +36,12 @@
 (defpage "/components" []
   (template/Components-Page
     (image "/img/logo.png")
-    [:h3 "Deployed Components"]
+    [:h3 "DE Tools and Associated App Info"]
     [:br]
     [:div#inner
-      [:h3.text "Without Transformations: " [:span#without]]
-      [:h3.text "With Transformations: " [:span#with]]
-      [:h3.text "Total Components: " [:span#all]]]
+      [:h3.text "Tools Without DE Apps: " [:span#without]]
+      [:h3.text "Tools With DE Apps: " [:span#with]]
+      [:h3.text "Total Tools: " [:span#all]]]
       [:br]
       (link-to "/jobs" "Discovery Environment Job Status")
       [:br]
@@ -54,7 +54,7 @@
                (map identity (cq/without-list))]
              [:tr
                [:td (str (:name list))]
-               [:td (str (or (:version list)"null"))]])]
+               [:td (str (or (:version list) "No Version"))]])]
       [:br]))
 
 ;AJAX call from the Javascript file 'get-components.js'.
