@@ -10,8 +10,8 @@ function getComponents() {
 			var response = JSON.parse(request.responseText);
 
 			document.getElementById('all').innerHTML = response['all'];
-			document.getElementById('with').innerHTML = response['with'];
-			document.getElementById('without').innerHTML = response['without'];
+			document.getElementById('private').innerHTML = response['private'];
+			document.getElementById('public').innerHTML = response['public'];
 		}
 	}
 	request.send();

@@ -39,19 +39,19 @@
     [:h3 "DE Tools and Associated App Info"]
     [:br]
     [:div#inner
-      [:h3.text "Tools Without DE Apps: " [:span#without]]
-      [:h3.text "Tools With DE Apps: " [:span#with]]
+      [:h3.text "With associated DE apps: " [:span#public]]
+      [:h3.text "Without associated DE apps: " [:span#private]]
       [:h3.text "Total Tools: " [:span#all]]]
       [:br]
       (link-to "/jobs" "Discovery Environment Job Status")
       [:br]
       [:br]
       [:table
-        [:caption [:h4 "Components Without Transformations Details:"]]
+        [:caption [:h4 "Unused Component Details:"]]
         [:tr [:th "Name"]
              [:th "Version"]]
         (for [list
-               (map identity (cq/without-list))]
+               (map identity (cq/unused-list))]
              [:tr
                [:td (str (:name list))]
                [:td (str (or (:version list) "No Version"))]])]
@@ -60,5 +60,6 @@
 ;AJAX call from the Javascript file 'get-components.js'.
 (defpage "/get-components" []
   (nr/json {:all (cq/all-count)
-            :with (cq/with-count)
-            :without (cq/without-count)}))
+            :private (cq/unused-count)
+            :public (cq/used-count)
+           }))
