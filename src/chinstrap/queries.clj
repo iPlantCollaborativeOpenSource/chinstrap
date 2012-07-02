@@ -11,51 +11,6 @@
     (select deployed_components
       (aggregate (count :*) :all)))))
 
-(defn with-count
-  "Returns a count of all public deployed components in the DB with associated
-   transformation activities."
-  []
-  (second (ffirst
-    (select deployed_components
-      (aggregate "COUNT(DISTINCT \"deployed_components\".*)" :with)
-      (join "inner" :template
-        (= :deployed_components.id :template.component_id))))))
-
-(defn without-count
-  "Returns a count of all the deployed components in the DB without
-   associated transformation activities."  []
-  (second (ffirst
-    (select deployed_components
-      (aggregate (count :*) :without)
-      (join "left outer" :template
-        (= :template.component_id :deployed_components.id))
-      (where {:template.component_id nil})))))
-
-(defn unused-list-deprecate
-  "Returns a list of all the deployed components in the DB without
-   associated transformation activities."  []
-  (select deployed_components
-    (fields :name :version)
-    (order :name :asc)
-    (join "left outer" :template
-      (= :template.component_id :deployed_components.id))
-    (where {:template.component_id nil})))
-
-(defn used-count-korma
-  "Returns a count of tools publicly deployed in DE apps" []
-  (second (ffirst
-    (select deployed_components
-      (aggregate "COUNT(DISTINCT \"deployed_components\".*)" :unused)
-      (join "LEFT" :template (= :deployed_components.id :template.component_id))
-      (join "LEFT" :transformations (= :template.id :transformations.template_id))
-      (join "LEFT" :transformation_steps (= :transformations.id :transformation_steps.transformation_id))
-      (join "LEFT" :transformation_task_steps (= :transformation_steps.id :transformation_task_steps.transformation_step_id))
-      (join "LEFT" :transformation_activity (= :transformation_task_steps.transformation_task_id :transformation_activity.hid))
-      (join "LEFT" :template_group_template (= :transformation_activity.hid :template_group_template.template_id))
-      (join "LEFT" :template_group (= :template_group_template.template_group_id :template_group.hid))
-      (join "LEFT" :workspace (= :template_group.workspace_id :workspace.id))
-      (where {:workspace.is_public true :template.component_id [not= nil]})))))
-
 (defn unused-count
   "Returns a count of undeployed tools, and tools deployed in private or deleted apps" []
   (second (ffirst
