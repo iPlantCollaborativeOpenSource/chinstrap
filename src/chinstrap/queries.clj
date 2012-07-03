@@ -81,5 +81,6 @@
               LEFT JOIN users u ON w.user_id = u.id
               WHERE t.component_id IS NOT NULL
               AND w.is_public IS FALSE
+              AND a.deleted IS FALSE
               GROUP BY username
               ORDER BY count DESC;"] :results))

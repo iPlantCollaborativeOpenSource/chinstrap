@@ -1,72 +1,111 @@
 body
 {
-text-align: center;
-font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background: whiteSmoke;
+  font: 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-shadow: 0px 1px #FFF;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-weight: 400;
+  color: #333;
 }
+
 
 h1
 {
-font-size: 25pt;
-font-family: Arial Unicode MS, Arial, sans-serif;
-margin-bottom: 10px;
+  font-size: 25pt;
+  font-family: Arial Unicode MS, Arial, sans-serif;
+  margin-bottom: 10px;
 }
 
 .text
 {
-text-align: left;
+  text-align: left;
 }
 
 table,td
 {
-margin: 0px auto;
-background-color: #F6F6F6;
-text-align: left;
-padding: 2px;
-border: 1px solid black;
+  margin: 0px auto;
+  background-color: #F6F6F6;
+  text-align: left;
+  padding: 2px;
+  padding-left: 6px;
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th
+{
+  text-align: center;
+  padding: 5px;
 }
 
 img
 {
-margin-bottom: 10px;
-width: 350px;
-height: 90px;
+  margin-bottom: 10px;
+  width: 350px;
+  height: 90px;
 }
 
 a
 {
-text-decoration: none;
+  text-decoration: none;
 }
 
 #wrapper
 {
-margin: 0px auto;
-margin-top: 150px;
-border: 1px solid #A2A2A2;
-border-radius: 4px;
-background-color: #E5E5E5;
-width: 500px;
-padding: 75px;
-padding-top: 30px;
-padding-bottom: 60px;
+  margin: 0px auto;
+  margin-top: 150px;
+  border: 1px solid #A2A2A2;
+  border-radius: 4px;
+  background-color: #E5E5E5;
+  width: 500px;
+  padding: 75px;
+  padding-top: 30px;
+  padding-bottom: 60px;
 }
 
 #inner
 {
-border-top: 1px solid #2C848C;
-border-left: 1px solid #2C848C;
-border-bottom: 1px solid white;
-border-right: 1px solid white;
-width: 300px;
-margin: 0px auto;
-background-color: #64C5CE;
-padding: 25px;
-padding-left: 35px;
-padding-right: 35px;
+  border-top: 1px solid #2C848C;
+  border-left: 1px solid #2C848C;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  width: 300px;
+  margin: 0px auto;
+  background-color: #64C5CE;
+  padding: 25px;
+  padding-left: 35px;
+  padding-right: 35px;
 }
 
 span
 {
-font-family: 'Arvo', serif;
-color: #303030;
-float: right;
+  color: #303030;
+  font-weight: bold;
+  float: right;
+}
+
+.collapsibleContainer
+{
+  border: solid 1px #9BB5C1;
+}
+
+.collapsibleContainerTitle
+{
+  cursor:pointer;
+}
+
+.collapsibleContainerTitle div
+{
+  padding:5px;
+  background-color:#9BB5C1;
+  color: black;
+}
+
+.collapsibleContainerContent
+{
+  display: none;
+  padding: 10px;
 }
