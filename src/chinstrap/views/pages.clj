@@ -11,9 +11,9 @@
 (defpage "/" []
   (render "/jobs"))
 
-;Page listing the count of different states of DE Jobs.
+;Page listing the count of different states of Discovery Environment Jobs.
 (defpage "/jobs" []
-  (template/DE-Page
+  (template/Jobs-Page
     (image "/img/logo.png")
     (javascript-tag "window.setInterval(getJobs,36000);")
     [:h3 "Discovery Environment Job Statuses"]
@@ -23,7 +23,9 @@
       [:h3.text "Submitted Apps: " [:span#submitted]]
       [:h3.text "Completed Apps: " [:span#completed]]]
     [:br]
-    (link-to "/components" "Components")))
+    (link-to "/components" "Discovery Environment Component Info")
+    [:br]
+    (link-to "/leaderboards" "Discovery Environment App Leaderboards")))
 
 ;AJAX call from the Javascript file 'get-de-jobs.js'.
 (defpage "/get-jobs" []
@@ -34,32 +36,60 @@
 
 ;Page listing count and info of Components with no transformation activities.
 (defpage "/components" []
+  (def i 0)
   (template/Components-Page
     (image "/img/logo.png")
-    [:h3 "DE Tools and Associated App Info"]
+    [:h3 "Discovery Environment Components Info"]
     [:br]
     [:div#inner
-      [:h3.text "With associated DE apps: " [:span#public]]
-      [:h3.text "Without associated DE apps: " [:span#private]]
-      [:h3.text "Total Tools: " [:span#all]]]
+      [:h3.text "With Associated Discovery Environment Apps: " [:span#with]]
+      [:h3.text "Without Associated Discovery Environment Apps: " [:span#without]]
+      [:h3.text "Total Components: " [:span#all]]]
       [:br]
-      (link-to "/jobs" "Discovery Environment Job Status")
+      (link-to "/jobs" "Discovery Environment Jobs Status")
+      [:br]
+      (link-to "/leaderboards" " Discovery Environment App Leaderboards")
       [:br]
       [:br]
       [:table
         [:caption [:h4 "Unused Component Details:"]]
-        [:tr [:th "Name"]
+        [:tr [:th "#"]
+             [:th "Name"]
              [:th "Version"]]
-        (for [list
-               (map identity (cq/unused-list))]
+        (for [list (cq/unused-list)]
              [:tr
-               [:td (str (:name list))]
-               [:td (str (or (:version list) "No Version"))]])]
+               [:td (var-get (def i (inc i)))]
+               [:td (:name list)]
+               [:td (or (:version list) "No Version")]])]
       [:br]))
 
 ;AJAX call from the Javascript file 'get-components.js'.
 (defpage "/get-components" []
   (nr/json {:all (cq/all-count)
-            :private (cq/unused-count)
-            :public (cq/used-count)
+            :without (cq/without-count)
+            :with (cq/with-count)
            }))
+
+(defpage "/leaderboards" []
+  (def i 0)
+  (template/Components-Page
+    (image "/img/logo.png")
+    [:h3 "Discovery Environment App Count by User"]
+    [:br]
+    [:br]
+    (link-to "/jobs" "Discovery Environment Jobs Status")
+    [:br]
+    (link-to "/components" "Discovery Environment Component Info")
+    [:br]
+    [:br]
+    [:table
+      [:caption [:h4 "Discovery Enviroment App Leaderboard:"]]
+      [:tr [:th "#"]
+           [:th "Name"]
+           [:th "Count"]]
+      (for [list (cq/leader-list)]
+           [:tr
+             [:td (var-get (def i (inc i)))]
+             [:td (:username list)]
+             [:td (or (:count list) "None Yet")]])]
+    [:br]))

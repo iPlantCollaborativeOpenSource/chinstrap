@@ -11,8 +11,8 @@
     (select deployed_components
       (aggregate (count :*) :all)))))
 
-(defn unused-count
-  "Returns a count of undeployed tools, and tools deployed in private or deleted apps" []
+(defn without-count
+  "Returns a count of components that are unused or are used in private or deleted apps" []
   (second (ffirst
             (exec-raw ["SELECT COUNT(DISTINCT dc.*)
                         FROM deployed_components dc
@@ -29,8 +29,8 @@
                         AND a.deleted IS FALSE
                         AND w.is_public IS TRUE);"] :results))))
 
-(defn used-count
-  "Returns a count of all tools used in public apps in the DB" []
+(defn with-count
+  "Returns a count of all components that are used in public apps in the DB" []
   (second (ffirst
             (exec-raw ["SELECT COUNT(DISTINCT dc.*)
                         FROM deployed_components dc
@@ -43,6 +43,7 @@
                         LEFT JOIN template_group tg ON tgt.template_group_id = tg.hid
                         LEFT JOIN workspace w ON tg.workspace_id = w.id
                         WHERE w.is_public IS TRUE
+                        AND a.deleted IS NOT TRUE
                         AND t.component_id IS NOT NULL;"] :results))))
 
 (defn unused-list
@@ -63,3 +64,22 @@
               AND a.deleted IS FALSE
               AND w.is_public IS TRUE)
               ORDER BY dc.name ASC;"] :results))
+
+(defn leader-list
+  "Returns a list of all the deployed components in the DB without
+   associated transformation activities."  []
+  (exec-raw ["SELECT COUNT(u.username) count, u.username
+              FROM deployed_components dc
+              LEFT JOIN template t ON dc.id = t.component_id
+              LEFT JOIN transformations tx ON t.id = tx.template_id
+              LEFT JOIN transformation_steps ts ON tx.id = ts.transformation_id
+              LEFT JOIN transformation_task_steps tts ON ts.id = tts.transformation_step_id
+              LEFT JOIN transformation_activity a ON tts.transformation_task_id = a.hid
+              LEFT JOIN template_group_template tgt ON a.hid = tgt.template_id
+              LEFT JOIN template_group tg ON tgt.template_group_id = tg.hid
+              LEFT JOIN workspace w ON tg.workspace_id = w.id
+              LEFT JOIN users u ON w.user_id = u.id
+              WHERE t.component_id IS NOT NULL
+              AND w.is_public IS FALSE
+              GROUP BY username
+              ORDER BY count DESC;"] :results))
