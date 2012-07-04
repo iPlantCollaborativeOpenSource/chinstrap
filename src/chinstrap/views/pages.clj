@@ -24,14 +24,17 @@
       [:h3.text "Completed Apps: " [:span#completed]]]
     [:br]
     [:div.collapsibleContainer {:title "Running App Details:"}
-      [:div {}{:names (:name (:state (second (mc/find-maps "jobs" {:state.status "Running"}))))}]]
+      [:div {}
+        (map str
+          (mc/find-maps "jobs" {:state.status "Running"} [:state.name]))]]
+    [:br]
     [:div.collapsibleContainer {:title "Submitted App Details:"}
-      [:div {}{:names (:name (:state (second (mc/find-maps "jobs" {:state.status "Submitted"}))))}]]
+      [:div {}
+        (map str
+          (mc/find-maps "jobs" {:state.status "Submitted"} [:state.name]))]]
     [:br]
     (link-to "/components" "Discovery Environment Component Info")
-    [:br]
-    (link-to "/leaderboards" "Discovery Environment App Leaderboards")
-    ))
+    [:br]))
 
 ;AJAX call from the Javascript file 'get-de-jobs.js'.
 (defpage "/get-jobs" []
@@ -53,20 +56,30 @@
       [:h3.text "Total Components: " [:span#all]]]
       [:br]
       [:div.collapsibleContainer {:title "Unused Componenent Details"}
+      [:br]
         [:table
           [:tr [:th "#"]
-              [:th "Name"]
-              [:th "Version"]]
+               [:th "Name"]
+               [:th "Version"]]
           (for [list (cq/unused-list)]
-              [:tr
-                [:td (var-get (def i (inc i)))]
-                [:td (:name list)]
-                [:td (or (:version list) "No Version")]])]]
+               [:tr
+                 [:td (var-get (def i (inc i)))]
+                 [:td (:name list)]
+                 [:td (or (:version list) "No Version")]])]]
+      [:br]
+      [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
+        [:br]
+        [:table
+          [:tr [:th "#"]
+               [:th "Username"]
+               [:th "Count"]]
+          (for [list (cq/leader-list)]
+               [:tr
+                 [:td (var-get (def i (inc i)))]
+                 [:td (:username list)]
+                 [:td (or (:count list) "None Yet")]])]]
       [:br]
       (link-to "/jobs" "Discovery Environment Jobs Status")
-      [:br]
-      (link-to "/leaderboards" " Discovery Environment App Leaderboards")
-      [:br]
       [:br]))
 
 ;AJAX call from the Javascript file 'get-components.js'.
@@ -75,23 +88,3 @@
             :without (cq/without-count)
             :with (cq/with-count)
            }))
-
-(defpage "/leaderboards" []
-  (def i 0)
-  (template/leaderboard-page
-    (image "/img/logo.png")
-    [:br]
-    [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
-      [:table
-        [:tr [:th "#"]
-             [:th "Username"]
-             [:th "Count"]]
-        (for [list (cq/leader-list)]
-             [:tr
-               [:td (var-get (def i (inc i)))]
-               [:td (:username list)]
-               [:td (or (:count list) "None Yet")]])]]
-    [:br]
-    (link-to "/jobs" "Discovery Environment Jobs Status")
-    [:br]
-    (link-to "/components" "Discovery Environment Component Info")))
