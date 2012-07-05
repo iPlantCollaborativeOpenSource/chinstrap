@@ -23,18 +23,19 @@
       [:h3.text "Submitted Apps: " [:span#submitted]]
       [:h3.text "Completed Apps: " [:span#completed]]]
     [:br]
-    [:div.collapsibleContainer {:title "Running App Details:"}
+    [:div.collapsibleContainer {:title "Running App Names:"}
       [:div {}
-        (map str
+        (map #(str (:name (:state %))"<br>")
           (mc/find-maps "jobs" {:state.status "Running"} [:state.name]))]]
     [:br]
-    [:div.collapsibleContainer {:title "Submitted App Details:"}
+    [:div.collapsibleContainer {:title "Submitted App Names:"}
       [:div {}
-        (map str
+        (map #(str (:name (:state %))"<br>")
           (mc/find-maps "jobs" {:state.status "Submitted"} [:state.name]))]]
     [:br]
     (link-to "/components" "Discovery Environment Component Info")
-    [:br]))
+    [:br]
+    ))
 
 ;AJAX call from the Javascript file 'get-de-jobs.js'.
 (defpage "/get-jobs" []
