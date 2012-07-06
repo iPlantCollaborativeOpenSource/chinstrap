@@ -1,9 +1,9 @@
-document.addEventListener("DOMContentLoaded", getJobs);
+document.addEventListener("DOMContentLoaded", getApps);
 
-function getJobs() {
+function getApps() {
 
 	var request = new XMLHttpRequest();
-	request.open("GET", "/get-jobs");
+	request.open("GET", "/get-apps");
 
 	request.onreadystatechange = function() {
 		if (request.readyState == 4) {

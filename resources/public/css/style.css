@@ -10,15 +10,7 @@ body
   color: #333;
 }
 
-
-h1
-{
-  font-size: 25pt;
-  font-family: Arial Unicode MS, Arial, sans-serif;
-  margin-bottom: 10px;
-}
-
-.text
+.left
 {
   text-align: left;
 }
@@ -37,8 +29,8 @@ table,td
 
 th
 {
-  text-align: center;
-  padding: 5px;
+  padding: 3px;
+  font-weight: bold;
 }
 
 img
@@ -85,6 +77,11 @@ span
   color: #303030;
   font-weight: bold;
   float: right;
+}
+
+.center
+{
+  text-align: center;
 }
 
 .collapsibleContainer

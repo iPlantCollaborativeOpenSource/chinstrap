@@ -3,14 +3,13 @@
         [hiccup.page]
         [hiccup.element]))
 
-(defpartial jobs-page [& content]
+(defpartial apps-page [& content]
     (html5
       [:head
-        [:title "Discovery Enviroment Jobs Status"]
+        [:title "Discovery Enviroment App Status"]
         (include-css "/css/reset.css"
-                     "/css/style.css"
-                     "http://fonts.googleapis.com/css?family=Ubuntu")
-        (include-js  "/js/get-de-jobs.js"
+                     "/css/style.css")
+        (include-js  "/js/get-apps.js"
                      "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
                      "/js/collapsible-panel.js")]
       [:body
@@ -23,8 +22,7 @@
       [:head
         [:title "Components Without Transformations"]
         (include-css "/css/reset.css"
-                     "/css/style.css"
-                     "http://fonts.googleapis.com/css?family=Ubuntu")
+                     "/css/style.css")
         (include-js  "/js/get-components.js"
                      "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
                      "/js/collapsible-panel.js")]
