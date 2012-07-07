@@ -15,4 +15,4 @@ function getComponents() {
 		}
 	}
 	request.send();
-}
+};

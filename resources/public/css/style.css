@@ -10,11 +10,6 @@ body
   color: #333;
 }
 
-.left
-{
-  text-align: left;
-}
-
 table,td
 {
   margin: 0px auto;
@@ -72,13 +67,17 @@ a
   padding-right: 35px;
 }
 
-span
+.right
 {
   color: #303030;
   font-weight: bold;
   float: right;
 }
 
+.left
+{
+  text-align: left;
+}
 .center
 {
   text-align: center;

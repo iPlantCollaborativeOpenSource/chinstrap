@@ -4,6 +4,9 @@
             [monger.collection :as mc])
   (:use [noir.core]))
 
+(defpage "/get-info" []
+  (str "Hello Ajax"))
+
 ;AJAX call from the Javascript file 'get-apps.js'.
 (defpage "/get-apps" []
   (nr/json {:running (mc/count "jobs" {:state.status "Running"}),

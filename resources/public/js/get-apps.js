@@ -15,4 +15,4 @@ function getApps() {
 		}
 	}
 	request.send();
-}
+};
