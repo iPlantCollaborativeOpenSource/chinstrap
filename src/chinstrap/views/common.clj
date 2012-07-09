@@ -8,6 +8,7 @@
       [:head
         [:title "Discovery Enviroment Status"]
         (include-css "/css/reset.css"
+                     "/css/datepicker.css"
                      "/css/style.css")
         (include-js  "/js/get-info.js"
                      "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
