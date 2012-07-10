@@ -6,9 +6,9 @@ function getInfo() {
 
 	request.onreadystatechange = function() {
 		if (request.readyState == 4) {
-			var response = request.responseText;
+			var response = JSON.parse(request.responseText);
 
-			$('#inner').html("Date: " + date + "\n Response: " + response);
+			$('#inner').html("Date: " + date + "\n Response: " + response['analysis_ids']);
 		}
 	}
 	request.send();

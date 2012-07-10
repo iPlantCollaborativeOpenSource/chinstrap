@@ -5,7 +5,12 @@
   (:use [noir.core]))
 
 (defpage "/get-info/:date" {:keys [date]}
-  (nr/json {:jobs (str (mc/find "jobs" {:state.submission_date {"$gt" (read-string date) "$lte" (+ 86400000 (read-string date))}}))}))
+  (nr/json {:analysis_ids
+    (map #(str (:analysis_id (:state %)))
+      (mc/find-maps "jobs" {:state.submission_date
+        {"$gte" (read-string date) "$lt" (+ 86400000 (read-string date))}
+        :state.analysis_id {"$exists" true}}
+          [:state.analysis_id]))}))
 
 ;AJAX call from the Javascript file 'get-apps.js'.
 (defpage "/get-apps" []
