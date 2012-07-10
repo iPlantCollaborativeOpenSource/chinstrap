@@ -39,10 +39,10 @@
       [:h3.left "Completed Apps:" [:span#completed.right]]]
     [:br]
     [:div.collapsibleContainer {:title "Currently Running Apps"}
-      [:div (apps-that-are "Running")]]
+      [:div#running-apps]]
     [:br]
     [:div.collapsibleContainer {:title "Submitted Apps"}
-      [:div (apps-that-are "Submitted")]]
+      [:div#submitted-apps]]
     [:br]
     (link-to "/main" "Discovery Environment Status")
     [:br]

@@ -9,9 +9,11 @@ function getApps() {
 		if (request.readyState == 4) {
 			var response = JSON.parse(request.responseText);
 
-			document.getElementById('running').innerHTML = response['running'];
-			document.getElementById('submitted').innerHTML = response['submitted'];
-			document.getElementById('completed').innerHTML = response['completed'];
+			$('#running').html(response['running']);
+			$('#submitted').html(response['submitted']);
+			$('#completed').html(response['completed']);
+			$('#running-apps').html(response['running-names']);
+			$('#submitted-apps').html(response['submitted-names']);
 		}
 	}
 	request.send();

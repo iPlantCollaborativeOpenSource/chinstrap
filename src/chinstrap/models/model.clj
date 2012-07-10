@@ -8,8 +8,9 @@
   "This function returns the application names currently operating at the passed state.
   E.G. (apps-that-are \"Completed\")"
   [state]
-    (map #(str (:name (:state %)) "<br>")
-      (mc/find-maps "jobs" {:state.status (str state)} [:state.name])))
+    (apply str
+      (map #(str (:name (:state %)) "<br>")
+        (mc/find-maps "jobs" {:state.status (str state)} [:state.name]))))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-info.js'.
 (defpage "/get-info/:date" {:keys [date]}
@@ -24,7 +25,9 @@
 (defpage "/get-apps" []
   (nr/json {:running (mc/count "jobs" {:state.status "Running"}),
             :submitted (mc/count "jobs" {:state.status "Submitted"}),
-            :completed (mc/count "jobs" {:state.status "Completed"})}))
+            :completed (mc/count "jobs" {:state.status "Completed"}),
+            :running-names (str (apps-that-are "Running")),
+            :submitted-names (str (apps-that-are "Submitted"))}))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-components.js'.
 (defpage "/get-components" []
