@@ -8,11 +8,11 @@
       [:head
         [:title "Discovery Enviroment Status"]
         (include-css "/css/reset.css"
-                     "/css/jquery-ui.css"
+                     "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/cupertino/jquery-ui.css"
                      "/css/style.css")
         (include-js  "/js/get-info.js"
-                     "/js/jquery.min.js"
-                     "/js/jquery-ui.min.js"
+                     "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+                     "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
                      "/js/collapsible-panel.js")]
       [:body
         (javascript-tag "$(document).ready(function(){
