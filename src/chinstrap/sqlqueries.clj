@@ -1,4 +1,4 @@
-(ns chinstrap.queries
+(ns chinstrap.sqlqueries
   (:use [kameleon.entities]
         [korma.core]
         [chinstrap.db])
@@ -9,12 +9,12 @@
   []
   (second (ffirst
     (select deployed_components
-      (aggregate (count :*) :all)))))
+      (aggregate (count :name) :all)))))
 
 (defn without-count
   "Returns a count of components that are unused or are used in private or deleted apps" []
   (second (ffirst
-            (exec-raw ["SELECT COUNT(DISTINCT dc.*)
+            (exec-raw ["SELECT COUNT(DISTINCT dc.name)
                         FROM deployed_components dc
                         WHERE NOT EXISTS (
                         SELECT t.id FROM template t
@@ -32,7 +32,7 @@
 (defn with-count
   "Returns a count of all components that are used in public apps in the DB" []
   (second (ffirst
-            (exec-raw ["SELECT COUNT(DISTINCT dc.*)
+            (exec-raw ["SELECT COUNT(DISTINCT dc.name)
                         FROM deployed_components dc
                         LEFT JOIN template t ON dc.id = t.component_id
                         LEFT JOIN transformations tx ON t.id = tx.template_id
@@ -47,9 +47,9 @@
                         AND t.component_id IS NOT NULL;"] :results))))
 
 (defn unused-list
-  "Returns a list of all the deployed components in the DB without
+  "Returns a list of all the deployed components in the DB that do not have
    associated transformation activities."  []
-  (exec-raw ["SELECT DISTINCT dc.*
+  (exec-raw ["SELECT DISTINCT dc.name, dc.version
               FROM deployed_components dc
               WHERE NOT EXISTS (
               SELECT t.id FROM template t
@@ -66,8 +66,8 @@
               ORDER BY dc.name ASC;"] :results))
 
 (defn leader-list
-  "Returns a list of all the deployed components in the DB without
-   associated transformation activities."  []
+   "Returns a list of all users with public apps and aggregates a count of
+   them so that they can be ranked according to #'s of apps." []
   (exec-raw ["SELECT COUNT(ind.integrator_name) count, ind.integrator_name AS name
               FROM deployed_components dc
               LEFT JOIN template t ON dc.id = t.component_id

@@ -1,19 +1,12 @@
 (ns chinstrap.views.pages
   (:require [chinstrap.views.common :as template]
-            [chinstrap.models.ajax :as ajax]
             [noir.response :as nr]
-            [chinstrap.queries :as cq]
+            [chinstrap.sqlqueries :as cq]
             [monger.collection :as mc])
   (:use [noir.core]
         [chinstrap.db]
+        [chinstrap.models.model]
         [hiccup.element]))
-
-(defn apps-that-are
-  "This function returns the application names currently operating at the passed state.
-  E.G. (apps-that-are \"Completed\")"
-  [state]
-    (map #(str (:name (:state %)) "<br>")
-      (mc/find-maps "jobs" {:state.status (str state)} [:state.name])))
 
 (defpage "/" []
   (render "/main"))
