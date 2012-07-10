@@ -4,8 +4,8 @@
             [monger.collection :as mc])
   (:use [noir.core]))
 
-(defpage "/get-info" []
-  (str "Hello Ajax"))
+(defpage "/get-info/:date" {:keys [date]}
+  (nr/json {:jobs (str (mc/find "jobs" {:state.submission_date {"$gt" (read-string date) "$lte" (+ 86400000 (read-string date))}}))}))
 
 ;AJAX call from the Javascript file 'get-apps.js'.
 (defpage "/get-apps" []
