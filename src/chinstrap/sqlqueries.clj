@@ -87,17 +87,16 @@
               GROUP BY integrator_name
               ORDER BY count DESC, name ASC;"] :results))
 
-(defn list-apps-by-id
+(defn apps-by-ids
   "This function takes a collection of analysis_ids and queries the postgres
   database for distinct matching tool names."
   [ids]
   (select "template"
     (modifier "distinct")
+    (aggregate (count :name) :count :name)
     (fields :name)
     (where {:name [in
       (map #(subselect "template"
         (fields :name)
-        (where {:id %})
-        (order :name :asc))ids )]})))
-
-(defn count-apps-by-id [id])
+        (where {:id %}))ids )]})
+    (order :count :desc)))

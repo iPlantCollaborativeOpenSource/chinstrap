@@ -15,7 +15,7 @@
 ;AJAX call from the Javascript file 'resources/public/js/get-info.js'.
 (defpage "/get-info/:date" {:keys [date]}
   (nr/json {:tools
-    (cq/list-apps-by-id
+    (cq/apps-by-ids
       (map #(str (:analysis_id (:state %)))
         (mc/find-maps "jobs" {:state.submission_date
           {"$gte" (read-string date) "$lt" (+ 86400000 (read-string date))}
