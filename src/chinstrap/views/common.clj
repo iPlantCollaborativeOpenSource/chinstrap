@@ -8,16 +8,20 @@
       [:head
         [:title "Discovery Enviroment Status"]
         (include-css "/css/reset.css"
-                     "/css/datepicker.css"
+                     "/css/jquery-ui.css"
                      "/css/style.css")
         (include-js  "/js/get-info.js"
-                     "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
-                     "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"
+                     "/js/jquery.min.js"
+                     "/js/jquery-ui.min.js"
                      "/js/collapsible-panel.js")]
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();
-          $('#date').datepicker();})")
+          var picker={showOn:'both',
+                      autoSize: true,
+                      hideIfNoPrevNext: true,
+                      buttonText:'Pick a Date'};
+          $('#date').datepicker(picker);});")
 [:div#wrapper content]]))
 
 (defpartial apps-page [& content]

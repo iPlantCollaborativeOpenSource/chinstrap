@@ -22,12 +22,11 @@
   (template/main-page
     (image "/img/logo.png")
     [:h3 "Discovery Environment Status"]
-    [:br]
-    [:h4 "Pick a date"
-      [:span
-        [:input#date {:type "text" :onInput "getInfo()"}]]]
-    [:br]
+    [:br][:br]
     [:div#inner]
+    [:br]
+    [:input#date {:type "text" :onChange "getInfo()"}]
+    [:br]
     [:br]
     (link-to "/components" "Discovery Environment Component Info")
     [:br]
