@@ -16,6 +16,7 @@
     (image "/img/logo.png")
     [:h3 "Discovery Environment Status"]
     [:br][:br]
+    [:h4#caption]
     [:div#inner]
     [:br]
     [:input#date {:type "text" :onChange "getInfo()"}]
