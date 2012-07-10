@@ -19,8 +19,7 @@
     [:div#inner]
     [:br]
     [:input#date {:type "text" :onChange "getInfo()"}]
-    [:br]
-    [:br]
+    [:br][:br]
     (link-to "/components" "Discovery Environment Component Info")
     [:br]
     (link-to "/apps" "Discovery Environment App Info")
@@ -38,10 +37,12 @@
       [:h3.left "Submitted Apps:" [:span#submitted.right]]
       [:h3.left "Completed Apps:" [:span#completed.right]]]
     [:br]
-    [:div.collapsibleContainer {:title "Currently Running Apps"}
+    [:div.collapsibleContainer
+      {:title "Currently Running Apps"}
       [:div#running-apps]]
     [:br]
-    [:div.collapsibleContainer {:title "Submitted Apps"}
+    [:div.collapsibleContainer
+      {:title "Submitted Apps"}
       [:div#submitted-apps]]
     [:br]
     (link-to "/main" "Discovery Environment Status")

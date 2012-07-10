@@ -4,9 +4,9 @@
             [monger.collection :as mc])
   (:use [noir.core]))
 
-(defn apps-that-are
+(defn get-app-names
   "This function returns the application names currently operating at the passed state.
-  E.G. (apps-that-are \"Completed\")"
+  E.G. (get-apps-names \"Completed\")"
   [state]
     (apply str
       (map #(str (:name (:state %)) "<br>")
@@ -26,8 +26,8 @@
   (nr/json {:running (mc/count "jobs" {:state.status "Running"}),
             :submitted (mc/count "jobs" {:state.status "Submitted"}),
             :completed (mc/count "jobs" {:state.status "Completed"}),
-            :running-names (str (apps-that-are "Running")),
-            :submitted-names (str (apps-that-are "Submitted"))}))
+            :running-names (str (get-app-names "Running")),
+            :submitted-names (str (get-app-names "Submitted"))}))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-components.js'.
 (defpage "/get-components" []
