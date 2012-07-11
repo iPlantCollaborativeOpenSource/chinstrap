@@ -53,8 +53,6 @@
 
 ;Page listing count and info of Components with no transformation activities.
 (defpage "/components" []
-  (def i 0) ;doing this wrong and I know it (for table increment)
-  (def j 0) ;doing this wrong and I know it (for table increment)
   (template/components-page
     (image "/img/logo.png")
     (javascript-tag "window.setInterval(getComponents,36000);")
@@ -71,11 +69,13 @@
           [:tr [:th ""]
                [:th "Name"]
                [:th "Version"]]
-          (for [list (cq/unused-list)]
+          (let [list (cq/unused-list) count (count list)]
+            (for [i (range 1 count)
+                  :let [record (nth list i)]]
                [:tr
-                 [:td.center (var-get (def i (inc i)))]
-                 [:td (:name list)]
-                 [:td.center (or (:version list) "No Version")]])]]
+                 [:td.center i]
+                 [:td (:name record)]
+                 [:td.center (or (:version record) "No Version")]]))]]
       [:br]
       [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
         [:br]
@@ -83,11 +83,13 @@
           [:tr [:th ""]
                [:th "Name"]
                [:th "Count"]]
-          (for [list (cq/leader-list)]
-               [:tr
-                 [:td.center (var-get (def j (inc j)))]
-                 [:td (:name list)]
-                 [:td.center (:count list)]])]]
+          (let [list (cq/leader-list) count (count list)]
+            (for [i (range 1 count)
+                  :let [record (nth list i)]]
+                 [:tr
+                   [:td.center i]
+                   [:td (:name record)]
+                   [:td.center (:count record)]]))]]
       [:br]
       (link-to "/main" "Discovery Environment Status")
       [:br]
