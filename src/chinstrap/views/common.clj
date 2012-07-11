@@ -20,6 +20,7 @@
           var picker={showOn:'both',
                       autoSize: true,
                       hideIfNoPrevNext: true,
+                      maxDate: '+0d',
                       buttonText:'Pick a Date'};
           $('#date').datepicker(picker);});")
 [:div#wrapper content]]))

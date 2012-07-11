@@ -12,6 +12,7 @@ function getInfo() {
             console.log(request.responseText);
 
             if(response['tools'] == "") {
+                $('#caption').html("");
                 tools = "No tools on " + date + ".";
             } else {
                 $('#caption').html("Tools on " + date + ":");
