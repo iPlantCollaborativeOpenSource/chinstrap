@@ -19,12 +19,7 @@
     [:h4#caption]
     [:div#inner]
     [:br]
-    [:input#date {:type "text" :onChange "getInfo()"}]
-    [:br][:br]
-    (link-to "/components" "Discovery Environment Component Info")
-    [:br]
-    (link-to "/apps" "Discovery Environment App Info")
-    [:br]))
+    [:input#date {:type "text" :onChange "getInfo()"}]))
 
 ;Page listing the count of different states of Discovery Environment Apps.
 (defpage "/apps" []
@@ -44,12 +39,7 @@
     [:br]
     [:div.collapsibleContainer
       {:title "Submitted Apps"}
-      [:div#submitted-apps]]
-    [:br]
-    (link-to "/main" "Discovery Environment Status")
-    [:br]
-    (link-to "/components" "Discovery Environment Component Info")
-    [:br]))
+      [:div#submitted-apps]]))
 
 ;Page listing count and info of Components with no transformation activities.
 (defpage "/components" []
@@ -66,16 +56,17 @@
       [:div.collapsibleContainer {:title "Unused Componenent Details"}
       [:br]
         [:table
-          [:tr [:th ""]
+          [:thead
+            [:tr [:th ""]
                [:th "Name"]
-               [:th "Version"]]
-          (let [list (cq/unused-list) count (count list)]
-            (for [i (range 1 count)
-                  :let [record (nth list i)]]
-               [:tr
-                 [:td.center i]
-                 [:td (:name record)]
-                 [:td.center (or (:version record) "No Version")]]))]]
+               [:th "Version"]]]
+          [:tbody
+            (let [list (cq/unused-list) count (count list)]
+                (for [i (range 1 count) :let [record (nth list i)]]
+                  [:tr
+                    [:td.center i]
+                    [:td (:name record)]
+                    [:td.center (or (:version record) "No Version")]]))]]]
       [:br]
       [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
         [:br]
@@ -89,9 +80,4 @@
                  [:tr
                    [:td.center i]
                    [:td (:name record)]
-                   [:td.center (:count record)]]))]]
-      [:br]
-      (link-to "/main" "Discovery Environment Status")
-      [:br]
-      (link-to "/apps" "Discovery Environment App Status")
-      [:br]))
+                   [:td.center (:count record)]]))]]))

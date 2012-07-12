@@ -40,12 +40,57 @@ a
   text-decoration: none;
 }
 
-#wrapper
+#navbar
 {
   margin: 0px auto;
   margin-top: 150px;
+  width: 500px;
+  padding: 15px;
+  padding-left: 75px;
+  padding-right: 75px;
   border: 1px solid #A2A2A2;
+  border-bottom: 2px solid #BBB;
+  border-top-left-radius: 50px 25px;
+  border-top-right-radius: 50px 25px;
+  background-color: #D5D5D5;
+}
+
+#navbar a:visited
+{
+  color: #333;
+}
+
+.vbr
+{
+  border-right: 1px solid #AAA;
+  display: inline;
+}
+
+.nav
+{
+  display: inline;
+  list-style: none;
+  text-align: center;
+  margin: auto 0px;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.nav:hover
+{
+  background-color: #E2E2E2;
+  border-radius: 15px;
+}
+
+#wrapper
+{
+  margin: 0px auto;
+  border: 1px solid #A2A2A2;
+  border-top: none;
   border-radius: 4px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   background-color: #E5E5E5;
   width: 500px;
   padding: 75px;
@@ -55,16 +100,18 @@ a
 
 #inner
 {
-  border-top: 1px solid #2C848C;
-  border-left: 1px solid #2C848C;
-  border-bottom: 1px solid white;
-  border-right: 1px solid white;
+  border-top: 1px solid #AAA;
+  border-left: 1px solid #AAA;
+  border-bottom: 1px solid #BBB;
+  border-right: 1px solid #BBB;
   width: 300px;
   margin: 0px auto;
-  background-color: #64C5CE;
+  background-color: #EEE;
   padding: 25px;
   padding-left: 35px;
   padding-right: 35px;
+  color: #333;
+  border-radius: 4px;
 }
 
 .right
@@ -78,6 +125,7 @@ a
 {
   text-align: left;
 }
+
 .center
 {
   text-align: center;
@@ -85,7 +133,9 @@ a
 
 .collapsibleContainer
 {
-  border: solid 1px #9BB5C1;
+  border: solid 1px #0098AA;
+  border-radius: 4px;
+  color: #222;
 }
 
 .collapsibleContainerTitle
@@ -95,9 +145,10 @@ a
 
 .collapsibleContainerTitle div
 {
-  padding:5px;
-  background-color:#9BB5C1;
-  color: black;
+  padding: 5px;
+  background-color: #64CFDB;
+  border-radius: 4ps;
+  color: #333;
 }
 
 .collapsibleContainerContent

@@ -2,6 +2,13 @@
   (:use [noir.core :only [defpartial]]
         [hiccup.page]
         [hiccup.element]))
+(defpartial wrapper [& content]
+  [:div#navbar
+    [:span.vbr]
+    [:li.nav (link-to "/main" "Status")][:div.vbr]
+    [:li.nav (link-to "/apps" "App Info")][:div.vbr]
+    [:li.nav (link-to "/components" "Component Info")][:div.vbr]]
+  [:div#wrapper content])
 
 (defpartial main-page [& content]
     (html5
@@ -12,18 +19,15 @@
                      "/css/style.css")
         (include-js  "/js/get-info.js"
                      "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
-                     "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
-                     "/js/collapsible-panel.js")]
+                     "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js")]
       [:body
         (javascript-tag "$(document).ready(function(){
-          $('.collapsibleContainer').collapsiblePanel();
           var picker={showOn:'both',
-                      autoSize: true,
                       hideIfNoPrevNext: true,
                       maxDate: '+0d',
                       buttonText:'Pick a Date'};
           $('#date').datepicker(picker);});")
-[:div#wrapper content]]))
+(wrapper content)]))
 
 (defpartial apps-page [& content]
     (html5
@@ -37,7 +41,7 @@
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();});")
-        [:div#wrapper content]]))
+        (wrapper content)]))
 
 (defpartial components-page [& content]
     (html5
@@ -51,4 +55,4 @@
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();});")
-        [:div#wrapper content]]))
+        (wrapper content)]))
