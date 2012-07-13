@@ -1,12 +1,30 @@
 Chinstrap
 =========
 
-Chinstrap is the middleman that runs services enabling a Discovery Environment
-status window that gives realtime info about OSM Jobs.
+Chinstrap is iPlant's back-end 'front-end' ui that developers to visually see data about the DE-Database, and the OSM combined.
 
-## Usage
 
-FIXME
+#So Far
+
+* Day by Day job reports *_What was Running and When_*
+
+`http//:localhost/main`
+
+* Realtime view of Running and Submitted app flow.
+
+`http//:localhost/apps`
+
+
+* Unused Tools List *_Private tools are not included_*
+
+`http//:localhost/components`
+
+## TODO
+1. Write a todo list
+
+## NOTE
+
+Everything is subject to change.
 
 ## Created By
 
