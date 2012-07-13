@@ -16,12 +16,12 @@ function getInfo() {
                 tools = "No tools on " + date + ".";
             } else {
                 $('#caption').html("Tools on " + date + ":");
-                tools = "<br><table><tr><th>Name</th><th>Count</th></tr>";
+                tools = "<table><thead><tr><th>Name</th><th>Count</th></tr></thead><tbody>";
                 for(var i = 0; i < response['tools'].length; i++){
-                    tools += "<tr><td>" + response['tools'][i]['name'] + "</td>";
-                    tools += "<td>" + response['tools'][i]['count'] + "</td></tr>";
+                    tools += "<tr><td>" + response['tools'][i]['name']+"</td>";
+                    tools += "<td>" + response['tools'][i]['count']+"</td></tr>";
                 }
-                tools += "</table>";
+                tools += "</tbody></table>";
             }
 			$('#inner').html(tools);
 		}
