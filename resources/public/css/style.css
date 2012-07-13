@@ -1,72 +1,183 @@
 body
 {
-text-align: center;
-font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  background: whiteSmoke;
+  font: 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-shadow: 0px 1px #FFF;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-weight: 400;
+  color: #333;
 }
 
-h1
+table
 {
-font-size: 25pt;
-font-family: Arial Unicode MS, Arial, sans-serif;
-margin-bottom: 10px;
+  margin: 0px auto;
+  border-spacing: 0.1em;
 }
 
-.text
+th
 {
-text-align: left;
+  font-weight: bold;
+  color: #666;
+  letter-spacing: 2px;
+  text-align: left;
 }
 
-table,td
+td
 {
-margin: 0px auto;
-background-color: #F6F6F6;
-text-align: left;
-padding: 2px;
-border: 1px solid black;
+  border-right: 1px solid #C1DAD7;
+  border-bottom: 1px solid #C1DAD7;
+  background: #FFF;
+  padding: 6px 6px 6px 12px;
+  color: #6D929B;
+}
+
+tr
+{
+border-radius: 4px;
+}
+
+td:nth-child(odd)
+{
+  background: #F5FAFA;
+  color: #496F79;
+}
+
+td:nth-child(3)
+{
+  border-right: none;
 }
 
 img
 {
-margin-bottom: 10px;
-width: 350px;
-height: 90px;
+  margin-bottom: 10px;
+  width: 350px;
+  height: 90px;
 }
 
 a
 {
-text-decoration: none;
+  text-decoration: none;
+}
+
+#navbar
+{
+  margin: 0px auto;
+  margin-top: 150px;
+  width: 500px;
+  padding: 15px;
+  padding-left: 75px;
+  padding-right: 75px;
+  border: 1px solid #A2A2A2;
+  border-bottom: 2px solid #BBB;
+  border-top-left-radius: 50px 25px;
+  border-top-right-radius: 50px 25px;
+  background-color: #D5D5D5;
+}
+
+#navbar a:visited
+{
+  color: #333;
+}
+
+.vbr
+{
+  border-right: 1px solid #AAA;
+  display: inline;
+}
+
+.nav
+{
+  display: inline;
+  list-style: none;
+  text-align: center;
+  margin: auto 0px;
+  margin: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.nav:hover
+{
+  text-shadow: 0 0 5px #64CFDB, 0 0 5px #64CFDB;
 }
 
 #wrapper
 {
-margin: 0px auto;
-margin-top: 150px;
-border: 1px solid #A2A2A2;
-border-radius: 4px;
-background-color: #E5E5E5;
-width: 500px;
-padding: 75px;
-padding-top: 30px;
-padding-bottom: 60px;
+  margin: 0px auto;
+  border: 1px solid #A2A2A2;
+  border-top: none;
+  border-radius: 4px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-color: #E5E5E5;
+  width: 500px;
+  padding: 75px;
+  padding-top: 30px;
+  padding-bottom: 60px;
 }
 
 #inner
 {
-border-top: 1px solid #2C848C;
-border-left: 1px solid #2C848C;
-border-bottom: 1px solid white;
-border-right: 1px solid white;
-width: 300px;
-margin: 0px auto;
-background-color: #64C5CE;
-padding: 25px;
-padding-left: 35px;
-padding-right: 35px;
+  border-top: 1px solid #AAA;
+  border-left: 1px solid #AAA;
+  border-bottom: 1px solid #BBB;
+  border-right: 1px solid #BBB;
+  width: 300px;
+  margin: 0px auto;
+  background-color: #EEE;
+  padding: 25px;
+  padding-left: 35px;
+  padding-right: 35px;
+  color: #333;
+  border-radius: 4px;
 }
 
-span
+.right
 {
-font-family: 'Arvo', serif;
-color: #303030;
-float: right;
+  color: #303030;
+  font-weight: bold;
+  float: right;
+}
+
+.left
+{
+  text-align: left;
+}
+
+.center
+{
+  text-align: center;
+}
+
+.collapsibleContainer
+{
+  border: solid 1px #0098AA;
+  border-radius: 4px;
+  color: #222;
+}
+
+.collapsibleContainerTitle
+{
+  cursor:pointer;
+}
+
+.collapsibleContainerTitle div
+{
+  padding: 5px;
+  background-color: #64CFDB;
+  border-radius: 4px;
+  color: #333;
+}
+
+.collapsibleContainerContent
+{
+  display: none;
+  padding: 10px;
+}
+
+#ui-datepicker-div
+{
+  display: none;
 }
