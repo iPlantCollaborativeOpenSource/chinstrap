@@ -13,7 +13,7 @@
 
 (defpage "/main" []
   (template/main-page
-    (image "/img/logo.png")
+    (image {:id "logo"} "/img/logo.png")
     [:br]
     [:h3 "Discovery Environment Status"]
     [:br]
@@ -25,7 +25,7 @@
 ;Page listing the count of different states of Discovery Environment Apps.
 (defpage "/apps" []
   (template/apps-page
-    (image "/img/logo.png")
+    (image {:id "logo"} "/img/logo.png")
     (javascript-tag "window.setInterval(getApps,36000);")
     [:h3 "Discovery Environment App Status"]
     [:br]
@@ -45,7 +45,7 @@
 ;Page listing count and info of Components with no transformation activities.
 (defpage "/components" []
   (template/components-page
-    (image "/img/logo.png")
+    (image {:id "logo"} "/img/logo.png")
     (javascript-tag "window.setInterval(getComponents,36000);")
     [:h3 "Discovery Environment Components Info"]
     [:br]

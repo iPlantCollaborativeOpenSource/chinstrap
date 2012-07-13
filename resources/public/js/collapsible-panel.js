@@ -8,6 +8,8 @@
 
 })(jQuery);
 
+var i = 0;
+
 function ConfigureCollapsiblePanel() {
     $(this).addClass("ui-widget");
 
@@ -15,7 +17,7 @@ function ConfigureCollapsiblePanel() {
     $(this).children().wrapAll("<div class='collapsibleContainerContent ui-widget-content'></div>");
 
     // Create a new div as the first item within the container.  Put the title of the panel in here.
-    $("<div class='collapsibleContainerTitle ui-widget-header'><div>" + $(this).attr("title") + "</div></div>").prependTo($(this));
+    $("<div class='collapsibleContainerTitle ui-widget-header'><div>" + $(this).attr("title") + "<img class='triangle' src='/img/circle_arrow_right.png'></img></div></div>").prependTo($(this));
 
     // Assign a call to CollapsibleContainerTitleOnClick for the click event of the new title div.
     $(".collapsibleContainerTitle", this).click(CollapsibleContainerTitleOnClick);
@@ -23,5 +25,11 @@ function ConfigureCollapsiblePanel() {
 
 function CollapsibleContainerTitleOnClick() {
     // The item clicked is the title div... get this parent (the overall container) and toggle the content within it.
+    if ((i % 2) == 0) {
+        $('.triangle').attr("src" , "/img/circle_arrow_down.png");
+    } else {
+        $('.triangle').attr("src" , "/img/circle_arrow_right.png");
+    }
     $(".collapsibleContainerContent", $(this).parent()).slideToggle();
+    i++;
 }

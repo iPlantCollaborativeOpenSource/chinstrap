@@ -49,7 +49,7 @@ td:nth-child(3)
   border-right: none;
 }
 
-img
+#logo
 {
   margin-bottom: 10px;
   width: 350px;
@@ -175,6 +175,15 @@ a
 {
   display: none;
   padding: 10px;
+}
+
+.triangle
+{
+  float: right;
+  width: 2.8%;
+  height: 2.8%;
+  position: relative;
+  top: 4px;
 }
 
 #ui-datepicker-div
