@@ -19,8 +19,8 @@ Chinstrap is iPlant's back-end 'front-end' ui that developers to visually see da
 `http//:localhost/components`
 
 ## TODO
-:one: Add visualization
-:two: Add arrows to collapsible panes for user ease.
+* :sunny: Add visualization
+* :shit: Add arrows to collapsible panes for user ease.
 ## NOTE
 
 Everything is subject to change.
