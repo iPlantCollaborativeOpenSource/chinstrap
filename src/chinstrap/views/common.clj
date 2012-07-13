@@ -17,17 +17,13 @@
         (include-css "/css/reset.css"
                      "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/cupertino/jquery-ui.css"
                      "/css/style.css")
-        (include-js  "/js/get-info.js"
-                     "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
-                     "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js")]
+        (include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+                    "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
+                    "/js/get-info.js"
+                    "/js/main.js"
+                    "/js/mousetrap.min.js")]
       [:body
-        (javascript-tag "$(document).ready(function(){
-          var picker={showOn:'both',
-                      hideIfNoPrevNext: true,
-                      maxDate: '+0d',
-                      buttonText:'Pick a Date'};
-          $('#date').datepicker(picker);});")
-(wrapper content)]))
+        (wrapper content)]))
 
 (defpartial apps-page [& content]
     (html5

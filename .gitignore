@@ -14,5 +14,6 @@ conrad.log
 /.lein-plugins/
 target/*
 *.swp
+*.swo
 *.un~
 /target/

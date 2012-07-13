@@ -14,12 +14,13 @@
 (defpage "/main" []
   (template/main-page
     (image "/img/logo.png")
+    [:br]
     [:h3 "Discovery Environment Status"]
-    [:br][:br]
+    [:br]
     [:h4#caption]
     [:div#inner "Pick a date to begin."]
     [:br]
-    [:input#date {:type "text" :onChange "getInfo()"}]))
+    [:input#date {:onChange "getInfo()"}]))
 
 ;Page listing the count of different states of Discovery Environment Apps.
 (defpage "/apps" []
