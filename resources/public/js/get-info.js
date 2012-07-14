@@ -15,6 +15,7 @@ function getInfo() {
                 $('#caption').html("");
                 tools = "No tools on " + date + ".";
             } else {
+                $('#caption').html("Tools on " + date + ":");
                 tools = "<table><thead><tr><th>Name</th><th>Count</th></tr></thead><tbody>";
                 for(var i = 0; i < response['tools'].length; i++){
                     tools += "<tr><td>" + response['tools'][i]['name']+"</td>";
