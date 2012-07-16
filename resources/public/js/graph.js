@@ -28,31 +28,31 @@ AmCharts.ready(function () {
     categoryAxis.dashLength = 1;
     categoryAxis.gridAlpha = 0.15;
     categoryAxis.position = "top";
-    categoryAxis.axisColor = "#DADADA";
+    categoryAxis.axisColor = "#CACACA";
 
     // value
     var valueAxis = new AmCharts.ValueAxis();
-    valueAxis.axisAlpha = 0;
+    valueAxis.axisAlpha = 0.15;
     valueAxis.dashLength = 1;
     chart.addValueAxis(valueAxis);
 
     // GRAPH
     var graph = new AmCharts.AmGraph();
-    graph.title = "red line";
-    graph.valueField = "visits";
+    graph.title = "Apps Ran Over Time";
+    graph.valueField = "apps";
     graph.bullet = "round";
-    graph.bulletBorderColor = "#FFFFFF";
+    graph.bulletBorderColor = "#FFF";
     graph.bulletBorderThickness = 2;
     graph.lineThickness = 2;
-    graph.lineColor = "#5fb503";
-    graph.negativeLineColor = "#efcc26";
+    graph.lineColor = "#0098AA";
+    graph.negativeLineColor = "#AADDCC";
     graph.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
     chart.addGraph(graph);
 
     // CURSOR
     chartCursor = new AmCharts.ChartCursor();
     chartCursor.cursorPosition = "mouse";
-    chartCursor.pan = true; // set it to fals if you want the cursor to work in "select" mode
+    chartCursor.pan = true; // set it to false if you want the cursor to work in "select" mode
     chart.addChartCursor(chartCursor);
 
     // SCROLLBAR
@@ -72,11 +72,11 @@ function generateChartData() {
         var newDate = new Date(firstDate);
         newDate.setDate(newDate.getDate() + i);
 
-        var visits = Math.round(Math.random() * 40) - 20;
+        var apps = Math.round(Math.random() * 40) - 20;
 
         chartData.push({
             date: newDate,
-            visits: visits
+            apps: apps
         });
     }
 }
