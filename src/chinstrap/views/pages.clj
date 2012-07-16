@@ -26,7 +26,7 @@
 (defpage "/apps" []
   (template/apps-page
     (image {:id "logo"} "/img/logo.png")
-    (javascript-tag "window.setInterval(getApps,36000);")
+    (javascript-tag "window.setInterval(getApps,1000);")
     [:h3 "Discovery Environment App Status"]
     [:br]
     [:div#inner
