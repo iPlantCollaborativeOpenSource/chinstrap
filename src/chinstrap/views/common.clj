@@ -27,6 +27,9 @@
     [:div.vbr]]
   [:div#wrapper content])
 
+(defpartial footer []
+  [:div#footer])
+
 (defpartial main-page [& content]
     (html5
       [:head
@@ -35,7 +38,8 @@
         (include-js "/js/get-info.js"
                     "/js/main.js")]
       [:body
-        (wrapper content)]))
+        (wrapper content)
+        (footer)]))
 
 (defpartial apps-page [& content]
     (html5
@@ -46,7 +50,8 @@
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();});")
-        (wrapper content)]))
+        (wrapper content)
+        (footer)]))
 
 (defpartial components-page [& content]
     (html5
@@ -57,7 +62,8 @@
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();});")
-        (wrapper content)]))
+        (wrapper content)
+        (footer)]))
 
 (defpartial graph-page [& content]
     (html5
@@ -66,4 +72,5 @@
         (include-js "/js/amcharts.js")
         (include-js "/js/graph.js")]
       [:body
-        (wrapper content)]))
+        (wrapper content)
+        (footer)]))

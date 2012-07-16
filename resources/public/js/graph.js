@@ -27,12 +27,28 @@ AmCharts.ready(function () {
     categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
     categoryAxis.dashLength = 1;
     categoryAxis.gridAlpha = 0.15;
+    categoryAxis.autoGridCount = false;
+    categoryAxis.gridCount = 10;
     categoryAxis.position = "top";
     categoryAxis.axisColor = "#CACACA";
+    categoryAxis.dateFormats = [{
+        period: "DD",
+        format: "DD"
+    }, {
+        period: "WW",
+        format: "MMM DD"
+    }, {
+        period: "MM",
+        format: "MMM"
+    }, {
+        period: "YYYY",
+        format: "YYYY"
+    }];
 
     // value
     var valueAxis = new AmCharts.ValueAxis();
     valueAxis.axisAlpha = 0.15;
+    valueAxis.title = "# of Apps";
     valueAxis.dashLength = 1;
     chart.addValueAxis(valueAxis);
 
@@ -46,7 +62,7 @@ AmCharts.ready(function () {
     graph.lineThickness = 2;
     graph.lineColor = "#0098AA";
     graph.negativeLineColor = "#AADDCC";
-    graph.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
+    graph.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50
     chart.addGraph(graph);
 
     // CURSOR
@@ -57,6 +73,9 @@ AmCharts.ready(function () {
 
     // SCROLLBAR
     var chartScrollbar = new AmCharts.ChartScrollbar();
+    chartScrollbar.graph = graph;
+    chartScrollbar.autoGridCount = true;
+    chartScrollbar.scrollbarHeight = 25;
     chart.addChartScrollbar(chartScrollbar);
 
     // WRITE
@@ -72,7 +91,7 @@ function generateChartData() {
         var newDate = new Date(firstDate);
         newDate.setDate(newDate.getDate() + i);
 
-        var apps = Math.round(Math.random() * 40) - 20;
+        var apps = Math.round(Math.random() * 40);
 
         chartData.push({
             date: newDate,

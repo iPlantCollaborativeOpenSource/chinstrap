@@ -86,7 +86,9 @@
 (defpage "/graph" []
   (template/graph-page
     (image {:id "logo"} "/img/logo.png")
-    [:h3 "Graph Test"]
+    [:br]
+    [:h3 "DE Apps Ran Over Time"]
+    [:br]
     [:div#chartdiv
       [:div#chartselect
         [:input#rb1 {:type "radio" :name "group" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
