@@ -82,3 +82,8 @@
                     [:td.center i]
                     [:td (:name record)]
                     [:td.center (:count record)]]))]]]))
+
+(defpage "/graph" []
+  (template/graph-page
+    (image {:id "logo"} "/img/logo.png")
+    [:h3 "Graph Test"]))

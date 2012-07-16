@@ -22,6 +22,8 @@
     [:li.nav (link-to "/apps" "App Info")]
     [:div.vbr]
     [:li.nav (link-to "/components" "Component Info")]
+    [:div.vbr]
+    [:li.nav (link-to "/graph" "Graphs")]
     [:div.vbr]]
   [:div#wrapper content])
 
@@ -55,4 +57,12 @@
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();});")
+        (wrapper content)]))
+
+(defpartial graph-page [& content]
+    (html5
+      [:head
+        (global "Graph Test")
+        (include-js "/js/amcharts.js")]
+      [:body
         (wrapper content)]))
