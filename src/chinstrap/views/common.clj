@@ -63,6 +63,7 @@
     (html5
       [:head
         (global "Graph Test")
-        (include-js "/js/amcharts.js")]
+        (include-js "/js/amcharts.js")
+        (include-js "/js/graph.js")]
       [:body
         (wrapper content)]))

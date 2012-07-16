@@ -89,6 +89,11 @@ a
   color: #333;
 }
 
+#navbar a
+{
+  color: #333;
+}
+
 .vbr
 {
   border-right: 1px solid #AAA;
@@ -184,8 +189,6 @@ a
   background: -ms-linear-gradient(top,  #65dddf 0%,#42d0d2 100%); /* IE10+ */
   background: linear-gradient(to bottom,  #65dddf 0%,#42d0d2 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#65dddf', endColorstr='#42d0d2',GradientType=0 ); /* IE6-9 */
-
-
 }
 
 .collapsibleContainerContent
@@ -205,6 +208,24 @@ a
 }
 
 #ui-datepicker-div
+{
+  display: none;
+}
+
+"---chart styling---"
+#chartdiv
+{
+  width: 100%;
+  height: 400px;
+}
+
+#chartdiv2
+{
+  margin-left: 35px;
+}
+
+"amchart logo rm hack"
+g:nth-child(15)
 {
   display: none;
 }
