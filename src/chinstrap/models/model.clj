@@ -31,6 +31,6 @@
 
 ;AJAX call from the Javascript file 'resources/public/js/get-components.js'.
 (defpage "/get-components" []
-  (nr/json {:all (cq/all-count)
-            :without (cq/without-count)
-            :with (cq/with-count)}))
+  (nr/json {:all (cq/all-app-count)
+            :without (cq/unused-app-count)
+            :with (cq/used-app-count)}))

@@ -61,7 +61,7 @@
                [:th "Name"]
                [:th "Version"]]]
         [:tbody
-          (let [list (cq/unused-list) count (count list)]
+          (let [list (cq/unused-app-list) count (count list)]
               (for [i (range 1 count) :let [record (nth list i)]]
                 [:tr
                   [:td.center i]

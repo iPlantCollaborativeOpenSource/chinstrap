@@ -4,14 +4,14 @@
         [chinstrap.db])
   (:require [clojure.tools.logging :as log]))
 
-(defn all-count
+(defn all-app-count
   "Returns a count of all the queried deployed components in the DB."
   []
   (second (ffirst
     (select deployed_components
       (aggregate (count :name) :all)))))
 
-(defn without-count
+(defn unused-app-count
   "Returns a count of components that are unused or are used in private or deleted apps" []
   (second (ffirst
             (exec-raw ["SELECT COUNT(DISTINCT dc.name)
@@ -29,7 +29,7 @@
                         AND a.deleted IS FALSE
                         AND w.is_public IS TRUE);"] :results))))
 
-(defn with-count
+(defn used-app-count
   "Returns a count of all components that are used in public apps in the DB" []
   (second (ffirst
             (exec-raw ["SELECT COUNT(DISTINCT dc.name)
@@ -46,7 +46,7 @@
                         AND a.deleted IS NOT TRUE
                         AND t.component_id IS NOT NULL;"] :results))))
 
-(defn unused-list
+(defn unused-app-list
   "Returns a list of all the deployed components in the DB that do not have
    associated transformation activities."  []
   (exec-raw ["SELECT DISTINCT dc.name, dc.version
