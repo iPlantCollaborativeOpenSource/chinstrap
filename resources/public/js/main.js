@@ -27,6 +27,10 @@ $(document).ready(function(){
         }
     });
 
+    Mousetrap.bind('r a m o n e s', function() {
+            $('#inner').html("Hey Ho, Lets Go");
+    });
+
     Mousetrap.bind(['t'], function() {
         i = -1;
         $('#date').datepicker('setDate', 'today');

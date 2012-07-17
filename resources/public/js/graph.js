@@ -55,7 +55,7 @@ AmCharts.ready(function () {
     // GRAPH
     var graph = new AmCharts.AmGraph();
     graph.title = "Apps Ran Over Time";
-    graph.valueField = "apps";
+    graph.valueField = "count";
     graph.bullet = "round";
     graph.bulletBorderColor = "#FFF";
     graph.bulletBorderThickness = 2;
@@ -84,7 +84,39 @@ AmCharts.ready(function () {
 
 // generate some random data, quite different range
 function generateChartData() {
-    var firstDate = new Date();
+
+    var request = new XMLHttpRequest();
+    request.open("GET", "/get-all-apps");
+
+    request.onreadystatechange = function() {
+        if (request.readyState == 4) {
+            var response = JSON.parse(request.responseText);
+
+            response.sort();
+            uniq = [];
+            len = response.length
+            for(var i = 0; i < len;) {
+                for(var k = i; k < len && response[k] == response[i]; k++);
+                    if(k == i + 1) uniq.push(response[i])
+                        i = k
+            }
+            console.log(response);
+            console.log(uniq);
+
+            function doThis (element, index, array){
+                var utcSeconds = element;
+                var d = new Date(element * 1); // The 0 there is the key, which sets the date to the epoch
+                //console.log(d);
+
+                chartData.push({ date: d, count: 10 });
+            }
+            response.forEach(doThis);
+        }
+    }
+    request.send();
+
+
+    /*var firstDate = new Date();
     firstDate.setDate(firstDate.getDate() - 500);
 
     for (var i = 0; i < 500; i++) {
@@ -97,7 +129,7 @@ function generateChartData() {
             date: newDate,
             apps: apps
         });
-    }
+    }*/
 }
 
 // this method is called when chart is first inited as we listen for "dataUpdated" event

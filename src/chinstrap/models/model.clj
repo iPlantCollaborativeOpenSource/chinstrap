@@ -12,6 +12,13 @@
       (map #(str (:name (:state %)) "<br>")
         (mc/find-maps "jobs" {:state.status (str state)} [:state.name]))))
 
+;AJAX call from the Javascript file 'resources/public/js/graph.js'.
+(defpage "/get-all-apps" []
+  (nr/json
+    (rest
+      (map #(str (:submission_date (:state %)))
+        (mc/find-maps "jobs" {} [:state.submission_date])))))
+
 ;AJAX call from the Javascript file 'resources/public/js/get-info.js'.
 (defpage "/get-info/:date" {:keys [date]}
   (nr/json {:tools
