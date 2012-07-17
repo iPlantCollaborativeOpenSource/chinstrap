@@ -82,8 +82,10 @@ AmCharts.ready(function () {
     chart.write("chartdiv");
 });
 
-// generate some random data, quite different range
 function generateChartData() {
+
+    dates = [];
+    count = {};
 
     var request = new XMLHttpRequest();
     request.open("GET", "/get-all-apps");
@@ -92,30 +94,33 @@ function generateChartData() {
         if (request.readyState == 4) {
             var response = JSON.parse(request.responseText);
 
-            response.sort();
-            uniq = [];
-            len = response.length
-            for(var i = 0; i < len;) {
-                for(var k = i; k < len && response[k] == response[i]; k++);
-                    if(k == i + 1) uniq.push(response[i])
-                        i = k
-            }
-            console.log(response);
-            console.log(uniq);
-
-            function doThis (element, index, array){
+            function formatDate (element){
                 var utcSeconds = element;
-                var d = new Date(element * 1); // The 0 there is the key, which sets the date to the epoch
-                //console.log(d);
+                var d = new Date(element * 1).toDateString();
 
-                chartData.push({ date: d, count: 10 });
+                dates.push(d);
             }
-            response.forEach(doThis);
+            //console.log(dates);
+            response.forEach(formatDate);
+
+            for(var i = 0; i < dates.length; i++)
+                count[dates[i]] = (count[dates[i]] || 0) + 1
         }
     }
     request.send();
 
+    len = Object.keys(count).length;
+    for (var i = 0; i < len; i++){
+        var key = Object.keys(count)[i];
+        console.log(Object.keys(count)[i]);
+        chartData.push({
+            date: Date(key),
+            count: count[key]
+        });
+    }
+        //console.log(chartData);
 
+    // generate some random data, quite different range
     /*var firstDate = new Date();
     firstDate.setDate(firstDate.getDate() - 500);
 
@@ -127,7 +132,7 @@ function generateChartData() {
 
         chartData.push({
             date: newDate,
-            apps: apps
+            count: apps
         });
     }*/
 }
