@@ -69,8 +69,9 @@
     (html5
       [:head
         (global "Graph Test")
-        (include-js "/js/amcharts.js")
-        (include-js "/js/graph.js")]
+        (include-js "/js/amcharts.js"
+                    "/js/underscore-min.js"
+                    "/js/graph.js")]
       [:body
         (wrapper content)
         (footer)]))
