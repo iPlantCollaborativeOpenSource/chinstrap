@@ -15,7 +15,7 @@
   (template/main-page
     (image {:id "logo"} "/img/logo.png")
     [:br]
-    [:h3 "Discovery Environment Status"]
+    [:h3 "Discovery Environment Apps by Day"]
     [:br]
     [:h4#caption]
     [:div#inner "Pick a date to begin."]

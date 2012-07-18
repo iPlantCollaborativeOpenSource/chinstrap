@@ -1,16 +1,9 @@
 var chart;
 var chartData = [];
 var chartCursor;
-var dates = [];
-var keys = [];
-var count = {};
-
-function getData () {
-}
 
 AmCharts.ready(function () {
     // generate some data first
-    getData();
     generateChartData();
 
     // SERIAL CHART
@@ -74,6 +67,8 @@ AmCharts.ready(function () {
 
     // CURSOR
     chartCursor = new AmCharts.ChartCursor();
+    chartCursor.cursorColor = '#db6619';
+    chartCursor.categoryBalloonColor = '#db6619';
     chartCursor.cursorPosition = "mouse";
     chartCursor.pan = true; // set it to false if you want the cursor to work in "select" mode
     chart.addChartCursor(chartCursor);
@@ -91,6 +86,8 @@ AmCharts.ready(function () {
 
 function generateChartData() {
 
+    var dates = [];
+    var count = {};
     var response;
     request = $.ajax({
         url: "/get-all-apps",
@@ -109,14 +106,13 @@ function generateChartData() {
         d = new Date(d);
         dates.push(d);
     }
-        console.log(dates);
+        //console.log(dates);
 
     for(var i = 0; i < dates.length; i++) {
         count[dates[i]] = (count[dates[i]] || 0) + 1
     }
 
     //   console.log(count);
-    console.log(_.keys(count));
 
     var firstDate = dates[0];
 
@@ -130,45 +126,24 @@ function generateChartData() {
 
     //console.log(dates);
 
+    keys = _.keys(count);
+    keys = keys.reverse();
+
     for(var i = 0; i < days_between(firstDate, new Date())+1; i++) {
         var newDate = new Date(firstDate);
         newDate.setDate(newDate.getDate() + i);
         //console.log(newDate);
 
-        keys = _.keys(count);
-        keys = keys.reverse();
-        //console.log(count);
-    /*    if (_.isUndefined(count[keys[0]])){
-            var num = 0;
-        }else{
-            var num = count[keys.push()];
-            newDate = keys.pop();
-        }*/
-
         var apps = Math.round(Math.random() * 40);
 
         chartData.push({
             date: newDate,
             count: apps
         });
+        console.log(dates);
     }
+        console.log(count);
 }
-    // generate some random data, quite different range
-    /*var firstDate = new Date();
-    firstDate.setDate(firstDate.getDate() - 500);
-
-    for (var i = 0; i < 500; i++) {
-        var newDate = new Date(firstDate);
-        newDate.setDate(newDate.getDate() + i);
-
-        var apps = Math.round(Math.random() * 40);
-
-        chartData.push({
-            date: newDate,
-            count: apps
-        });
-    }
-}*/
 
 // this method is called when chart is first inited as we listen for "dataUpdated" event
 function zoomChart() {
