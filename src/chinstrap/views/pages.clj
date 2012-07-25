@@ -23,7 +23,7 @@
 ;Page listing the count of different states of Discovery Environment Apps.
 (defpage "/apps" []
   (template/apps-page
-    (javascript-tag "window.setInterval(getApps,1000);")
+    (javascript-tag "window.setInterval(getApps,36000);")
     [:h3 "Discovery Environment App Status"]
     [:br]
     [:div#inner
@@ -43,7 +43,7 @@
 (defpage "/components" []
   (template/components-page
     (javascript-tag "window.setInterval(getComponents,36000);")
-    [:h3 "Discovery Environment Components Info"]
+    [:h3 "Discovery Environment Component Info"]
     [:br]
     [:div#inner
       [:h3.left "With Associated Apps:" [:span#with.right]]

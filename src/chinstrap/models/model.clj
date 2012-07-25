@@ -8,9 +8,10 @@
             [clojure.tools.logging :as log])
   (:use [noir.core]))
 
-(defn format-app-count-graph-data
+(defn format-graph-data
   "This function takes in dates and their counts and parses them into a JSON
-  object for easy graph data parsing in javascript." [data]
+  object for easy graph data parsing in javascript."
+  [data]
   (map
     #(hash-map
       :date (key %)
@@ -25,24 +26,26 @@
       (map #(str (:name (:state %)) "<br>")
         (mc/find-maps "jobs" {:state.status (str state)} [:state.name]))))
 
+;currently unused
 (defpage "/get-all-apps" []
   (nr/json
     (rest
       (map #(str (:submission_date (:state %)))
         (mc/find-maps "jobs" {} [:state.submission_date])))))
 
-;AJAX call from the Javascript file 'resources/public/js/graph.js'.
+;currently unused
+(defpage "/get-failed-apps" []
+  (nr/json
+    (mc/find-maps "jobs" {:state.status {"$in" ["Failed"]}})))
+
+;AJAX call from the Javascript file 'resources/public/js/graph.js' for graph data.
 (defpage "/get-completed-apps" []
   (nr/json
-    (format-app-count-graph-data
+    (format-graph-data
     (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
       (map #(* 86400000 (long (/ (Long/parseLong (str %)) 86400000)))
         (rest (map #(:submission_date (:state %))
           (mc/find-maps "jobs" {:state.status {"$in" ["Completed"]}} [:state.submission_date])))))))))
-
-(defpage "/get-failed-apps" []
-  (nr/json
-    (mc/find-maps "jobs" {:state.status {"$in" ["Failed"]}})))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-info.js'.
 (defpage "/get-info/:date" {:keys [date]}

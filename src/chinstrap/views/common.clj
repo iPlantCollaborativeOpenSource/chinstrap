@@ -36,6 +36,11 @@
 (defpartial footer []
   [:div#footer])
 
+(defpartial page [& content]
+  (navbar)
+  (wrapper content)
+  (footer))
+
 (defpartial info-page [& content]
     (html5
       [:head
@@ -44,9 +49,7 @@
         (include-js "/js/get-info.js"
                     "/js/info-script.js")]
       [:body
-        (navbar)
-        (wrapper content)
-        (footer)]))
+        (page content)]))
 
 (defpartial apps-page [& content]
     (html5
@@ -57,9 +60,7 @@
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();});")
-        (navbar)
-        (wrapper content)
-        (footer)]))
+        (page content)]))
 
 (defpartial components-page [& content]
     (html5
@@ -70,9 +71,7 @@
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();});")
-        (navbar)
-        (wrapper content)
-        (footer)]))
+        (page content)]))
 
 (defpartial graph-page [& content]
     (html5
@@ -82,6 +81,4 @@
                     "/js/underscore-min.js"
                     "/js/graph.js")]
       [:body
-        (navbar)
-        (wrapper content)
-        (footer)]))
+        (page content)]))
