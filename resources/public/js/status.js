@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+    changePage('main');
+
     var i = 0;
     var picker = {showOn:'both',
                   hideIfNoPrevNext: true,

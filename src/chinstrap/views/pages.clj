@@ -9,12 +9,19 @@
         [hiccup.element]))
 
 (defpage "/" []
-  (render "/main"))
+  (template/main))
 
 (defpage "/main" []
-  (template/main-page
-    (image {:id "logo"} "/img/logo.png")
+  (template/html
+    [:h2 "Welcome to Chinstrap"]
     [:br]
+    [:p "Chinstrap is a Discovery Environment Diagnostics tool."]
+    [:br]
+    [:p "Scroll through the status windows with the 'h' and 'l' keys."]))
+
+(defpage "/status" []
+  (template/status-page)
+  (template/html
     [:h3 "Discovery Environment Apps by Day"]
     [:br]
     [:h4#caption]
@@ -24,9 +31,8 @@
 
 ;Page listing the count of different states of Discovery Environment Apps.
 (defpage "/apps" []
-  (template/apps-page
-    (image {:id "logo"} "/img/logo.png")
-    (javascript-tag "window.setInterval(getApps,1000);")
+  (template/html
+    (javascript-tag "window.setInterval(getApps,36000);")
     [:h3 "Discovery Environment App Status"]
     [:br]
     [:div#inner
@@ -44,8 +50,7 @@
 
 ;Page listing count and info of Components with no transformation activities.
 (defpage "/components" []
-  (template/components-page
-    (image {:id "logo"} "/img/logo.png")
+  (template/html
     (javascript-tag "window.setInterval(getComponents,36000);")
     [:h3 "Discovery Environment Components Info"]
     [:br]
@@ -84,9 +89,7 @@
                     [:td.center (:count record)]]))]]]))
 
 (defpage "/graph" []
-  (template/graph-page
-    (image {:id "logo"} "/img/logo.png")
-    [:br]
+  (template/html
     [:h3 "DE Apps Ran Over Time"]
     [:br]
     [:div#chartdiv
