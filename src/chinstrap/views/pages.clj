@@ -9,13 +9,11 @@
         [hiccup.element]))
 
 (defpage "/" []
-  (render "/main"))
+  (render "/info"))
 
-(defpage "/main" []
-  (template/main-page
-    (image {:id "logo"} "/img/logo.png")
-    [:br]
-    [:h3 "Discovery Environment Apps by Day"]
+(defpage "/info" []
+  (template/info-page
+    [:h3 "Discovery Environment App Info by Day"]
     [:br]
     [:h4#caption]
     [:div#inner "Pick a date to begin."]
@@ -25,7 +23,6 @@
 ;Page listing the count of different states of Discovery Environment Apps.
 (defpage "/apps" []
   (template/apps-page
-    (image {:id "logo"} "/img/logo.png")
     (javascript-tag "window.setInterval(getApps,1000);")
     [:h3 "Discovery Environment App Status"]
     [:br]
@@ -45,7 +42,6 @@
 ;Page listing count and info of Components with no transformation activities.
 (defpage "/components" []
   (template/components-page
-    (image {:id "logo"} "/img/logo.png")
     (javascript-tag "window.setInterval(getComponents,36000);")
     [:h3 "Discovery Environment Components Info"]
     [:br]
@@ -85,8 +81,6 @@
 
 (defpage "/graph" []
   (template/graph-page
-    (image {:id "logo"} "/img/logo.png")
-    [:br]
     [:h3 "DE Apps Ran Over Time"]
     [:br]
     [:div#chartdiv

@@ -14,30 +14,37 @@
       "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
       "/js/mousetrap.min.js")])
 
-(defpartial wrapper [& content]
+(defpartial navbar []
   [:div#navbar
     [:span.vbr]
-    [:li.nav (link-to "/main" "Status")]
+    [:li.nav (link-to "/info" "Info")]
     [:div.vbr]
-    [:li.nav (link-to "/apps" "App Info")]
+    [:li.nav (link-to "/apps" "Apps")]
     [:div.vbr]
-    [:li.nav (link-to "/components" "Component Info")]
+    [:li.nav (link-to "/components" "Components")]
     [:div.vbr]
     [:li.nav (link-to "/graph" "Graphs")]
-    [:div.vbr]]
-  [:div#wrapper content])
+    [:div.vbr]])
+
+(defpartial wrapper [& content]
+  [:div#wrapper
+    (image {:id "logo" :alt "iPlant Logo"} "/img/logo.png")
+    [:br]
+    content]
+  [:br])
 
 (defpartial footer []
   [:div#footer])
 
-(defpartial main-page [& content]
+(defpartial info-page [& content]
     (html5
       [:head
-        (global "Status")
+        (global "Info")
         (include-css "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/cupertino/jquery-ui.css")
         (include-js "/js/get-info.js"
-                    "/js/main.js")]
+                    "/js/info-script.js")]
       [:body
+        (navbar)
         (wrapper content)
         (footer)]))
 
@@ -50,6 +57,7 @@
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();});")
+        (navbar)
         (wrapper content)
         (footer)]))
 
@@ -62,6 +70,7 @@
       [:body
         (javascript-tag "$(document).ready(function(){
           $('.collapsibleContainer').collapsiblePanel();});")
+        (navbar)
         (wrapper content)
         (footer)]))
 
@@ -73,5 +82,6 @@
                     "/js/underscore-min.js"
                     "/js/graph.js")]
       [:body
+        (navbar)
         (wrapper content)
         (footer)]))
