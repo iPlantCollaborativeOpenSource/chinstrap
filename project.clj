@@ -3,6 +3,7 @@
     :dependencies [[org.clojure/clojure "1.4.0"]
                    [org.iplantc/clojure-commons "1.1.0-SNAPSHOT"]
                    [org.iplantc/kameleon "0.0.1-SNAPSHOT"]
+                   [clj-time "0.4.3"]
                    [org.clojure/data.json "0.1.2"]
                    [com.novemberain/monger "1.0.0-rc2"]
                    [korma/korma "0.3.0-beta10"]

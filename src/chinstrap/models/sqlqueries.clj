@@ -1,4 +1,4 @@
-(ns chinstrap.sqlqueries
+(ns chinstrap.models.sqlqueries
   (:use [kameleon.entities]
         [korma.core]
         [chinstrap.db])
@@ -87,12 +87,11 @@
               GROUP BY integrator_name
               ORDER BY count DESC, name ASC;"] :results))
 
-(defn apps-by-ids
+(defn count-apps
   "This function takes a collection of analysis_ids and queries the postgres
-  database for distinct matching tool names."
+  database to run a count of tools run on that day."
   [ids]
   (select "template"
-    (modifier "distinct")
     (aggregate (count :name) :count :name)
     (fields :name)
     (where {:name [in

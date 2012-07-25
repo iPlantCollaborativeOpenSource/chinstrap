@@ -90,7 +90,7 @@ function generateChartData() {
     var count = {};
     var response;
     request = $.ajax({
-        url: "/get-all-apps",
+        url: "/get-completed-apps",
         async: false,
         contentType: "application/json",
         success: function(data){
@@ -98,15 +98,15 @@ function generateChartData() {
         }
     });
 
-    sortedResponse = response.sort();
-    sortedResponse.forEach(formatDate);
+        console.log(response);
+    response.forEach(formatDate);
+        console.log(response);
 
     function formatDate (element) {
         var d = new Date(element * 1).toDateString();
         d = new Date(d);
         dates.push(d);
     }
-        //console.log(dates);
 
     for(var i = 0; i < dates.length; i++) {
         count[dates[i]] = (count[dates[i]] || 0) + 1

@@ -1,7 +1,10 @@
 (ns chinstrap.models.model
   (:require [noir.response :as nr]
-            [chinstrap.sqlqueries :as cq]
-            [monger.collection :as mc])
+            [chinstrap.models.sqlqueries :as cq]
+            [monger.collection :as mc]
+            [clj-time.core :as time]
+            [clj-time.coerce :as coerce]
+            [clojure.tools.logging :as log])
   (:use [noir.core]))
 
 (defn get-app-names
@@ -19,14 +22,25 @@
       (map #(str (:submission_date (:state %)))
         (mc/find-maps "jobs" {} [:state.submission_date])))))
 
+(defpage "/get-completed-apps" []
+  (nr/json (log/warn
+    (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
+      (map #(coerce/from-long (* 86400000 (long (/ (Long/parseLong (str %)) 86400000))))
+        (rest (map #(:submission_date (:state %))
+          (mc/find-maps "jobs" {:state.status {"$in" ["Completed"]}} [:state.submission_date])))))))))
+
+(defpage "/get-failed-apps" []
+  (nr/json
+    (mc/find-maps "jobs" {:state.status {"$in" ["Failed"]}})))
+
 ;AJAX call from the Javascript file 'resources/public/js/get-info.js'.
 (defpage "/get-info/:date" {:keys [date]}
   (nr/json {:tools
-    (cq/apps-by-ids
+    (cq/count-apps
       (map #(str (:analysis_id (:state %)))
         (mc/find-maps "jobs" {:state.submission_date
-          {"$gte" (read-string date) "$lt" (+ 86400000 (read-string date))}
-            :state.analysis_id {"$exists" true}}[:state.analysis_id])))}))
+          {"$gte" (read-string date) "$lt" (+ 86400000 (read-string date))}}
+            [:state.analysis_id])))}))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-apps.js'.
 (defpage "/get-apps" []

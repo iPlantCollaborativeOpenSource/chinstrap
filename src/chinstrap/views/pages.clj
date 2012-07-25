@@ -1,7 +1,7 @@
 (ns chinstrap.views.pages
   (:require [chinstrap.views.common :as template]
             [noir.response :as nr]
-            [chinstrap.sqlqueries :as cq]
+            [chinstrap.models.sqlqueries :as cq]
             [monger.collection :as mc])
   (:use [noir.core]
         [chinstrap.db]
