@@ -77,7 +77,8 @@
   "Registers a property in the list of required properties."
   [prop]
   (dosync (alter required-props conj prop)))
-;postgres connection properties
+
+;'Metadactyl' Postgres connection properties
 (required
   (defprop postgresdb-driver
     "The database driver."
