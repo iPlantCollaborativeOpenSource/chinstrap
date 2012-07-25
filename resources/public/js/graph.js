@@ -62,7 +62,7 @@ AmCharts.ready(function () {
     graph.lineThickness = 2;
     graph.lineColor = "#0098AA";
     graph.negativeLineColor = "#AADDCC";
-    graph.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50
+    graph.hideBulletsCount = 100; // this makes the chart to hide bullets when there are more than 50
     chart.addGraph(graph);
 
     // CURSOR
@@ -86,8 +86,6 @@ AmCharts.ready(function () {
 
 function generateChartData() {
 
-    var dates = [];
-    var count = {};
     var response;
     request = $.ajax({
         url: "/get-completed-apps",
@@ -98,7 +96,13 @@ function generateChartData() {
         }
     });
 
+    var daysBetween = Math.round(
+                        Math.abs(response[0]['date'] - new Date().getTime())
+                      /8640000);
+
     response.forEach(formatDate);
+
+    var firstDate = response[0]['date'];
 
     function formatDate (element) {
         var d = new Date(element['date'] * 1).toDateString();
@@ -106,17 +110,7 @@ function generateChartData() {
         element['date'] = d;
     }
 
-    var firstDate = response[0]['date'];
-
-    function days_between(date1, date2) {
-        var ONE_DAY = 1000 * 60 * 60 * 24;
-        var date1_ms = date1;
-        var date2_ms = date2;
-        var difference_ms = Math.abs(date1_ms - date2_ms);
-        return Math.round(difference_ms/ONE_DAY);
-    }
-
-    for(var i = 0; i < days_between(firstDate, new Date())+1; i++) {
+    for(var i = 0; i <= daysBetween; i++) {
         var newDate = new Date(firstDate);
         newDate.setDate(newDate.getDate() + i);
         for(var j = 0; j < response.length; j++){
@@ -126,6 +120,7 @@ function generateChartData() {
                     count: response[j]['count']
                 });
                 response = _.rest(response);
+                break;
             } else {
                 chartData.push({
                     date: newDate,
