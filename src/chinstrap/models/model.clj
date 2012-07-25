@@ -4,8 +4,18 @@
             [monger.collection :as mc]
             [clj-time.core :as time]
             [clj-time.coerce :as coerce]
+            [clojure.walk :as walk]
             [clojure.tools.logging :as log])
   (:use [noir.core]))
+
+(defn format-app-count-graph-data
+  "This function takes in dates and their counts and parses them into a JSON
+  object for easy graph data parsing in javascript." [data]
+  (map
+    #(hash-map
+      :date (key %)
+      :count (val %))
+    data))
 
 (defn get-app-names
   "This function returns the application names currently operating at the passed state.
@@ -15,17 +25,18 @@
       (map #(str (:name (:state %)) "<br>")
         (mc/find-maps "jobs" {:state.status (str state)} [:state.name]))))
 
-;AJAX call from the Javascript file 'resources/public/js/graph.js'.
 (defpage "/get-all-apps" []
   (nr/json
     (rest
       (map #(str (:submission_date (:state %)))
         (mc/find-maps "jobs" {} [:state.submission_date])))))
 
+;AJAX call from the Javascript file 'resources/public/js/graph.js'.
 (defpage "/get-completed-apps" []
-  (nr/json (log/warn
+  (nr/json
+    (format-app-count-graph-data
     (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
-      (map #(coerce/from-long (* 86400000 (long (/ (Long/parseLong (str %)) 86400000))))
+      (map #(* 86400000 (long (/ (Long/parseLong (str %)) 86400000)))
         (rest (map #(:submission_date (:state %))
           (mc/find-maps "jobs" {:state.status {"$in" ["Completed"]}} [:state.submission_date])))))))))
 
