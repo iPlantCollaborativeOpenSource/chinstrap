@@ -81,7 +81,7 @@ AmCharts.ready(function () {
     chart.addChartScrollbar(chartScrollbar);
 
     // WRITE
-    chart.write("chartdiv");
+    chart.write("byDay");
 });
 
 function generateChartData() {

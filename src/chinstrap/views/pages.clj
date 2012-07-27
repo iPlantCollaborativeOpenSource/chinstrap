@@ -83,7 +83,14 @@
   (template/graph-page
     [:h3 "DE Apps Ran Over Time"]
     [:br]
-    [:div#chartdiv
-      [:div#chartselect
-        [:input#rb1 {:type "radio" :name "group" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
-        [:input#rb2 {:type "radio" :checked "true" :name "group" :onClick "setPanSelect()"} "Pan"]]]))
+    [:h4 "By Day"]
+    [:div#byDay.chart
+      [:div#dayselect
+        [:input#rb1 {:type "radio" :name "dayGroup" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
+        [:input#rb2 {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]]
+    [:br]
+    [:h4 "By Month"]
+    [:div#byMonth.chart
+      [:div#monthselect
+        [:input#rb3 {:type "radio" :name "monthGroup" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
+        [:input#rb4 {:type "radio" :checked "true" :name "monthGroup" :onClick "setPanSelect()"} "Pan"]]]))

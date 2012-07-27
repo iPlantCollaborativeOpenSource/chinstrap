@@ -79,6 +79,7 @@
         (global "Graph Test")
         (include-js "/js/amcharts.js"
                     "/js/underscore-min.js"
-                    "/js/graph.js")]
+                    "/js/dayGraph.js"
+                    "/js/monthGraph.js")]
       [:body
         (page content)]))
