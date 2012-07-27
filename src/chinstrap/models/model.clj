@@ -60,8 +60,10 @@
 (defpage "/get-apps" []
   (nr/json {:running (mc/count "jobs" {:state.status "Running"}),
             :submitted (mc/count "jobs" {:state.status "Submitted"}),
+            :failed (mc/count "jobs" {:state.status "Failed"}),
             :completed (mc/count "jobs" {:state.status "Completed"}),
             :running-names (str (get-app-names "Running")),
+            :failed-names (str (get-app-names "Failed")),
             :submitted-names (str (get-app-names "Submitted"))}))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-components.js'.

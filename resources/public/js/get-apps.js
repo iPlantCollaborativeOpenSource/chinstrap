@@ -11,8 +11,10 @@ function getApps() {
 
 			$('#running').html(response['running']);
 			$('#submitted').html(response['submitted']);
+			$('#failed').html(response['failed']);
 			$('#completed').html(response['completed']);
 			$('#running-apps').html(response['running-names']);
+			$('#failed-apps').html(response['failed-names']);
 			$('#submitted-apps').html(response['submitted-names']);
 		}
 	}

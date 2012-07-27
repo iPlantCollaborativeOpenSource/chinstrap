@@ -29,6 +29,7 @@
     [:div#inner
       [:h3.left "Running Apps:" [:span#running.right]]
       [:h3.left "Submitted Apps:" [:span#submitted.right]]
+      [:h3.left "Failed Apps:" [:span#failed.right]]
       [:h3.left "Completed Apps:" [:span#completed.right]]]
     [:br]
     [:div.collapsibleContainer
@@ -37,7 +38,11 @@
     [:br]
     [:div.collapsibleContainer
       {:title "Submitted Apps"}
-      [:div#submitted-apps]]))
+      [:div#submitted-apps]]
+    [:br]
+    [:div.collapsibleContainer
+      {:title "Failed Apps"}
+      [:div#failed-apps]]))
 
 ;Page listing count and info of Components with no transformation activities.
 (defpage "/components" []
