@@ -4,9 +4,7 @@ $(document).ready(function(){
                   hideIfNoPrevNext: true,
                   maxDate: '+0d',
                   buttonText:'Pick a Date',
-                  onClose: function(dateText, inst) {
-                               changeDay(inst);
-                           }
+                  onClose: changeDay
                  };
 
     $('#date').datepicker(picker);
@@ -17,8 +15,11 @@ $(document).ready(function(){
     now = $.datepicker.formatDate('mm/dd/yy', now);
     console.log(now);
 
-    function changeDay(inst){
-        console.log(inst);
+    function changeDay(dateText, inst){
+        var selected = new Date(dateText);
+        var today = new Date();
+        i = Math.round((selected - today) / 86400000);
+
     }
 
     Mousetrap.bind(['down', 'j'], function() {

@@ -237,14 +237,9 @@ a
   margin-left: 35px;
 }
 
-g:nth-child(15)
+g:nth-child(15) rect
 {
-  display: none;
-}
-
-g:nth-child(14)
-{
-  display: none;
+  display:none;
 }
 
 #footer
