@@ -18,7 +18,7 @@
     [:h4#caption]
     [:div#inner "Pick a date to begin."]
     [:br]
-    [:input#date {:onChange "getInfo()"}]))
+    [:input#date.left {:onChange "getInfo()"}]))
 
 ;Page listing the count of different states of Discovery Environment Apps.
 (defpage "/apps" []
@@ -54,7 +54,10 @@
       [:h3.left "Total Components:" [:span#all.right]]]
     [:br]
     [:div.collapsibleContainer {:title "Unused Componenent Details"}
-      [:table
+      [:button
+        {:onClick "$('#unused').table2CSV({header:['#','App Name','Version']});"}
+        "Export to CSV"]
+      [:table#unused
         [:thead
           [:tr [:th ""]
                [:th "Name"]
@@ -68,11 +71,14 @@
                   [:td.center (or (:version record) "No Version")]]))]]]
       [:br]
       [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
-        [:table
+        [:button
+          {:onClick "$('#leaderboard').table2CSV({header:['#','Contributor Name','Number of Apps']});"}
+          "Export to CSV"]
+        [:table#leaderboard
           [:thead
             [:tr [:th ""]
-                [:th "Name"]
-                [:th "Count"]]]
+                 [:th "Name"]
+                 [:th "Count"]]]
           [:tbody
             (let [list (cq/leader-list) count (count list)]
               (for [i (range 1 count)
@@ -84,10 +90,13 @@
 
 (defpage "/graph" []
   (template/graph-page
-    [:h3 "DE Apps Ran Over Time"]
+    [:h3 "DE Apps Completed Over Time"]
     [:br]
-    [:h4 "By Day"]
-    [:div#byDay.chart
-      [:div#dayselect
+    [:h4#kind]
+    [:br]
+    [:div#chart
+      [:div.select
         [:input#rb1 {:type "radio" :name "dayGroup" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
-        [:input#rb2 {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]]))
+        [:input#rb2 {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]
+      [:div#loader]]
+    [:h5.right "Data Starting from: " [:span#firstDate]]))

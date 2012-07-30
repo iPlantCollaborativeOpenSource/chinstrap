@@ -81,14 +81,14 @@ AmCharts.ready(function () {
     chart.addChartScrollbar(chartScrollbar);
 
     // WRITE
-    chart.write("byDay");
+    chart.write("chart");
 });
 
 function generateChartData() {
 
     var response;
     request = $.ajax({
-        url: "/get-completed-apps",
+        url: "/get-day-data",
         async: false,
         contentType: "application/json",
         success: function(data){
@@ -96,13 +96,7 @@ function generateChartData() {
         }
     });
 
-    var daysBetween = Math.round(
-                        Math.abs(response[0]['date'] - new Date().getTime())
-                      /8640000);
-
     response.forEach(formatDate);
-
-    var firstDate = response[0]['date'];
 
     function formatDate (element) {
         var d = new Date(element['date'] * 1).toDateString();
@@ -110,20 +104,27 @@ function generateChartData() {
         element['date'] = d;
     }
 
+    var firstDate = response[0]['date'];
+
+    $("#kind").html("By Day");
+    $("#firstDate").html("" + firstDate);
+
+    var daysBetween = Math.round(Math.abs(firstDate - new Date().getTime())/8640000);
+
     for(var i = 0; i <= daysBetween; i++) {
         var newDate = new Date(firstDate);
         newDate.setDate(newDate.getDate() + i);
         for(var j = 0; j < response.length; j++){
             if(response[j]['date'].getTime() == newDate.getTime()){
                 chartData.push({
-                    date: response[j]['date'],
+                    date:  response[j]['date'],
                     count: response[j]['count']
                 });
                 response = _.rest(response);
                 break;
             } else {
                 chartData.push({
-                    date: newDate,
+                    date:  newDate,
                     count: 0
                 });
             }

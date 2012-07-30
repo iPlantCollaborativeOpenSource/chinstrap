@@ -18,7 +18,7 @@ $(document).ready(function(){
     function changeDay(dateText, inst){
         var selected = new Date(dateText);
         var today = new Date();
-        i = Math.round((selected - today) / 86400000);
+        i = Math.round((selected - today) / 86400000) + 1;
 
     }
 

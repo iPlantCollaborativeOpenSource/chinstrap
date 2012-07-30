@@ -24,7 +24,7 @@ function loadMonthGraph() {
     // category
     var categoryAxis = chart.categoryAxis;
     categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
-    categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
+    categoryAxis.minPeriod = "MM"; // our data is daily, so we set minPeriod to DD
     categoryAxis.dashLength = 1;
     categoryAxis.gridAlpha = 0.15;
     categoryAxis.autoGridCount = false;
@@ -32,12 +32,6 @@ function loadMonthGraph() {
     categoryAxis.position = "top";
     categoryAxis.axisColor = "#CACACA";
     categoryAxis.dateFormats = [{
-        period: "DD",
-        format: "DD"
-    }, {
-        period: "WW",
-        format: "MMM DD"
-    }, {
         period: "MM",
         format: "MMM"
     }, {
@@ -54,7 +48,7 @@ function loadMonthGraph() {
 
     // GRAPH
     var graph = new AmCharts.AmGraph();
-    graph.title = "Apps Ran Over Time";
+    graph.title = "Apps Ran Over Time - By Month";
     graph.valueField = "count";
     graph.bullet = "round";
     graph.bulletBorderColor = "#FFF";
@@ -81,14 +75,14 @@ function loadMonthGraph() {
     chart.addChartScrollbar(chartScrollbar);
 
     // WRITE
-    chart.write("byMonth");
+    chart.write("chart");
 };
 
 function generateChartData() {
 
     var response;
     request = $.ajax({
-        url: "/get-day-data",
+        url: "/get-month-data",
         async: false,
         contentType: "application/json",
         success: function(data){
@@ -96,19 +90,20 @@ function generateChartData() {
         }
     });
 
-    var daysBetween = Math.round(
-                        Math.abs(response[0]['date'] - new Date().getMonth())
-                      /8640000);
-
     response.forEach(formatDate);
-
-    var firstDate = response[0]['date'];
 
     function formatDate (element) {
         var d = new Date(element['date'] * 1).toDateString();
         d = new Date(d);
         element['date'] = d;
     }
+
+    var firstDate = response[0]['date'];
+
+    $("#kind").html("By Month");
+    $("#firstDate").html("" + firstDate);
+
+    var daysBetween = Math.round(Math.abs(firstDate - new Date().getMonth())/8640000);
 
     for(var i = 0; i <= daysBetween; i++) {
         var newDate = new Date(firstDate);
@@ -139,7 +134,7 @@ function zoomChart() {
 
 // changes cursor mode from pan to select
 function setPanSelect() {
-    if (document.getElementById("rb3").checked) {
+    if (document.getElementById("rb1").checked) {
         chartCursor.pan = false;
         chartCursor.zoomable = true;
     } else {

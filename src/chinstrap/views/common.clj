@@ -12,7 +12,7 @@
     (include-js
       "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
       "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
-      "/js/lib/mousetrap.min.js")])
+      "/js/lib/table2CSV.js")])
 
 (defpartial navbar []
   [:div#navbar
@@ -47,9 +47,10 @@
         (global "Info")
         (include-css "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/cupertino/jquery-ui.css")
         (include-js "/js/get-info.js"
-                    "/js/info-script.js")]
+                    "/js/info-script.js"
+                    "/js/lib/mousetrap.min.js")])
       [:body
-        (page content)]))
+        (page content)])
 
 (defpartial apps-page [& content]
     (html5
@@ -79,7 +80,9 @@
         (global "Graph Test")
         (include-js "/js/lib/amcharts.js"
                     "/js/lib/underscore-min.js"
-                    "/js/day-graph.js"
-                    "/js/month-graph.js")]
+                    "/js/lib/spin.min.js"
+                    "/js/graph-loader.js"
+                    "/js/month-graph.js"
+                    "/js/day-graph.js")]
       [:body
         (page content)]))
