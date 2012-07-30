@@ -23,7 +23,6 @@
 ;Page listing the count of different states of Discovery Environment Apps.
 (defpage "/apps" []
   (template/apps-page
-    (javascript-tag "window.setInterval(getApps,36000);")
     [:h3 "Discovery Environment App Status"]
     [:br]
     [:div#inner
@@ -47,7 +46,6 @@
 ;Page listing count and info of Components with no transformation activities.
 (defpage "/components" []
   (template/components-page
-    (javascript-tag "window.setInterval(getComponents,36000);")
     [:h3 "Discovery Environment Component Info"]
     [:br]
     [:div#inner
@@ -92,10 +90,4 @@
     [:div#byDay.chart
       [:div#dayselect
         [:input#rb1 {:type "radio" :name "dayGroup" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
-        [:input#rb2 {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]]
-    [:br]
-    [:h4 "By Month"]
-    [:div#byMonth.chart
-      [:div#monthselect
-        [:input#rb3 {:type "radio" :name "monthGroup" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
-        [:input#rb4 {:type "radio" :checked "true" :name "monthGroup" :onClick "setPanSelect()"} "Pan"]]]))
+        [:input#rb2 {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]]))

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", getApps);
+document.addEventListener("DOMContentLoaded", function(){getApps();window.setInterval(getApps,36000);});
 
 function getApps() {
 

@@ -12,7 +12,7 @@
     (include-js
       "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
       "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
-      "/js/mousetrap.min.js")])
+      "/js/lib/mousetrap.min.js")])
 
 (defpartial navbar []
   [:div#navbar
@@ -77,9 +77,9 @@
     (html5
       [:head
         (global "Graph Test")
-        (include-js "/js/amcharts.js"
-                    "/js/underscore-min.js"
-                    "/js/dayGraph.js"
-                    "/js/monthGraph.js")]
+        (include-js "/js/lib/amcharts.js"
+                    "/js/lib/underscore-min.js"
+                    "/js/day-graph.js"
+                    "/js/month-graph.js")]
       [:body
         (page content)]))

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", getComponents);
+document.addEventListener("DOMContentLoaded",function(){getComponents();window.setInterval(getComponents,36000);});
 
 function getComponents() {
 

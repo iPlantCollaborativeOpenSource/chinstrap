@@ -2,7 +2,7 @@ var chart;
 var chartData = [];
 var chartCursor;
 
-AmCharts.ready(function () {
+function loadMonthGraph() {
     // generate some data first
     generateChartData();
 
@@ -82,13 +82,13 @@ AmCharts.ready(function () {
 
     // WRITE
     chart.write("byMonth");
-});
+};
 
 function generateChartData() {
 
     var response;
     request = $.ajax({
-        url: "/get-completed-apps",
+        url: "/get-day-data",
         async: false,
         contentType: "application/json",
         success: function(data){

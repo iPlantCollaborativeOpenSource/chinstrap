@@ -39,7 +39,7 @@
     (mc/find-maps "jobs" {:state.status {"$in" ["Failed"]}})))
 
 ;AJAX call from the Javascript file 'resources/public/js/graph.js' for graph data.
-(defpage "/get-completed-apps" []
+(defpage "/get-day-data" []
   (nr/json
     (format-graph-data
     (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
