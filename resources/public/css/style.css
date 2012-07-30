@@ -257,7 +257,7 @@ g:nth-child(15)
 }
 
 /* --- CSV Styling --- */
-.csv
+#csv
 {
    text-align: left;
    font-size: 8pt;

@@ -37,6 +37,9 @@ jQuery.fn.table2CSV = function(options) {
     if (options.delivery == 'popup') {
         var mydata = csvData.join('\n');
         return popup(mydata);
+    } else if(options.delivery == 'download') {
+        var mydata = csvData.join('\n');
+        return download("csv.txt", mydata);
     } else {
         var mydata = csvData.join('\n');
         return mydata;
@@ -60,13 +63,26 @@ jQuery.fn.table2CSV = function(options) {
         if (output == "") return '';
         return '"' + output + '"';
     }
+    function download(filename, data) {
+        var blob = new Blob([data]);
+        var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("click");
+            $("<a>", {
+                download: filename,
+                href: webkitURL.createObjectURL(blob)
+                }).get(0).dispatchEvent(evt);
+    }
     function popup(data) {
         var generator = window.open('', 'csv', 'height=400,width=600');
         generator.document.write('<html><head><link href="/css/style.css" rel="stylesheet" type="text/css">');
-        generator.document.write('<title>Raw CSV</title></head><body>');
-        generator.document.write('<pre class="csv">');
+        generator.document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>');
+        generator.document.write('<script src="/js/download.js" type="text/javascript"></script>');
+        generator.document.write('<title>CSV</title></head><body>');
+        generator.document.write('<pre id="csv">');
         generator.document.write(data);
         generator.document.write('</pre>');
+        generator.document.write('<br><button style="float:left;" onclick="download(\'csv.txt\',$(\'#csv\').inner)">');
+        generator.document.write('Download Raw Txt</button>');
         generator.document.write('</body></html>');
         generator.document.close();
         return true;
