@@ -78,11 +78,11 @@ jQuery.fn.table2CSV = function(options) {
         generator.document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>');
         generator.document.write('<script src="/js/download.js" type="text/javascript"></script>');
         generator.document.write('<title>CSV</title></head><body>');
+        generator.document.write('<button style="float:left;" onclick="download(\''+new Date().getTime()+' CSV.txt\',$(\'#csv\').html())">');
+        generator.document.write('Download</button><br>');
         generator.document.write('<pre id="csv">');
         generator.document.write(data);
         generator.document.write('</pre>');
-        generator.document.write('<br><button style="float:left;" onclick="download(\'csv.txt\',$(\'#csv\').inner)">');
-        generator.document.write('Download Raw Txt</button>');
         generator.document.write('</body></html>');
         generator.document.close();
         return true;
