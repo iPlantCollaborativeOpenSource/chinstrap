@@ -42,47 +42,66 @@
   (footer))
 
 (defpartial info-page [& content]
-    (html5
-      [:head
-        (global "Info")
-        (include-css "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/cupertino/jquery-ui.css")
-        (include-js "/js/get-info.js"
-                    "/js/info-script.js"
-                    "/js/lib/mousetrap.min.js")])
-      [:body
-        (page content)])
+  (html5
+    [:head
+      (global "Info")
+      (include-css "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/cupertino/jquery-ui.css")
+      (include-js "/js/get-info.js"
+                  "/js/info-script.js"
+                  "/js/lib/mousetrap.min.js")])
+    [:body
+      (page content)])
 
 (defpartial apps-page [& content]
-    (html5
-      [:head
-        (global "Apps")
-        (include-js "/js/get-apps.js"
-                    "/js/collapsible-panel.js")]
-      [:body
-        (javascript-tag "$(document).ready(function(){
-          $('.collapsibleContainer').collapsiblePanel();});")
-        (page content)]))
+  (html5
+    [:head
+      (global "Apps")
+      (include-js "/js/get-apps.js"
+                  "/js/collapsible-panel.js")]
+    [:body
+      (javascript-tag "$(document).ready(function(){
+        $('.collapsibleContainer').collapsiblePanel();});")
+      (page content)]))
 
 (defpartial components-page [& content]
-    (html5
-      [:head
-        (global "Components")
-        (include-js "/js/get-components.js"
-                    "/js/collapsible-panel.js")]
-      [:body
-        (javascript-tag "$(document).ready(function(){
-          $('.collapsibleContainer').collapsiblePanel();});")
-        (page content)]))
+  (html5
+    [:head
+      (global "Components")
+      (include-js "/js/get-components.js"
+                  "/js/collapsible-panel.js")]
+    [:body
+      (javascript-tag "$(document).ready(function(){
+        $('.collapsibleContainer').collapsiblePanel();});")
+      (page content)]))
 
-(defpartial graph-page [& content]
-    (html5
-      [:head
-        (global "Graph Test")
-        (include-js "/js/lib/amcharts.js"
-                    "/js/lib/underscore-min.js"
-                    "/js/lib/spin.min.js"
-                    "/js/graph-loader.js"
-                    "/js/month-graph.js"
-                    "/js/day-graph.js")]
-      [:body
-        (page content)]))
+(defpartial graph-nav []
+    [:div#graph-nav
+      [:span.vbr]
+      [:a {:href "/graph/day"} "Day"]
+      [:span.vbr]
+      [:a {:href "/graph/month"} "Month"]
+      [:span.vbr]])
+
+(defpartial day-page [& content]
+  (html5
+    [:head
+      (global "Graph - by Day")
+      (include-js "/js/lib/amcharts.js"
+                  "/js/lib/underscore-min.js"
+                  "/js/lib/spin.min.js"
+                  "/js/spinner.js"
+                  "/js/day-graph.js")]
+    [:body
+      (page content)]))
+
+(defpartial month-page [& content]
+  (html5
+    [:head
+      (global "Graph - by Month")
+      (include-js "/js/lib/amcharts.js"
+                  "/js/lib/underscore-min.js"
+                  "/js/lib/spin.min.js"
+                  "/js/spinner.js"
+                  "/js/month-graph.js")]
+    [:body
+      (page content)]))

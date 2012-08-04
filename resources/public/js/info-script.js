@@ -22,13 +22,13 @@ $(document).ready(function(){
 
     }
 
-    Mousetrap.bind(['down', 'j'], function() {
+    Mousetrap.bind(['down', 'left', 'j'], function() {
         i--;
         $('#date').datepicker('setDate', i);
         getInfo();
     });
 
-    Mousetrap.bind(['up', 'k'], function() {
+    Mousetrap.bind(['up', 'right', 'k'], function() {
         i++;
         if(i < 0){
             $('#date').datepicker('setDate', i);

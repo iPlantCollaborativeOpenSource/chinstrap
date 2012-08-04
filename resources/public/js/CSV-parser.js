@@ -79,7 +79,7 @@ jQuery.fn.table2CSV = function(options) {
         generator.document.write('<script src="/js/download.js" type="text/javascript"></script>');
         generator.document.write('<title>CSV</title></head><body>');
         generator.document.write('<button style="float:left;" onclick="download(\''+new Date().getTime()+' CSV.txt\',$(\'#csv\').html())">');
-        generator.document.write('Download</button><br>');
+        generator.document.write('Download Raw</button><br>');
         generator.document.write('<pre id="csv">');
         generator.document.write(data);
         generator.document.write('</pre>');

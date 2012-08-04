@@ -88,7 +88,7 @@ function generateChartData() {
 
     var response;
     request = $.ajax({
-        url: "/get-day-data",
+        url: "/get-day-data/Completed",
         async: false,
         contentType: "application/json",
         success: function(data){

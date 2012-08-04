@@ -3,6 +3,7 @@
             [chinstrap.models.sqlqueries :as cq]
             [monger.collection :as mc]
             [clj-time.core :as time]
+            [clj-time.format :as format]
             [clj-time.coerce :as coerce]
             [clojure.walk :as walk]
             [clojure.tools.logging :as log])
@@ -38,23 +39,31 @@
   (nr/json
     (mc/find-maps "jobs" {:state.status {"$in" ["Failed"]}})))
 
+(defn get-jobs
+  "Helper fuction for mongo calls"
+  [status]
+  (map #(:submission_date (:state %))
+    (mc/find-maps "jobs"
+      {:state.status {"$in" [status]}}
+      [:state.submission_date])))
+
 ;AJAX call from the Javascript file 'resources/public/js/day-graph.js' for graph data.
-(defpage "/get-day-data" []
+(defpage "/get-day-data/:status" {:keys [status]}
   (nr/json
     (format-graph-data
-    (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
-      (map #(* 86400000 (long (/ (Long/parseLong (str %)) 86400000)))
-        (rest (map #(:submission_date (:state %))
-          (mc/find-maps "jobs" {:state.status {"$in" ["Completed"]}} [:state.submission_date])))))))))
+      (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
+        (map #(* 86400000 (long (/ (Long/parseLong (str %)) 86400000)))
+              (get-jobs status)))))))
 
 ;AJAX call from the Javascript file 'resources/public/js/month-graph.js' for graph data.
-(defpage "/get-month-data" []
+(defpage "/get-month-data/:status" {:keys [status]}
   (nr/json
+  (log/warn
     (format-graph-data
-    (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
-      (map #(* 86400000 (long (/ (Long/parseLong (str %)) 86400000)))
-        (rest (map #(:submission_date (:state %))
-          (mc/find-maps "jobs" {:state.status {"$in" ["Completed"]}} [:state.submission_date])))))))))
+      (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
+        (map #(format/unparse (format/formatter "MM yy")
+                (coerce/from-long (Long/parseLong (str %))))
+          (get-jobs status))))))))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-info.js'.
 (defpage "/get-info/:date" {:keys [date]}

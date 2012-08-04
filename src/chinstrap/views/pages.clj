@@ -1,6 +1,7 @@
 (ns chinstrap.views.pages
   (:require [chinstrap.views.common :as template]
             [noir.response :as nr]
+            [clojure.string :as string]
             [chinstrap.models.sqlqueries :as cq]
             [monger.collection :as mc])
   (:use [noir.core]
@@ -68,7 +69,10 @@
                 [:tr
                   [:td.center i]
                   [:td (:name record)]
-                  [:td.center (or (:version record) "No Version")]]))]]]
+                  [:td.center (if
+                                (or (nil? (:version record))
+                                    (string/blank? (:version record)))
+                                "No Version" (:version record))]]))]]]
       [:br]
       [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
         [:button
@@ -89,9 +93,27 @@
                     [:td.center (:count record)]]))]]]))
 
 (defpage "/graph" []
-  (template/graph-page
+  (render "/graph/day"))
+
+(defpage "/graph/day" []
+  (template/day-page
     [:h3 "DE Apps Completed Over Time"]
     [:br]
+    (template/graph-nav)
+    [:h4#kind]
+    [:br]
+    [:div#chart
+      [:div.select
+        [:input#rb1 {:type "radio" :name "dayGroup" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
+        [:input#rb2 {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]
+      [:div#loader]]
+    [:h5.right "Data Starting from: " [:span#firstDate]]))
+
+(defpage "/graph/month" []
+  (template/month-page
+    [:h3 "DE Apps Completed Over Time"]
+    [:br]
+    (template/graph-nav)
     [:h4#kind]
     [:br]
     [:div#chart
