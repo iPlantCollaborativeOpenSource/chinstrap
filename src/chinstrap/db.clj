@@ -10,7 +10,7 @@
   "Loads the configuration properties from Zookeeper."
   []
   (cl/with-zk
-    (zk-url "zkhosts.properties")
+    (zk-props)
     (when-not (cl/can-run?)
       (log/warn "Chinstrap has no configuration data from zookeeper.")
       (log/warn "Attempting to load local configuration data...")

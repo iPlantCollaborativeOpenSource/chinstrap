@@ -4,14 +4,9 @@
             [clojure.tools.logging :as log]))
 
 (defn zk-props
-  "The properties loaded from the properties file."
-  [prop-file]
-  (cc-props/parse-properties prop-file))
-
-(defn zk-url
-  "The URL used to connect to zookeeper."
-  [prop-file]
-  (get (zk-props prop-file) "zookeeper"))
+  "The URL used to connect to zookeeper and load properties."
+  []
+  (get (cc-props/parse-properties "zkhosts.properties") "zookeeper"))
 
 (def props
   "The properites that have been loaded from Zookeeper."
