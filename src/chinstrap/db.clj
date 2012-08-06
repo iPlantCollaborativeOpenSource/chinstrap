@@ -10,18 +10,18 @@
   "Loads the configuration properties from Zookeeper."
   []
   (cl/with-zk
-    (zk-url)
+    (zk-url "zkhosts.properties")
     (when-not (cl/can-run?)
-      (log/warn "THIS APPLICATION CANNOT RUN ON THIS MACHINE. SO SAYETH ZOOKEEPER.")
-      (log/warn "THIS APPLICATION WILL NOT EXECUTE CORRECTLY.")
-      (System/exit 1))
+      (log/warn "Chinstrap has no configuration data from zookeeper.")
+      (log/warn "Attempting to load local configuration data...")
+        (System/exit 1))
     (reset! props (cl/properties "chinstrap")))
   (log/warn @props)
   (when-not (configuration-valid)
     (log/warn "THE CONFIGURATION IS INVALID - EXITING NOW")
     (System/exit 1)))
 
-(defn db-spec
+(defn postgresdb-spec
   "Constructs a database connection specification from the configuration
    settings."
   []
@@ -35,7 +35,7 @@
 (defn korma-define
   "Defines a korma representation of the database using the settings passed in from zookeeper."
   []
-  (let [spec (db-spec)]
+  (let [spec (postgresdb-spec)]
     (defonce de (create-db spec))
     (default-connection de)))
 

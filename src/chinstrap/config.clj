@@ -3,20 +3,15 @@
   (:require [clojure-commons.props :as cc-props]
             [clojure.tools.logging :as log]))
 
-(defn prop-file
-  "The name of the properties file."
-  []
-  "zkhosts.properties")
-
 (defn zk-props
   "The properties loaded from the properties file."
-  []
-  (cc-props/parse-properties (prop-file)))
+  [prop-file]
+  (cc-props/parse-properties prop-file))
 
 (defn zk-url
   "The URL used to connect to zookeeper."
-  []
-  (get (zk-props) "zookeeper"))
+  [prop-file]
+  (get (zk-props prop-file) "zookeeper"))
 
 (def props
   "The properites that have been loaded from Zookeeper."
@@ -27,7 +22,7 @@
   (ref []))
 
 (def configuration-is-valid
-  "True if the configuraiton is valid."
+  "True if the configuration is valid."
   (atom true))
 
 (defn- record-missing-prop
