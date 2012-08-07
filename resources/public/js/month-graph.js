@@ -1,7 +1,5 @@
 var chart;
 var chartData = [];
-var monthNames = [ "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December" ];
 
 AmCharts.ready(function () {
 
@@ -21,11 +19,14 @@ AmCharts.ready(function () {
     // category
     var categoryAxis = chart.categoryAxis;
     categoryAxis.labelRotation = 65;
-    //categoryAxis.parseDates = true;
-    //categoryAxis.minPeriod = "MM";
+    categoryAxis.parseDates = true;
+    categoryAxis.minPeriod = "MM";
     categoryAxis.gridAlpha = 0.07;
     categoryAxis.axisColor = "#CACACA";
-    //categoryAxis.dateFormats = [{period: "MM", format: "MMM YYYY"}]
+    categoryAxis.equalSpacing = true;
+    categoryAxis.dateFormats = [{period: "DD", format: "DD"},
+                                {period: "MM", format: "MMM YY"},
+                                {period: "YYYY", format: "YY"}];
 
     // GRAPH
     var graph = new AmCharts.AmGraph();
@@ -54,10 +55,8 @@ function generateChartData() {
 
     response.forEach(pushData);
     function pushData (element) {
-            date = new Date(element['date']);
-            primedDate = monthNames[date.getMonth()] + " " + date.getFullYear();
         chartData.push({
-            date: primedDate,
+            date: new Date(element['date']),
             count: element['count']});
     }
 }
