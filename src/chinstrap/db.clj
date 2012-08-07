@@ -7,7 +7,8 @@
               [clojure-commons.clavin-client :as cl]))
 
 (defn load-configuration
-  "Loads the configuration properties from Zookeeper."
+  "Loads the configuration properties from Zookeeper and falls back to a
+  local file if Zookeeper is not running."
   []
   (cl/with-zk
     (zk-props)
