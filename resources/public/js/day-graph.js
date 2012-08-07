@@ -32,18 +32,18 @@ AmCharts.ready(function () {
     categoryAxis.position = "top";
     categoryAxis.axisColor = "#CACACA";
     categoryAxis.dateFormats = [{
-        period: "DD",
-        format: "DD"
-    }, {
-        period: "WW",
-        format: "MMM DD"
-    }, {
-        period: "MM",
-        format: "MMM"
-    }, {
-        period: "YYYY",
-        format: "YYYY"
-    }];
+            period: "DD",
+            format: "DD"
+        }, {
+            period: "WW",
+            format: "MMM DD"
+        }, {
+            period: "MM",
+            format: "MMM"
+        }, {
+            period: "YYYY",
+            format: "YYYY"
+        }];
 
     // value
     var valueAxis = new AmCharts.ValueAxis();
@@ -62,7 +62,6 @@ AmCharts.ready(function () {
     graph.lineThickness = 2;
     graph.lineColor = "#0098AA";
     graph.negativeLineColor = "#AADDCC";
-    graph.hideBulletsCount = 100; // this makes the chart to hide bullets when there are more than 50
     chart.addGraph(graph);
 
     // CURSOR
