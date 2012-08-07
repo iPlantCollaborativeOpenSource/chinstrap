@@ -27,20 +27,8 @@
       (map #(str (:name (:state %)) "<br>")
         (mc/find-maps "jobs" {:state.status (str state)} [:state.name]))))
 
-;currently unused
-(defpage "/get-all-apps" []
-  (nr/json
-    (rest
-      (map #(str (:submission_date (:state %)))
-        (mc/find-maps "jobs" {} [:state.submission_date])))))
-
-;currently unused
-(defpage "/get-failed-apps" []
-  (nr/json
-    (mc/find-maps "jobs" {:state.status {"$in" ["Failed"]}})))
-
-(defn get-jobs
-  "Helper fuction for mongo calls"
+(defn get-app-times
+  "Helper fuction for graph data calls to the mongoDB, returns milliseconds"
   [status]
   (map #(:submission_date (:state %))
     (mc/find-maps "jobs"
@@ -53,17 +41,18 @@
     (format-graph-data
       (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
         (map #(* 86400000 (long (/ (Long/parseLong (str %)) 86400000)))
-              (get-jobs status)))))))
+              (get-app-times status)))))))
+(def parser
+  (format/formatter "MM yyyy"))
 
 ;AJAX call from the Javascript file 'resources/public/js/month-graph.js' for graph data.
 (defpage "/get-month-data/:status" {:keys [status]}
   (nr/json
-  (log/warn
     (format-graph-data
       (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
-        (map #(format/unparse (format/formatter "MM yy")
-                (coerce/from-long (Long/parseLong (str %))))
-          (get-jobs status))))))))
+        (map #(coerce/to-long (format/parse parser (format/unparse parser
+                (coerce/from-long (Long/parseLong (str %))))))
+          (get-app-times status)))))))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-info.js'.
 (defpage "/get-info/:date" {:keys [date]}
