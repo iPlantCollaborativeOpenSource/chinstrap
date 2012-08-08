@@ -9,11 +9,6 @@ Chinstrap is iPlant's back-end 'front-end' ui that developers to visually see da
 
 `/info`
 
-:shit:
-    A user clicks on a date via the calendar, but the keyboard does not track surrounding dates relative to the slected date.
-
-    Move days up and down with arrow keys or vim keys.
-
 * Realtime view of Running and Submitted app flow.
 
 `/apps`
@@ -28,10 +23,13 @@ Chinstrap is iPlant's back-end 'front-end' ui that developers to visually see da
 
 ## TODO
 
-:black_square: The list of unused apps should have a link to the wiki page for
+1. The list of unused apps should have a link to the wiki page for
 them or do a search on the forums if no wiki link has been provided.
 
-:black_square: Get detailed info about a certain day on graph bubble click.
+2. Get detailed info about a certain day on graph bubble click.
+
+3. Fix the datepicker from skipping yesterday after pushing it forward past
+today with the keybindings.
 
 ## NOTE
 
