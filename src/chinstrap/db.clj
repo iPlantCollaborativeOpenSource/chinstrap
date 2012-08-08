@@ -1,22 +1,39 @@
 (ns chinstrap.db
     (:use [chinstrap.config]
-          [korma.db])
+          [korma.db]
+          [clojure.java.io :only [file]])
     (:import [com.mongodb MongoOptions ServerAddress])
     (:require [clojure.tools.logging :as log]
               [monger.core :as mg ]
-              [clojure-commons.clavin-client :as cl]))
+              [clojure-commons.clavin-client :as cl]
+              [clojure-commons.props :as cp]))
 
-(defn load-configuration
+(defn load-configuration-from-props
+  "Loads the configuration from the local properties file."
+  [passed-filename]
+  (let [filename "chinstrap.properties"
+        conf-dir (System/getenv "IPLANT_CONF_DIR")]
+    (if (nil? conf-dir)
+      (reset! props (cp/read-properties (file "conf/test/" passed-filename)))
+      (reset! props (cp/read-properties (file conf-dir filename)))))
+  (log/warn "Configuration Data from local properties file:")
+  (log/warn @props)
+  (when-not (configuration-valid)
+    (log/warn "THE CONFIGURATION IS INVALID - EXITING NOW")
+    (System/exit 1)))
+
+(defn load-configuration-from-zookeeper
   "Loads the configuration properties from Zookeeper and falls back to a
   local file if Zookeeper is not running."
   []
   (cl/with-zk
     (zk-props)
     (when-not (cl/can-run?)
-      (log/warn "Chinstrap has no configuration data from zookeeper.")
-      (log/warn "Attempting to load local configuration data...")
-        (System/exit 1))
+      (log/warn "THIS APPLICATION CANNOT RUN ON THIS MACHINE. SO SAYETH ZOOKEEPER.")
+      (log/warn "THIS APPLICATION WILL NOT EXECUTE CORRECTLY.")
+      (System/exit 1))
     (reset! props (cl/properties "chinstrap")))
+  (log/warn "Configuration Data loaded from the Zookeeper server:")
   (log/warn @props)
   (when-not (configuration-valid)
     (log/warn "THE CONFIGURATION IS INVALID - EXITING NOW")
@@ -44,20 +61,21 @@
   "Connects to the mongoDB using the settings passed in from zookeeper to monger."
   []
   (let [^MongoOptions opts
-            (mg/mongo-options
-                :connections-per-host (mongodb-connections-per-host)
-                :max-wait-time (mongodb-max-wait-time)
-                :connect-timeout (mongodb-connect-timeout)
-                :socket-timeout (mongodb-socket-timeout)
-                :auto-connect-retry (mongodb-auto-connect-retry))
+          (mg/mongo-options
+              :connections-per-host (mongodb-connections-per-host)
+              :max-wait-time (mongodb-max-wait-time)
+              :connect-timeout (mongodb-connect-timeout)
+              :socket-timeout (mongodb-socket-timeout)
+              :auto-connect-retry (mongodb-auto-connect-retry))
         ^ServerAddress sa
-            (mg/server-address (mongodb-host) (mongodb-port))]
-       (mg/connect! sa opts))
+          (mg/server-address (mongodb-host) (mongodb-port))]
+    (mg/connect! sa opts))
   (mg/set-db! (mg/get-db (mongodb-database))))
 
 (defn db-config
   "Sets up a connection to the database using config data loaded from zookeeper into Monger and Korma."
   []
-  (load-configuration)
+  ;(load-configuration-from-zookeeper)
+  (load-configuration-from-props "staging.properties")
   (mongodb-connect)
   (korma-define))
