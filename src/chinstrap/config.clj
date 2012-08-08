@@ -155,11 +155,6 @@
     "The bucket in the database whose data will be accessed."
     (get-str "chinstrap.mongodb.bucket")))
 
-(required
-  (defprop mongodb-listen-port
-    "The port to listen to for incoming connections."
-    (get-int "chinstrap.app.listen-port")))
-
 (defn configuration-valid
   "Ensures that all required properties are valued."
   []

@@ -76,6 +76,6 @@
   "Sets up a connection to the database using config data loaded from zookeeper into Monger and Korma."
   []
   ;(load-configuration-from-zookeeper)
-  (load-configuration-from-props "staging.properties")
+  (load-configuration-from-props "devs.properties")
   (mongodb-connect)
   (korma-define))
