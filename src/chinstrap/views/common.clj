@@ -82,37 +82,28 @@
         $('.collapsibleContainer').collapsiblePanel();});")
       (page content)]))
 
-(defpartial graph-page [content]
-    [:h3 "DE Apps Completed Over Time"]
-    [:br]
-    (graph-nav)
-    [:br]
-    [:div#chart content [:div#loader]]
-    [:h5.right "Data Starting from: " [:span#firstDate]])
-
-(defpartial day-page [& content]
+(defpartial graph-page [& content]
   (html5
     [:head
       (global "Graph - by Day")
       (include-js "/js/lib/spin.min.js"
                   "/js/lib/underscore-min.js"
                   "/js/spinner.js"
-                  "/js/lib/amcharts.js"
-                  "/js/day-graph.js")]
+                  "/js/lib/amcharts.js")
     [:body
-      (page (graph-page content))]))
+      (page
+        [:h3 "DE Apps Completed Over Time"]
+        [:br]
+        (graph-nav)
+        [:br]
+        [:div#chart content [:div#loader]]
+        [:h5.right "Data Starting from: " [:span#firstDate]])]]))
 
-(defpartial month-page [& content]
-  (html5
-    [:head
-      (global "Graph - by Month")
-      (include-js "/js/lib/spin.min.js"
-                  "/js/lib/underscore-min.js"
-                  "/js/spinner.js"
-                  "/js/lib/amcharts.js"
-                  "/js/month-graph.js")]
-    [:body
-      (page (graph-page content))]))
+(defpartial day-page []
+  (include-js "/js/day-graph.js"))
+
+(defpartial month-page []
+  (include-js "/js/month-graph.js"))
 
 (defpartial raw-page [& content]
   (html5
