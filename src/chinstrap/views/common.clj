@@ -14,6 +14,14 @@
       "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
       "/js/csv-parser.js")])
 
+(defpartial graph-nav []
+    [:div#graph-nav
+      [:span.vbr]
+      [:li#day.nav (link-to "/graph/day" "Day")]
+      [:span.vbr]
+      [:li#month.nav (link-to "/graph/month" "Month")]
+      [:span.vbr]])
+
 (defpartial navbar []
   [:div#navbar
     [:span.vbr]
@@ -74,34 +82,35 @@
         $('.collapsibleContainer').collapsiblePanel();});")
       (page content)]))
 
-(defpartial graph-nav []
-    [:div#graph-nav
-      [:span.vbr]
-      [:a {:href "/graph/day"} "Day"]
-      [:span.vbr]
-      [:a {:href "/graph/month"} "Month"]
-      [:span.vbr]])
+(defpartial graph-page [content]
+    [:h3 "DE Apps Completed Over Time"]
+    [:br]
+    (graph-nav)
+    [:br]
+    [:div#chart content [:div#loader]]
+    [:h5.right "Data Starting from: " [:span#firstDate]])
 
 (defpartial day-page [& content]
   (html5
     [:head
       (global "Graph - by Day")
-      (include-js "/js/lib/amcharts.js"
+      (include-js "/js/lib/spin.min.js"
                   "/js/lib/underscore-min.js"
-                  "/js/lib/spin.min.js"
                   "/js/spinner.js"
+                  "/js/lib/amcharts.js"
                   "/js/day-graph.js")]
     [:body
-      (page content)]))
+      (page (graph-page content))]))
 
 (defpartial month-page [& content]
   (html5
     [:head
       (global "Graph - by Month")
-      (include-js "/js/lib/amcharts.js"
+      (include-js "/js/lib/spin.min.js"
                   "/js/lib/underscore-min.js"
-                  "/js/lib/spin.min.js"
                   "/js/spinner.js"
+                  "/js/lib/amcharts.js"
                   "/js/month-graph.js")]
     [:body
-      (page content)]))
+      (page (graph-page content))]))
+

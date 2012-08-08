@@ -62,6 +62,7 @@ AmCharts.ready(function () {
     graph.lineThickness = 2;
     graph.lineColor = "#0098AA";
     graph.negativeLineColor = "#AADDCC";
+    graph.hideBulletsCount = 100;
     chart.addGraph(graph);
 
     // CURSOR
@@ -105,8 +106,8 @@ function generateChartData() {
 
     var firstDate = response[0]['date'];
 
-    $("#kind").html("By Day");
     $("#firstDate").html("" + firstDate);
+    $("#day").addClass("active");
 
     var daysBetween = Math.round(Math.abs(firstDate - new Date().getTime())/8640000);
 

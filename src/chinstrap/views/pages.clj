@@ -97,25 +97,9 @@
 
 (defpage "/graph/day" []
   (template/day-page
-    [:h3 "DE Apps Completed Over Time"]
-    [:br]
-    (template/graph-nav)
-    [:h4#kind]
-    [:br]
-    [:div#chart
       [:div.select
         [:input#rb1 {:type "radio" :name "dayGroup" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
-        [:input#rb2 {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]
-      [:div#loader]]
-    [:h5.right "Data Starting from: " [:span#firstDate]]))
+        [:input {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]))
 
 (defpage "/graph/month" []
-  (template/month-page
-    [:h3 "DE Apps Completed Over Time"]
-    [:br]
-    (template/graph-nav)
-    [:h4#kind]
-    [:br]
-    [:div#chart
-      [:div#loader]]
-    [:h5.right "Data Starting from: " [:span#firstDate]]))
+  (template/month-page))

@@ -59,4 +59,6 @@ function generateChartData() {
             date: new Date(element['date']),
             count: element['count']});
     }
+    $('#firstDate').html(new Date(response[0]['date']).toDateString());
+    $('#month').addClass("active");
 }
