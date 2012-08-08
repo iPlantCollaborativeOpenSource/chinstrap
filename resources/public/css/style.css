@@ -1,5 +1,4 @@
-body
-{
+body {
   text-align: center;
   background: white;
   font: 16px/22px "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -10,22 +9,19 @@ body
   color: #333;
 }
 
-table
-{
+table {
   margin: 0px auto;
   border-spacing: 0.1em;
 }
 
-th
-{
+th {
   font-weight: bold;
   color: #666;
   letter-spacing: 2px;
   text-align: left;
 }
 
-td
-{
+td {
   border-right: 1px solid #C1DAD7;
   border-bottom: 1px solid #C1DAD7;
   background: #FFF;
@@ -33,36 +29,26 @@ td
   color: #6D929B;
 }
 
-tr
-{
-border-radius: 4px;
+tr {
+  border-radius: 4px;
 }
 
-td:nth-child(odd)
-{
+td:nth-child(odd) {
   background: #F5FAFA;
   color: #496F79;
 }
 
-td:nth-child(3)
-{
+td:nth-child(3) {
   border-right: none;
 }
 
-#logo
-{
+#logo {
   margin-bottom: 10px;
   width: 350px;
   height: 90px;
 }
 
-a
-{
-  text-decoration: none;
-}
-
-#navbar
-{
+#navbar {
   margin: 0px auto;
   margin-top: 100px;
   width: 600px;
@@ -83,45 +69,29 @@ a
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
 }
 
-#graph-nav
-{
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  border: 1px solid #A2A2A2;
+a {
+  color: #333;
+  text-decoration: none;
 }
 
-li.active
-{
- background: #cccccc; /* Old browsers */
- background: -moz-linear-gradient(top,  #cccccc 0%, #eeeeee 100%); /* FF3.6+ */
- background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cccccc), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
- background: -webkit-linear-gradient(top,  #cccccc 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
- background: -o-linear-gradient(top,  #cccccc 0%,#eeeeee 100%); /* Opera 11.10+ */
- background: -ms-linear-gradient(top,  #cccccc 0%,#eeeeee 100%); /* IE10+ */
- background: linear-gradient(to bottom,  #cccccc 0%,#eeeeee 100%); /* W3C */
- filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
-
-}
-
-a:visited
-{
+a:visited {
   color: #333;
 }
 
-#navbar a
-{
-  color: #333;
+a:hover {
+  text-shadow: 0 0 5px #64CFDB, 0 0 5px #64CFDB;
 }
 
-.vbr
-{
+li.active {
+  text-shadow: 0 0 10px #64CFDB, 0 0 10px #64CFDB;
+}
+
+span.nav {
   border-right: 1px solid #AAA;
   display: inline;
 }
 
-.nav
-{
+li.nav {
   display: inline;
   list-style: none;
   text-align: center;
@@ -131,13 +101,14 @@ a:visited
   margin-right: 30px;
 }
 
-.nav:hover
-{
-  text-shadow: 0 0 5px #64CFDB, 0 0 5px #64CFDB;
+#graph-nav {
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid #A2A2A2;
 }
 
-#wrapper
-{
+#wrapper {
   margin: 0px auto;
   border: 1px solid #A2A2A2;
   border-top: none;
@@ -151,8 +122,7 @@ a:visited
   padding-bottom: 60px;
 }
 
-#inner
-{
+#inner {
   border-top: 1px solid #AAA;
   border-left: 1px solid #AAA;
   border-bottom: 1px solid #BBB;
@@ -167,31 +137,26 @@ a:visited
   border-radius: 4px;
 }
 
-#footer
-{
+#footer {
   height: 100px;
 }
 
-.right
-{
+.right {
   color: #303030;
   font-weight: bold;
   float: right;
 }
 
-.left
-{
+.left {
   text-align: left;
 }
 
-.center
-{
+.center {
   text-align: center;
 }
 
 /* --- Collapsible Container Stylings --- */
-.collapsibleContainer
-{
+.collapsibleContainer {
   width: 80%;
   margin: 0px auto;
   border: solid 1px #0098AA;
@@ -199,13 +164,11 @@ a:visited
   color: #222;
 }
 
-.collapsibleContainerTitle
-{
+.collapsibleContainerTitle {
   cursor:pointer;
 }
 
-.collapsibleContainerTitle div
-{
+.collapsibleContainerTitle div {
   padding: 5px;
   border-radius: 4px;
   color: #333;
@@ -219,26 +182,22 @@ a:visited
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#65dddf', endColorstr='#42d0d2',GradientType=0 ); /* IE6-9 */
 }
 
-.collapsibleContainerContent
-{
+.collapsibleContainerContent {
   display: none;
   padding: 10px;
 }
 
-.collapsibleContainerTitle, .collapsibleContainerTitle div
-{
+.collapsibleContainerTitle, .collapsibleContainerTitle div {
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
 
-.expanded.collapsibleContainerTitle, .expanded.collapsibleContainerTitle div
-{
+.expanded.collapsibleContainerTitle, .expanded.collapsibleContainerTitle div {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 }
 
-.arrow
-{
+.arrow {
   float: right;
   width: 2.8%;
   height: 2.8%;
@@ -248,8 +207,7 @@ a:visited
 }
 
 /* --- amChart Stylings --- */
-#chart
-{
+#chart {
   width: 100%;
   height: 400px;
   background: #EFEFEF;
@@ -257,35 +215,30 @@ a:visited
   border: 1px solid #A2A2A2;
 }
 
-.select
-{
+.select {
   position: absolute;
   top: 800px;
   margin-left: 35px;
 }
 
-g:nth-child(15)
-{
+g:nth-child(15) {
   display: none;
 }
 
 /* --- Loader Styling --- */
-.spinner
-{
+.spinner {
   position: relative;
   bottom: 200px;
 }
 
 /* --- CSV Styling --- */
-#csv
-{
+#csv {
    text-align: left;
    font-size: 8pt;
    line-height: 10px;
 }
 
 /* --- datepicker fix --- */
-#ui-datepicker-div
-{
+#ui-datepicker-div {
   display: none;
 }
