@@ -27,7 +27,7 @@
       (map #(str (:name (:state %)) "<br>")
         (mc/find-maps "jobs" {:state.status (str state)} [:state.name]))))
 
-(defn get-app-times
+(defn get-app-submission-date
   "Helper fuction for graph data calls to the mongoDB, returns milliseconds"
   [status]
   (map #(:submission_date (:state %))
@@ -41,7 +41,7 @@
     (format-graph-data
       (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
         (map #(* 86400000 (long (/ (Long/parseLong (str %)) 86400000)))
-              (get-app-times status)))))))
+              (get-app-submission-date status)))))))
 (def parser
   (format/formatter "MM yyyy"))
 
@@ -52,7 +52,7 @@
       (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
         (map #(coerce/to-long (format/parse parser (format/unparse parser
                 (coerce/from-long (Long/parseLong (str %))))))
-          (get-app-times status)))))))
+          (get-app-submission-date status)))))))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-info.js'.
 (defpage "/get-info/:date" {:keys [date]}

@@ -114,3 +114,9 @@
     [:body
       (page (graph-page content))]))
 
+(defpartial raw-page [& content]
+  (html5
+    [:head
+      (global "Raw Data")]
+    [:body
+      (page content)]))

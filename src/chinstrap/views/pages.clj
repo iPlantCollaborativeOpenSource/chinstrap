@@ -103,3 +103,13 @@
 
 (defpage "/graph/month" []
   (template/month-page))
+
+(defpage "/raw" []
+  (template/raw-page
+    [:h3 "Raw Data (JSON):"]
+    [:br]
+    [:button {:onclick "window.location = '/get-day-data/Completed';"} "Count of Completed apps - By Day"]
+    [:button {:onclick "window.location = '/get-day-data/Failed';"} "Count of Failed apps - By Day"]
+    [:button {:onclick "window.location = '/get-month-data/Completed';"} "Count of Completed apps - By Month"]
+    [:button {:onclick "window.location = '/get-month-data/Failed';"} "Count of Failed apps - By Month"]
+))
