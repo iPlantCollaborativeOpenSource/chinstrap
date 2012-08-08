@@ -13,9 +13,21 @@ function getApps() {
 			$('#submitted').html(response['submitted']);
 			$('#failed').html(response['failed']);
 			$('#completed').html(response['completed']);
-			$('#running-apps').html(response['running-names']);
-			$('#failed-apps').html(response['failed-names']);
-			$('#submitted-apps').html(response['submitted-names']);
+
+            if(response['running'] === 0)
+                $('#running-apps').html('There are currently no apps running.');
+             else
+                $('#running-apps').html(response['running-names']);
+
+            if(response['submitted'] === 0)
+                $('#submitted-apps').html('There are currently no submitted apps.');
+             else
+                $('#submitted-apps').html(response['submitted-names']);
+
+            if(response['failed'] === 0)
+                $('#failed-apps').html(response['failed-names']);
+             else
+                $('#failed-apps').html('There are currently no failed apps. Woohoo!');
 		}
 	}
 	request.send();
