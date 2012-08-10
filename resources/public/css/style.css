@@ -83,7 +83,8 @@ a:hover {
 }
 
 li.active {
-  text-shadow: 0 0 10px #64CFDB, 0 0 10px #64CFDB;
+    padding-top: 11px;
+    border-top: 6px solid #96DBE2;
 }
 
 span.nav {
@@ -95,10 +96,9 @@ li.nav {
   display: inline;
   list-style: none;
   text-align: center;
-  margin: auto 0px;
   margin: 10px;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 #graph-nav {
