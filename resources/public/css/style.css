@@ -82,9 +82,24 @@ a:hover {
   text-shadow: 0 0 5px #64CFDB, 0 0 5px #64CFDB;
 }
 
-li.active {
-    padding-top: 11px;
-    border-top: 6px solid #96DBE2;
+#navbar > ul > li.nav.active {
+    padding-bottom: 14px;
+    border-bottom: 4px solid #0098AA;
+}
+
+#navbar > ul > li.nav:hover {
+    padding-bottom: 14px;
+    border-bottom: 4px solid #96DBE2;
+}
+
+#graph-nav > ul > li.nav.active {
+    padding-bottom: 4px;
+    border-bottom: 3px solid #0098AA;
+}
+
+#graph-nav > ul > li.nav:hover {
+    padding-bottom: 14px;
+    border-bottom: 4px solid #96DBE2;
 }
 
 span.nav {
@@ -96,9 +111,9 @@ li.nav {
   display: inline;
   list-style: none;
   text-align: center;
-  margin: 10px;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #graph-nav {
