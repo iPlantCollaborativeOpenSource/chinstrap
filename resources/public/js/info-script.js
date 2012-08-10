@@ -32,12 +32,11 @@ $(document).ready(function(){
         i++;
         if(i < 0){
             $('#date').datepicker('setDate', i);
-            getInfo();
         } else {
             $('#date').datepicker('setDate', 'today');
-            i--;
-            getInfo();
+            i = 0;
         }
+        getInfo();
     });
 
     Mousetrap.bind(['t'], function() {

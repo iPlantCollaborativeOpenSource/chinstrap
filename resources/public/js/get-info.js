@@ -15,13 +15,13 @@ function getInfo() {
                 $('#caption').html("");
                 tools = "No tools on " + date + ".";
             } else {
-                tools = "<table id='apps'><thead><tr><th>Name</th><th>Count</th></tr></thead><tbody>";
+                tools = "<table id='app-info'><thead><tr><th>Name</th><th>Count</th></tr></thead><tbody>";
                 for(var i = 0; i < response['tools'].length; i++){
                     tools += "<tr><td>" + response['tools'][i]['name']+"</td>";
                     tools += "<td>" + response['tools'][i]['count']+"</td></tr>";
                 }
                 tools += "</tbody></table>";
-                tools += "<br><button class='left' onclick=\"$('#apps').table2CSV({header:['App Name','Count']})\">";
+                tools += "<br><button class='left' onclick=\"$('#app-info').table2CSV({header:['App Name','Count']})\">";
                 tools += "Export to CVS</button>";
             }
 			$('#inner').html(tools);

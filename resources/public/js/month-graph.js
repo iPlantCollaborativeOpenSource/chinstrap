@@ -26,7 +26,7 @@ AmCharts.ready(function () {
     categoryAxis.equalSpacing = true;
     categoryAxis.dateFormats = [{period: "DD", format: "DD"},
                                 {period: "MM", format: "MMM YY"},
-                                {period: "YYYY", format: "YY"}];
+                                {period: "YYYY", format: "MMM YY"}];
 
     // GRAPH
     var graph = new AmCharts.AmGraph();

@@ -10,9 +10,8 @@
       "/css/reset.css"
       "/css/style.css")
     (include-js
-      "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
-      "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"
-      "/js/csv-parser.js")])
+      "http://code.jquery.com/jquery-1.8.0.min.js"
+      "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js")])
 
 (defpartial graph-nav []
   [:div#graph-nav
@@ -58,6 +57,7 @@
       (include-css "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/cupertino/jquery-ui.css")
       (include-js "/js/get-info.js"
                   "/js/info-script.js"
+                  "/js/csv-parser.js"
                   "/js/lib/mousetrap.min.js")])
     [:body
       (javascript-tag "$(document).ready(function(){
@@ -81,6 +81,7 @@
     [:head
       (global "Components")
       (include-js "/js/get-components.js"
+                  "/js/csv-parser.js"
                   "/js/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
@@ -93,8 +94,8 @@
     [:head
       (global "Graph - by Day")
       (include-js "/js/lib/spin.min.js"
-                  "/js/lib/underscore-min.js"
                   "/js/spinner.js"
+                  "/js/lib/underscore-min.js"
                   "/js/lib/amcharts.js")
       (javascript-tag "$(document).ready(function(){
         $('#graphs').addClass('active');})")
