@@ -1,4 +1,5 @@
 (ns chinstrap.server
+  (:gen-class)
   (:use [chinstrap.db])
   (:require [noir.server :as server]))
 
