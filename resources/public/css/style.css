@@ -98,8 +98,8 @@ a:hover {
 }
 
 #graph-nav > ul > li.nav:hover {
-    padding-bottom: 14px;
-    border-bottom: 4px solid #96DBE2;
+    padding-bottom: 4px;
+    border-bottom: 3px solid #96DBE2;
 }
 
 span.nav {
