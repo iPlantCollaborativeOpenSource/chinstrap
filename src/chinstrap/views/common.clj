@@ -15,25 +15,23 @@
 
 (defpartial graph-nav []
   [:div#graph-nav
-    [:ul
-      [:span.nav]
-      [:li#day.nav (link-to "/graph/day" "Day")]
-      [:span.nav]
-      [:li#month.nav (link-to "/graph/month" "Month")]
-      [:span.nav]]])
+    [:span.nav]
+    [:a#day.nav {:href "/graph/day"} [:li.nav "Day"]]
+    [:span.nav]
+    [:a#month.nav {:href "/graph/month"} [:li.nav "Month"]]
+    [:span.nav]])
 
 (defpartial navbar []
   [:div#navbar
-    [:ul
-      [:span.nav]
-      [:li#info.nav (link-to "/info" "Info")]
-      [:span.nav]
-      [:li#apps.nav (link-to "/apps" "Apps")]
-      [:span.nav]
-      [:li#components.nav (link-to "/components" "Components")]
-      [:span.nav]
-      [:li#graphs.nav (link-to "/graph" "Graphs")]
-      [:span.nav]]])
+    [:span.nav]
+    [:a#info.nav {:href "/info"} [:li.nav "Info"]]
+    [:span.nav]
+    [:a#apps.nav {:href "/apps"} [:li.nav "Apps"]]
+    [:span.nav]
+    [:a#components.nav {:href "/components"} [:li.nav "Components"]]
+    [:span.nav]
+    [:a#graphs.nav {:href "/graph"} [:li.nav "Graphs"]]
+    [:span.nav]])
 
 (defpartial wrapper [& content]
   [:div#wrapper
@@ -58,11 +56,11 @@
       (include-js "/js/get-info.js"
                   "/js/info-script.js"
                   "/js/csv-parser.js"
-                  "/js/lib/mousetrap.min.js")])
+                  "/js/lib/mousetrap.min.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#info').addClass('active');})")
-      (page content)])
+      (page content)]))
 
 (defpartial apps-page [& content]
   (html5

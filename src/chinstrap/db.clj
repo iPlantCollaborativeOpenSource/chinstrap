@@ -75,7 +75,7 @@
 (defn db-config
   "Sets up a connection to the database using config data loaded from zookeeper into Monger and Korma."
   []
-  ;(load-configuration-from-zookeeper)
-  (load-configuration-from-props "devs.properties")
+  (load-configuration-from-zookeeper)
+  ;(load-configuration-from-props "devs.properties")
   (mongodb-connect)
   (korma-define))
