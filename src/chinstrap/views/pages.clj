@@ -6,7 +6,7 @@
             [monger.collection :as mc])
   (:use [noir.core]
         [chinstrap.db]
-        [chinstrap.models.model]
+        [chinstrap.models.ajax-endpoints]
         [hiccup.element]))
 
 (defpage "/" []
