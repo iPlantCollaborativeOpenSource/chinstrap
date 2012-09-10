@@ -30,6 +30,8 @@
     [:span.nav]
     [:a#components.nav {:href "/components"} [:li.nav "Components"]]
     [:span.nav]
+    [:a#integrators.nav {:href "/integrators"} [:li.nav "Integrators"]]
+    [:span.nav]
     [:a#graphs.nav {:href "/graph"} [:li.nav "Graphs"]]
     [:span.nav]])
 
@@ -74,6 +76,18 @@
         $('.collapsibleContainer').collapsiblePanel();});")
       (page content)]))
 
+(defpartial integrators-page [& content]
+  (html5
+    [:head
+      (global "Integrators")
+      (include-js "/js/get-integrators.js"
+                  "/js/collapsible-panel.js")]
+    [:body
+      (javascript-tag "$(document).ready(function(){
+        $('#integrators').addClass('active');
+        $('.collapsibleContainer').collapsiblePanel();});")
+      (page content)]))
+
 (defpartial components-page [& content]
   (html5
     [:head
@@ -93,8 +107,7 @@
       (global "Graph - by Day")
       (include-js "/js/lib/spin.min.js"
                   "/js/spinner.js"
-                  "/js/lib/underscore-min.js"
-                  "/js/lib/amcharts.js")
+                  "/js/lib/underscore-min.js")
       (javascript-tag "$(document).ready(function(){
         $('#graphs').addClass('active');})")
     [:body
@@ -107,9 +120,11 @@
         [:h5.right "Data Starting from: " [:span#firstDate]])]]))
 
 (defpartial day-page []
+  (include-js "/js/lib/amcharts.js")
   (include-js "/js/day-graph.js"))
 
 (defpartial month-page []
+  (include-js "/js/lib/amcharts.js")
   (include-js "/js/month-graph.js"))
 
 (defpartial raw-page [& content]

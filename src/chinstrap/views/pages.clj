@@ -72,25 +72,32 @@
                   [:td.center (if
                                 (or (nil? (:version record))
                                     (string/blank? (:version record)))
-                                "No Version" (:version record))]]))]]]
+                                "No Version" (:version record))]]))]]]))
       [:br]
-      [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
-        [:button
-          {:onClick "$('#leaderboard').table2CSV({header:['#','Contributor Name','Number of Apps']});"}
-          "Export to CSV"]
-        [:table#leaderboard
-          [:thead
-            [:tr [:th ""]
-                 [:th "Name"]
-                 [:th "Count"]]]
-          [:tbody
-            (let [list (cq/leader-list) count (count list)]
-              (for [i (range 1 count)
-                    :let [record (nth list i)]]
-                  [:tr
-                    [:td.center i]
-                    [:td (:name record)]
-                    [:td.center (:count record)]]))]]]))
+
+;Page listing information about Integrators.
+(defpage "/integrators" []
+  (template/integrators-page
+    [:h3 "Discovery Environment App Status"]
+    [:br]
+    [:div#inner]
+    [:br]
+    [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
+      [:button
+        {:onClick "$('#leaderboard').table2CSV({header:['#','Contributor Name','Number of Apps']});"}
+        "Export to CSV"]
+      [:table#leaderboard
+        [:thead
+          [:tr [:th ""]
+               [:th "Name"]
+               [:th "Count"]]]
+        [:tbody
+          (let [list (cq/leader-list) count (count list)]
+            (for [i (range 1 count) :let [record (nth list i)]]
+              [:tr
+                [:td.center i]
+                [:td (:name record)]
+                [:td.center (:count record)]]))]]]))
 
 (defpage "/graph" []
   (render "/graph/day"))
