@@ -35,6 +35,11 @@
           {"$gte" (read-string date) "$lt" (+ 86400000 (read-string date))}}
             [:state.analysis_id])))}))
 
+;AJAX call from the Javascript file 'resources/public/js/get-integrators.js'.
+(defpage "/get-integrator-data/:name" {:keys [name]}
+  (nr/json {:test
+    (hash-map :name name)}))
+
 ;AJAX call from the Javascript file 'resources/public/js/get-apps.js'.
 (defpage "/get-apps" []
   (nr/json {:running (mc/count "jobs" {:state.status "Running"}),

@@ -84,6 +84,9 @@
                   "/js/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
+        $('.integrator').click(function() {
+          getIntegrators($(this).text())
+        });
         $('#integrators').addClass('active');
         $('.collapsibleContainer').collapsiblePanel();});")
       (page content)]))

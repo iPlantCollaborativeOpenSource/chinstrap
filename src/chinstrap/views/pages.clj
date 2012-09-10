@@ -96,7 +96,7 @@
               [i (range 1 count) :let [record (nth list i)]]
               [:tr
                 [:td.center i]
-                [:td (:name record)]
+                [:td.integrator (:name record)]
                 [:td.center (:count record)]]))]]]))
 
 (defpage "/graph" []
