@@ -241,6 +241,10 @@ li.nav {
   opacity: .6;
 }
 
+.name {
+  color: #555;
+}
+
 /* --- amChart Stylings --- */
 #chart {
   width: 100%;

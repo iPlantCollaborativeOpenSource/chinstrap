@@ -81,11 +81,12 @@
     [:head
       (global "Integrators")
       (include-js "/js/get-integrators.js"
+                  "/js/csv-parser.js"
                   "/js/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('.integrator').click(function() {
-          getIntegrators($(this).text())
+          getIntegrators($(this).children('.name').text())
         });
         $('#integrators').addClass('active');
         $('.collapsibleContainer').collapsiblePanel();});")

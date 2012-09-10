@@ -89,14 +89,16 @@
         [:thead
           [:tr [:th ""]
                [:th "Name"]
+               [:th "Email"]
                [:th "Count"]]]
         [:tbody
           (let [list (cq/leader-list) count (count list)]
             (for 
               [i (range 1 count) :let [record (nth list i)]]
-              [:tr
+              [:tr.integrator
                 [:td.center i]
-                [:td.integrator (:name record)]
+                [:td.name (:name record)]
+                [:td (:email record)]
                 [:td.center (:count record)]]))]]]))
 
 (defpage "/graph" []
