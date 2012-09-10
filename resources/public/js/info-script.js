@@ -8,8 +8,6 @@ $(document).ready(function(){
                  };
 
     $('#date').datepicker(picker);
-    $('#date').datepicker('setDate', 'today');
-    getInfo();
 
     var now = $('#date').datepicker('getDate');
     now = $.datepicker.formatDate('mm/dd/yy', now);

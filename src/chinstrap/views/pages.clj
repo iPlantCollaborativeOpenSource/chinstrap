@@ -2,8 +2,7 @@
   (:require [chinstrap.views.common :as template]
             [noir.response :as nr]
             [clojure.string :as string]
-            [chinstrap.models.sqlqueries :as cq]
-            [monger.collection :as mc])
+            [chinstrap.models.sqlqueries :as cq])
   (:use [noir.core]
         [chinstrap.db]
         [chinstrap.models.ajax-endpoints]
@@ -65,15 +64,15 @@
                [:th "Version"]]]
         [:tbody
           (let [list (cq/unused-app-list) count (count list)]
-              (for [i (range 1 count) :let [record (nth list i)]]
+              (for
+                [i (range 1 count) :let [record (nth list i)]]
                 [:tr
                   [:td.center i]
                   [:td (:name record)]
                   [:td.center (if
-                                (or (nil? (:version record))
-                                    (string/blank? (:version record)))
-                                "No Version" (:version record))]]))]]]))
-      [:br]
+                    (or (nil? (:version record))
+                        (string/blank? (:version record)))
+                    "No Version" (:version record))]]))]]]))
 
 ;Page listing information about Integrators.
 (defpage "/integrators" []
@@ -93,7 +92,8 @@
                [:th "Count"]]]
         [:tbody
           (let [list (cq/leader-list) count (count list)]
-            (for [i (range 1 count) :let [record (nth list i)]]
+            (for 
+              [i (range 1 count) :let [record (nth list i)]]
               [:tr
                 [:td.center i]
                 [:td (:name record)]
@@ -115,7 +115,7 @@
 
 (defpage "/raw" []
   (template/raw-page
-    [:h3 "Raw Data (JSON):"]
+    [:h3 "Raw JSON Data:"]
     [:br]
     [:button {:onclick "window.location = '/get-day-data/Completed';"} "Count of Completed apps - By Day"]
     [:button {:onclick "window.location = '/get-day-data/Failed';"} "Count of Failed apps - By Day"]
