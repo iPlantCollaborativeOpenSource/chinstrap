@@ -88,17 +88,16 @@
       [:table#leaderboard
         [:thead
           [:tr [:th ""]
-               [:th "Name"]
                [:th "Email"]
                [:th "Count"]]]
         [:tbody
           (let [list (cq/leader-list) count (count list)]
-            (for 
+            (for
               [i (range 1 count) :let [record (nth list i)]]
               [:tr.integrator
                 [:td.center i]
-                [:td.name (:name record)]
-                [:td (:email record)]
+                [:td.email {:value (:email record)} (:email record)]
+                [:input.name {:type "hidden" :value (:name record)}]
                 [:td.center (:count record)]]))]]]))
 
 (defpage "/graph" []

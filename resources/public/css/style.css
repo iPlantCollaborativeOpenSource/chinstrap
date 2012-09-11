@@ -241,8 +241,8 @@ li.nav {
   opacity: .6;
 }
 
-.name {
-  color: #555;
+#leaderboard td.email {
+ width: 280px;
 }
 
 /* --- amChart Stylings --- */

@@ -82,11 +82,24 @@
       (global "Integrators")
       (include-js "/js/get-integrators.js"
                   "/js/csv-parser.js"
+                  "/js/lib/jquery.color.js"
                   "/js/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
+        $('.integrator').hover(
+        function() {
+          $(this).children('.email').text(
+            $(this).children('.name').attr('value'));
+          $(this).children('.email').animate({ color: '#555' }, 100);
+        },
+        function() {
+          $(this).children('.email').text(
+            $(this).children('.email').attr('value'));
+          $(this).children('.email').animate({ color: '#6D929B' }, 100);
+
+        });
         $('.integrator').click(function() {
-          getIntegrators($(this).children('.name').text())
+          getIntegrators($(this).children('.email').text())
         });
         $('#integrators').addClass('active');
         $('.collapsibleContainer').collapsiblePanel();});")
