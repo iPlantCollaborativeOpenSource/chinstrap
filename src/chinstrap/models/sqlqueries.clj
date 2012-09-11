@@ -72,21 +72,28 @@
    "Returns a list of all users with public apps and aggregates a count of
    them so that they can be ranked according to #'s of apps." []
   (exec-raw
-    ["SELECT COUNT(ind.integrator_email) count,
+    ["SELECT COUNT(lower(ind.integrator_name)) count,
       ind.integrator_name AS name,
       ind.integrator_email AS email,
       ind.id
       FROM deployed_components dc
-      LEFT JOIN template t ON dc.id = t.component_id
-      LEFT JOIN transformations tx ON t.id = tx.template_id
-      LEFT JOIN transformation_steps ts ON tx.id = ts.transformation_id
-      LEFT JOIN transformation_task_steps tts ON ts.id = tts.transformation_step_id
-      LEFT JOIN transformation_activity a ON tts.transformation_task_id = a.hid
-      LEFT JOIN integration_data ind ON a.integration_data_id = ind.id
+      LEFT JOIN template t
+        ON dc.id = t.component_id
+      LEFT JOIN transformations tx
+        ON t.id = tx.template_id
+      LEFT JOIN transformation_steps ts
+        ON tx.id = ts.transformation_id
+      LEFT JOIN transformation_task_steps tts
+        ON ts.id = tts.transformation_step_id
+      LEFT JOIN transformation_activity a
+        ON tts.transformation_task_id = a.hid
+      LEFT JOIN integration_data ind
+        ON a.integration_data_id = ind.id
       WHERE t.component_id IS NOT NULL
       AND EXISTS (
         SELECT * FROM template_group_template tgt
-        LEFT JOIN template_group tg ON tgt.template_group_id = tg.hid
+        LEFT JOIN template_group tg
+          ON tgt.template_group_id = tg.hid
         LEFT JOIN workspace w ON tg.workspace_id = w.id
         WHERE w.is_public IS TRUE
         AND tgt.template_id = a.hid
