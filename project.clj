@@ -5,7 +5,7 @@
                    [org.iplantc/kameleon "0.0.1-SNAPSHOT"]
                    [clj-time "0.4.3"]
                    [org.clojure/data.json "0.1.2"]
-                   [com.novemberain/monger "1.0.0-rc2"]
+                   [com.novemberain/monger "1.1.2"]
                    [korma/korma "0.3.0-beta10"]
                    [log4j/log4j "1.2.16"]
                    [noir "1.3.0-beta3"]]
