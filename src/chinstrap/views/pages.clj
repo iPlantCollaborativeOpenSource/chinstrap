@@ -15,7 +15,6 @@
   (template/info-page
     [:h3 "Discovery Environment App Info by Day"]
     [:br]
-    [:h4#caption]
     [:div#inner "Pick a date to begin."]
     [:br]
     [:input#date.left {:onChange "getInfo()"}]))
@@ -88,7 +87,7 @@
       [:table#leaderboard
         [:thead
           [:tr [:th ""]
-               [:th "Email"]
+               [:th "Name"]
                [:th "Count"]]]
         [:tbody
           (let [list (cq/leader-list) count (count list)]
@@ -96,8 +95,9 @@
               [i (range 1 count) :let [record (nth list i)]]
               [:tr.integrator
                 [:td.center i]
-                [:td.email {:value (:email record)} (:email record)]
-                [:input.name {:type "hidden" :value (:name record)}]
+                [:td.name {:value (:name record)} (:name record)]
+                [:input.email {:type "hidden" :value (:email record)}]
+                [:input.id {:type "hidden" :value (:id record)}]
                 [:td.center (:count record)]]))]]]))
 
 (defpage "/graph" []
