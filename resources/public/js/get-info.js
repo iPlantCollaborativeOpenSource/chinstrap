@@ -1,31 +1,33 @@
 function getInfo() {
+    $.get("/get-info/" + $.datepicker.formatDate('@', $('#date').datepicker('getDate')), function(resp) {
 
-	var request = new XMLHttpRequest();
-	request.open("GET", "/get-info/" +
-        $.datepicker.formatDate('@', $('#date').datepicker('getDate')));
+        if(resp['tools'] == "")
+            $('#inner').html( "No tools on " + $('#date').val() + ".")
+        else {
+            tools = "Tools on " + $('#date').val() + ":<hr>"
 
-	request.onreadystatechange = function() {
-		if (request.readyState == 4) {
-			var response = JSON.parse(request.responseText);
-            var tools = "";
-            var date = $('#date').val();
-            console.log(request.responseText);
+            tools +=
+                "<table id='app-info'><thead>" +
+                "<tr><th>Name</th><th>Count</th></tr>" +
+                "</thead><tbody>"
 
-            if(response['tools'] == "") {
-                $('#caption').html("");
-                tools = "No tools on " + date + ".";
-            } else {
-                tools = "<table id='app-info'><thead><tr><th>Name</th><th>Count</th></tr></thead><tbody>";
-                for(var i = 0; i < response['tools'].length; i++){
-                    tools += "<tr><td>" + response['tools'][i]['name']+"</td>";
-                    tools += "<td>" + response['tools'][i]['count']+"</td></tr>";
-                }
-                tools += "</tbody></table>";
-                tools += "<br><button class='left' onclick=\"$('#app-info').table2CSV({header:['App Name','Count']})\">";
-                tools += "Export to CVS</button>";
+            for(var i = 0; i < resp['tools'].length; i++){
+                tools +=
+                    "<tr><td>" +
+                    resp['tools'][i]['name'] +
+                    "</td><td>" +
+                    resp['tools'][i]['count'] +
+                    "</td></tr>"
             }
-			$('#inner').html(tools);
-		}
-	}
-	request.send();
-};
+
+            tools +=
+                "</tbody></table><br>" +
+                "<button class='left'" +
+                "onclick=\"$('#app-info').table2CSV(" +
+                "{header:['App Name','Count']})\">" +
+                "Export to CVS</button>"
+
+            $('#inner').html(tools)
+        }
+    })
+}
