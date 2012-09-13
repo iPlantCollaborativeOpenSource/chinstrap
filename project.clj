@@ -10,13 +10,13 @@
                    [log4j/log4j "1.2.16"]
                    [noir "1.3.0-beta3"]]
     :plugins [[org.iplantc/lein-iplant-rpm "1.3.1-SNAPSHOT"]]
-    :profiles {:dev {:resource-paths ["conf/test"]}}
+    :profiles {:dev {:resource-paths ["resources/conf/test"]}}
     :aot [chinstrap.server]
     :main chinstrap.server
     :iplant-rpm {:summary "iPlant Chinstrap"
                 :provides "chinstrap"
                 :dependencies ["iplant-service-config >= 0.1.0-5"]
                 :config-files ["log4j.properties"]
-                :config-path "conf/main"}
+                :config-path "resources/conf/main"}
                 :repositories {"iplantCollaborative"
                                "http://projects.iplantcollaborative.org/archiva/repository/internal/"})

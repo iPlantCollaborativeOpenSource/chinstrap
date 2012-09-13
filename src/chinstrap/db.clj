@@ -14,7 +14,7 @@
   (let [filename "chinstrap.properties"
         conf-dir (System/getenv "IPLANT_CONF_DIR")]
     (if (nil? conf-dir)
-      (reset! props (cp/read-properties (file "conf/test/" passed-filename)))
+      (reset! props (cp/read-properties (file "resources/conf/test/" passed-filename)))
       (reset! props (cp/read-properties (file conf-dir filename)))))
   (log/warn "Configuration Data from local properties file:")
   (log/warn @props)
