@@ -14,16 +14,21 @@ $(document).ready(function() {
     $('.integrator').click(function() {
         getIntegrators($(this).children('.id').attr('value'))
     })
+})
 
+function generalData() {
     $.get('get-integrator-data/', function(resp){
         body =
-              "<h3><strong>General Integrator Info</strong></h3><hr>"
+            "<h3><strong>General Integrator Info</strong></h3><hr>"
             + "<ul>"
-                + "<li>On average Integrators create "
+                + "<li>There are a total of "
+                + "<strong>" + resp['total'] + "</strong>"
+                + " apps on the DE</li>"
+                + "<li>On average, Integrators create "
                 + "<strong>" + resp['average'] + "</strong>"
                 + " apps</li>"
             +"</ul>"
         $('#inner').html(body)
     })
-
-})
+}
+generalData();

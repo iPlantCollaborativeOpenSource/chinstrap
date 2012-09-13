@@ -43,12 +43,13 @@
 
 ;AJAX call from the Javascript file 'resources/public/js/integrator-script.js' for general integrator data.
 (defpage "/get-integrator-data/" []
-  (let [data (map :count (cq/integrator-list))]
+  (let [cq-data (map :count (cq/integrator-list))]
+        ;mc-data (map :count (mg/integrator-list))]
     (nr/json {
       :average
-        (/ (reduce + data) (count data))
+        (/ (reduce + cq-data) (count cq-data))
       :total
-        (count data)
+        (reduce + cq-data)
     })
 ;(hash-map :id id)
 ))

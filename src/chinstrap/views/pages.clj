@@ -81,9 +81,13 @@
     [:div#inner]
     [:br]
     [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
-      [:button
-        {:onClick "$('#leaderboard').table2CSV({header:['#','Contributor Name','Number of Apps']});"}
-        "Export to CSV"]
+      [:span
+        [:button
+          {:onClick "$('#leaderboard').table2CSV({header:['#','Contributor Name','Number of Apps']});"}
+          "Export to CSV"]
+        [:button
+          {:onClick "generalData();"}
+          "General Data"]]
       [:table#leaderboard
         [:thead
           [:tr [:th ""]
