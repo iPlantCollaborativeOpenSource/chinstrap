@@ -90,7 +90,7 @@
                [:th "Name"]
                [:th "Count"]]]
         [:tbody
-          (let [list (cq/leader-list) count (count list)]
+          (let [list (cq/integrator-list) count (count list)]
             (for
               [i (range 1 count) :let [record (nth list i)]]
               [:tr.integrator

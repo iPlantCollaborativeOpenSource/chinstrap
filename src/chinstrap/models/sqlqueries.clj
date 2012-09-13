@@ -68,7 +68,7 @@
       AND w.is_public IS TRUE)
       ORDER BY dc.name ASC;"] :results))
 
-(defn leader-list
+(defn integrator-list
    "Returns a list of all users with public apps and aggregates a count of
    them so that they can be ranked according to #'s of apps." []
   (exec-raw
@@ -100,6 +100,12 @@
       )
       GROUP BY integrator_name, integrator_email, ind.id
       ORDER BY count DESC, name ASC;"] :results))
+
+(defn integrator-data
+   "This query returns specific data about an integrator."
+  [id]
+  (select "integration_data"
+    (where {:id (read-string id)})))
 
 (defn count-apps
   "This function takes a collection of analysis_ids and queries the postgres

@@ -35,10 +35,23 @@
           {"$gte" (read-string date) "$lt" (+ 86400000 (read-string date))}}
             [:state.analysis_id])))}))
 
-;AJAX call from the Javascript file 'resources/public/js/get-integrators.js'.
-(defpage "/get-integrator-data/:name" {:keys [name]}
-  (nr/json {:test
-    (hash-map :name name)}))
+;AJAX call from the Javascript file 'resources/public/js/get-integrators.js for specific integrator data'.
+(defpage "/get-integrator-data/:id" {:keys [id]}
+  (nr/json
+    (first (cq/integrator-data id))
+))
+
+;AJAX call from the Javascript file 'resources/public/js/integrator-script.js' for general integrator data.
+(defpage "/get-integrator-data/" []
+  (let [data (map :count (cq/integrator-list))]
+    (nr/json {
+      :average
+        (/ (reduce + data) (count data))
+      :total
+        (count data)
+    })
+;(hash-map :id id)
+))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-apps.js'.
 (defpage "/get-apps" []
