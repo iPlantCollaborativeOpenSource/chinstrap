@@ -14,6 +14,11 @@ $(document).ready(function() {
     $('.integrator').click(function() {
         getIntegrators($(this).children('.id').attr('value'))
     })
+
+    $('#choose').change(function() {
+        getIntegrators($(this).attr('value'))
+    })
+
 })
 
 function generalData() {
@@ -33,7 +38,6 @@ function generalData() {
 }
 
 function integratorData() {
-$("#inner").html($("#integrator").val());
-
+    //$("#inner").html($("#integrator").val());
 }
 generalData();

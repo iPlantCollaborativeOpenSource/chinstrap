@@ -80,14 +80,17 @@
   (html5
     [:head
       (global "Integrators")
-      (include-js "/js/get-integrators.js"
+      (include-css "/css/chosen.css")
+      (include-js "/js/lib/chosen.jquery.min.js"
+                  "/js/lib/jquery.color.js"
+                  "/js/get-integrators.js"
                   "/js/integrators-script.js"
                   "/js/csv-parser.js"
-                  "/js/lib/jquery.color.js"
                   "/js/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#integrators').addClass('active')
+        $('.chzn-select').chosen({max_selected_options: 1});
         $('.collapsibleContainer').collapsiblePanel()})")
       (page content)]))
 
