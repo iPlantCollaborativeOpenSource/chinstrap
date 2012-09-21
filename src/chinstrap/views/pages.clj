@@ -80,6 +80,8 @@
     [:br]
     [:div#inner]
     [:br]
+    [:input#integrator {:type "text" :oninput "integratorData()"}]
+    [:br][:br]
     [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
       [:span
         [:button

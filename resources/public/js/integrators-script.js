@@ -23,12 +23,17 @@ function generalData() {
             + "<ul>"
                 + "<li>There are a total of "
                 + "<strong>" + resp['total'] + "</strong>"
-                + " apps on the DE</li>"
-                + "<li>On average, Integrators create "
-                + "<strong>" + resp['average'] + "</strong>"
-                + " apps</li>"
+                + " apps on the DE.</li>"
+                + "<li>On average, an integrator creates "
+                + "<strong>" + resp['average'].toPrecision(3) + "</strong>"
+                + " apps.</li>"
             +"</ul>"
         $('#inner').html(body)
     })
+}
+
+function integratorData() {
+$("#inner").html($("#integrator").val());
+
 }
 generalData();

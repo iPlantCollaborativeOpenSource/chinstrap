@@ -72,7 +72,7 @@
    "Returns a list of all users with public apps and aggregates a count of
    them so that they can be ranked according to #'s of apps." []
   (exec-raw
-    ["SELECT COUNT(lower(ind.integrator_name)) count,
+    ["SELECT COUNT(ind.integrator_name) count,
       ind.integrator_name AS name,
       ind.integrator_email AS email,
       ind.id
