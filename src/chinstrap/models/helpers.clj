@@ -29,7 +29,8 @@
   (into {} (filter (comp fields first) m)))
 
 (defn field-selector-for
-  "Returns a monger field selector for a set of keywords."
+  "Returns a monger field selector for a set of keywords representing fields
+   in the state subobject of a job status record from the OSM."
   [ks]
   (->> ks
        (map name)
@@ -38,7 +39,8 @@
        vec))
 
 (defn app-details
-  "Returns information about apps in a particular state."
+  "Returns information about apps in a particular state.  The set of fields
+   to return is specified by the sequence in the first argument."
   [result-fields status]
   (map :state
        (mc/find-maps "jobs"
@@ -46,21 +48,23 @@
                      (field-selector-for result-fields))))
 
 (defn app-details-str
-  "Returns a string containing app details."
+  "Returns a string containing app details.  The set of fields to include in
+   the string is specified by the sequence in the first argument."
   [result-fields status]
   (letfn [(fmt [data] (string/join " - " (map data result-fields)))]
     (map #(str (fmt %) "<br>") (app-details (set result-fields) status))))
 
 (defn app-details-table
-  "Returns an HTML table containing app details."
+  "Returns an HTML table containing app details.  The set of fields to include
+   in the table is specified by the sequence in the first argument."
   [result-fields status]
   (letfn [(tr   [f data]      (str "<tr>" (apply str (map f data)) "</tr>"))
           (htr  [fields]      (tr #(str "<th>" (name %) "</th>") fields))
-          (dtr  [ks data]     (tr #(str "<th>" (data %) "</th>") ks))
+          (dtr  [ks data]     (tr #(str "<td>" (data %) "</td>") ks))
           (dtrs [ks data-seq] (apply str (map #(dtr ks %) data-seq)))]
     (str "<table><thead>" (htr result-fields) "</thead><tbody>"
          (dtrs result-fields (app-details (set result-fields) status))
-         "</tbody>")))
+         "</tbody></table>")))
 
 (defn pending-analyses
   "Returns analyses that are not in a completed status.  If a grouping field

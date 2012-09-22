@@ -65,8 +65,8 @@
               :failed-names (fmt-job-details "Failed"),
               :submitted-names (fmt-job-details "Submitted")})))
 
-;AJAX call from the Javascript file 'resources/public/js/pending-analyses-by-user.js'.
-(defpage "/get-analyses-by-user" []
+;AJAX call to get information about pending analyses grouped by username.
+(defpage "/pending-analyses-by-user" []
   (nr/json (pending-analyses :user #{:uuid})))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-components.js'.
