@@ -56,13 +56,18 @@
 
 ;AJAX call from the Javascript file 'resources/public/js/get-apps.js'.
 (defpage "/get-apps" []
-  (nr/json {:running (mc/count "jobs" {:state.status "Running"}),
-            :submitted (mc/count "jobs" {:state.status "Submitted"}),
-            :failed (mc/count "jobs" {:state.status "Failed"}),
-            :completed (mc/count "jobs" {:state.status "Completed"}),
-            :running-names (str (get-app-names "Running")),
-            :failed-names (str (get-app-names "Failed")),
-            :submitted-names (str (get-app-names "Submitted"))}))
+  (let [fmt-job-details (partial app-details-str [:user :name])]
+    (nr/json {:running (mc/count "jobs" {:state.status "Running"}),
+              :submitted (mc/count "jobs" {:state.status "Submitted"}),
+              :failed (mc/count "jobs" {:state.status "Failed"}),
+              :completed (mc/count "jobs" {:state.status "Completed"}),
+              :running-names (fmt-job-details "Running"),
+              :failed-names (fmt-job-details "Failed"),
+              :submitted-names (fmt-job-details "Submitted")})))
+
+;AJAX call from the Javascript file 'resources/public/js/pending-analyses-by-user.js'.
+(defpage "/get-analyses-by-user" []
+  (nr/json (pending-analyses :user #{:uuid})))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-components.js'.
 (defpage "/get-components" []

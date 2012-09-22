@@ -1,5 +1,9 @@
 (ns chinstrap.models.helpers
-  (:require [monger.collection :as mc]))
+  (:use [monger.operators :only [$nin]])
+  (:require [clojure.string :as string]
+            [monger.collection :as mc]))
+
+(def ^:private completed-states ["Failed" "Completed"])
 
 (defn format-data-for-graph
   "This function takes in dates and their counts and parses them into a JSON
@@ -19,8 +23,63 @@
       (map #(str (:name (:state %)) "<br>")
         (mc/find-maps "jobs" {:state.status (str status)} [:state.name]))))
 
+(defn- submap
+  "Returns a map containing only the specified fields in the parent map."
+  [m fields]
+  (into {} (filter (comp fields first) m)))
+
+(defn field-selector-for
+  "Returns a monger field selector for a set of keywords."
+  [ks]
+  (->> ks
+       (map name)
+       (map #(str "state." %))
+       (map keyword)
+       vec))
+
+(defn app-details
+  "Returns information about apps in a particular state."
+  [result-fields status]
+  (map :state
+       (mc/find-maps "jobs"
+                     {:state.status status}
+                     (field-selector-for result-fields))))
+
+(defn app-details-str
+  "Returns a string containing app details."
+  [result-fields status]
+  (letfn [(fmt [data] (string/join " - " (map data result-fields)))]
+    (map #(str (fmt %) "<br>") (app-details (set result-fields) status))))
+
+(defn app-details-table
+  "Returns an HTML table containing app details."
+  [result-fields status]
+  (letfn [(tr   [f data]      (str "<tr>" (apply str (map f data)) "</tr>"))
+          (htr  [fields]      (tr #(str "<th>" (name %) "</th>") fields))
+          (dtr  [ks data]     (tr #(str "<th>" (data %) "</th>") ks))
+          (dtrs [ks data-seq] (apply str (map #(dtr ks %) data-seq)))]
+    (str "<table><thead>" (htr result-fields) "</thead><tbody>"
+         (dtrs result-fields (app-details (set result-fields) status))
+         "</tbody>")))
+
+(defn pending-analyses
+  "Returns analyses that are not in a completed status.  If a grouping field
+   is provided then the results will be grouped by that field.  If a set of
+   result fields is included then the job information will only include those
+   fields in addition to the grouping field."
+  ([]
+     (map :state
+          (mc/find-maps "jobs" {:state.status {$nin completed-states}})))
+  ([grouping-field]
+     (group-by grouping-field (pending-analyses)))
+  ([grouping-field result-fields]
+     (let [all-fields (set (cons grouping-field result-fields))]
+       (group-by grouping-field
+                 (map #(submap % all-fields) (pending-analyses))))))
+
 (defn fetch-submission-date-by-status
-  "Helper fuction for graph data calls to the mongoDB, returns a map of the dates in milliseconds of apps with the passed status."
+  "Helper fuction for graph data calls to the mongoDB, returns a map of the
+   dates in milliseconds of apps with the passed status."
   [status]
   (map #(:submission_date (:state %))
     (mc/find-maps "jobs"
