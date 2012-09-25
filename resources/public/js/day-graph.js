@@ -2,7 +2,7 @@ var chart;
 var chartData = [];
 var chartCursor;
 
-AmCharts.ready(function () {
+function createChart(){
     // generate some data first
     generateChartData();
 
@@ -82,13 +82,13 @@ AmCharts.ready(function () {
 
     // WRITE
     chart.write("chart");
-});
+};
 
 function generateChartData() {
-
+    chartData = [];
     var response;
     request = $.ajax({
-        url: "/get-day-data/Completed",
+        url: "/get-day-data/" + $('option:selected').text(),
         async: false,
         contentType: "application/json",
         success: function(data){
@@ -136,6 +136,11 @@ function generateChartData() {
 function zoomChart() {
     // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
     chart.zoomToIndexes(chartData.length - 40, chartData.length - 1);
+}
+
+function reloadChart(){
+    $("#chart").html("");
+    createChart()
 }
 
 // changes cursor mode from pan to select

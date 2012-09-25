@@ -162,7 +162,7 @@ li.nav {
   border-left: 1px solid #AAA;
   border-bottom: 1px solid #BBB;
   border-right: 1px solid #BBB;
-  width: 300px;
+  width: 400px;
   margin: 0px auto;
   background-color: #EFEFEF;
   padding: 25px;
@@ -170,6 +170,26 @@ li.nav {
   padding-right: 35px;
   color: #333;
   border-radius: 4px;
+}
+
+#inner-oversize {
+  border-top: 1px solid #AAA;
+  border-left: 1px solid #AAA;
+  border-bottom: 1px solid #BBB;
+  border-right: 1px solid #BBB;
+  width: 400px;
+  margin: 0px auto;
+  background-color: #EFEFEF;
+  padding: 25px;
+  padding-left: 35px;
+  padding-right: 35px;
+  color: #333;
+  border-radius: 4px;
+}
+
+ul
+{
+  list-style-image: url('../img/logo_sm.png');
 }
 
 #footer {

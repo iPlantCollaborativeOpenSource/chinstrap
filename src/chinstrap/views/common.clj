@@ -84,6 +84,7 @@
       (include-js "/js/lib/chosen.jquery.min.js"
                   "/js/lib/jquery.color.js"
                   "/js/get-integrators.js"
+                  "/js/lib/mousetrap.min.js"
                   "/js/integrators-script.js"
                   "/js/csv-parser.js"
                   "/js/collapsible-panel.js")]
@@ -115,23 +116,32 @@
                   "/js/spinner.js"
                   "/js/lib/underscore-min.js")
       (javascript-tag "$(document).ready(function(){
-        $('#graphs').addClass('active');})")
+                       $('#graphs').addClass('active')
+                       createChart()})")
     [:body
       (page
-        [:h3 "DE Apps Completed Over Time"]
+        [:h3 "DE Apps "
+          [:select#type.selector {:onchange "reloadChart()"}
+            [:option "Completed"]
+            [:option "Failed"]]
+        " Over Time"]
         [:br]
         (graph-nav)
         [:br]
-        [:div#chart content [:div#loader]]
+        [:div#chart] content [:div#loader]
         [:h5.right "Data Starting from: " [:span#firstDate]])]]))
 
 (defpartial day-page []
   (include-js "/js/lib/amcharts.js")
-  (include-js "/js/day-graph.js"))
+  (include-js "/js/day-graph.js")
+  (javascript-tag "$(document).ready(function(){
+                   $('#day').addClass('active')})"))
 
 (defpartial month-page []
   (include-js "/js/lib/amcharts.js")
-  (include-js "/js/month-graph.js"))
+  (include-js "/js/month-graph.js")
+  (javascript-tag "$(document).ready(function(){
+                   $('#month').addClass('active')})"))
 
 (defpartial raw-page [& content]
   (html5

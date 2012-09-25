@@ -81,17 +81,13 @@
     [:div#inner]
     [:br]
     [:select#choose.chzn-select {:data-placeholder "Select an Integrator"}
-      [:option]
+      [:option "General Data"]
       (map #(str "<option value='"(:id %)"'>" (:name %) "</option>")(cq/integrator-list))]
     [:br][:br]
     [:div.collapsibleContainer {:title "Discovery Enviroment App Leaderboard"}
-      [:span
-        [:button
-          {:onClick "$('#leaderboard').table2CSV({header:['#','Contributor Name','Count of Integrated Apps']});"}
-          "Export to CSV"]
-        [:button
-          {:onClick "generalData();"}
-          "General Data"]]
+      [:button
+        {:onClick "$('#leaderboard').table2CSV({header:['#','Contributor Name','Count of Integrated Apps']});"}
+        "Export to CSV"]
       [:table#leaderboard
         [:thead
           [:tr [:th ""]
