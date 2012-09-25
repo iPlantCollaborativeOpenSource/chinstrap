@@ -9,7 +9,7 @@
                    [korma/korma "0.3.0-beta10"]
                    [log4j/log4j "1.2.16"]
                    [noir "1.3.0-beta10"]]
-    :plugins [[org.iplantc/lein-iplant-rpm "1.3.1-SNAPSHOT"]]
+    :plugins [[org.iplantc/lein-iplant-rpm "1.3.2-SNAPSHOT"]]
     :profiles {:dev {:resource-paths ["resources/conf/test"]}}
     :aot [chinstrap.server]
     :main chinstrap.server
