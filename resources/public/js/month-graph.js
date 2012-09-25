@@ -1,7 +1,7 @@
 var chart;
 var chartData = [];
 
-AmCharts.ready(function () {
+function createChart() {
 
     generateChartData();
 
@@ -39,13 +39,13 @@ AmCharts.ready(function () {
     chart.addGraph(graph);
 
     chart.write("chart");
-});
+};
 
 function generateChartData() {
-
+    chartData = [];
     var response;
     request = $.ajax({
-        url: "/get-month-data/Completed",
+        url: "/get-month-data/" + $('option:selected').text(),
         async: false,
         contentType: "application/json",
         success: function(data){
@@ -60,5 +60,10 @@ function generateChartData() {
             count: element['count']});
     }
     $('#firstDate').html(new Date(response[0]['date']).toDateString());
-    $('#month').addClass("active");
+}
+
+function reloadChart(){
+    $("#chart").html("");
+    createChart()
+    $('#firstDate').html(new Date(chartData[0]['date']).toDateString());
 }
