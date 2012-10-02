@@ -3,6 +3,7 @@ var chartData = [];
 var chartCursor;
 
 function createChart(){
+    $('#loader').show();
     // generate some data first
     generateChartData();
 
@@ -55,6 +56,7 @@ function createChart(){
     // GRAPH
     var graph = new AmCharts.AmGraph();
     graph.title = "Apps Ran Over Time";
+    graph.labelText = "[[count]]";
     graph.valueField = "count";
     graph.bullet = "round";
     graph.bulletBorderColor = "#FFF";
@@ -81,6 +83,7 @@ function createChart(){
     chart.addChartScrollbar(chartScrollbar);
 
     // WRITE
+    $('#loader').hide();
     chart.write("chart");
 };
 
@@ -88,7 +91,7 @@ function generateChartData() {
     chartData = [];
     var response;
     request = $.ajax({
-        url: "/get-day-data/" + $('option:selected').text(),
+        url: "/get-day-data/" + $('option:selected').attr("data"),
         async: false,
         contentType: "application/json",
         success: function(data){
@@ -139,7 +142,7 @@ function zoomChart() {
 }
 
 function reloadChart(){
-    $("#chart").html("");
+    $("#chart").html("")
     createChart()
 }
 

@@ -7,6 +7,26 @@
   (:use [noir.core]
         [chinstrap.models.helpers]))
 
+(def parser
+  (format/formatter "MM yyyy"))
+
+;AJAX call from the Javascript file 'resources/public/js/day-graph.js' for graph data.
+(defpage "/get-day-data/" []
+  (nr/json
+    (format-data-for-graph
+      (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
+        (map #(* 86400000 (long (/ (Long/parseLong (str %)) 86400000)))
+              (fetch-submission-date-by-status)))))))
+
+;AJAX call from the Javascript file 'resources/public/js/month-graph.js' for graph data.
+(defpage "/get-month-data/" []
+  (nr/json
+    (format-data-for-graph
+      (into (sorted-map) (reduce #(assoc %1 %2 (inc (%1 %2 0))) {}
+        (map #(coerce/to-long (format/parse parser (format/unparse parser
+                (coerce/from-long (Long/parseLong (str %))))))
+          (fetch-submission-date-by-status)))))))
+
 ;AJAX call from the Javascript file 'resources/public/js/day-graph.js' for graph data.
 (defpage "/get-day-data/:status" {:keys [status]}
   (nr/json

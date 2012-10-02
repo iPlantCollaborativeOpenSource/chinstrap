@@ -84,8 +84,12 @@
 (defn fetch-submission-date-by-status
   "Helper fuction for graph data calls to the mongoDB, returns a map of the
    dates in milliseconds of apps with the passed status."
-  [status]
+  ([]
+   (map #(:submission_date (:state %))
+    (mc/find-maps "jobs"
+      {:state.status {"$in" ["Completed" "Failed"]}})))
+  ([status]
   (map #(:submission_date (:state %))
     (mc/find-maps "jobs"
       {:state.status {"$in" [status]}}
-      [:state.submission_date])))
+      [:state.submission_date]))))

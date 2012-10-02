@@ -11,6 +11,7 @@
       "/css/style.css")
     (include-js
       "http://code.jquery.com/jquery-1.8.0.min.js"
+      "/js/lib/exists.js"
       "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js")])
 
 (defpartial graph-nav []
@@ -112,36 +113,35 @@
   (html5
     [:head
       (global "Graph - by Day")
-      (include-js "/js/lib/spin.min.js"
-                  "/js/spinner.js"
-                  "/js/lib/underscore-min.js")
       (javascript-tag "$(document).ready(function(){
-                       $('#graphs').addClass('active')
-                       createChart()})")
-    [:body
+                       $('#graphs').addClass('active')})")]
+    [:body {:onload "createChart()"}
       (page
-        [:h3 "DE Apps "
+        [:h3
           [:select#type.selector {:onchange "reloadChart()"}
-            [:option "Completed"]
-            [:option "Failed"]]
-        " Over Time"]
+            [:option  {:data ""} "All"]
+            [:option {:data "Completed"} "Completed"]
+            [:option {:data "Failed"} "Failed"]]
+        " DE Apps Over Time"]
         [:br]
         (graph-nav)
         [:br]
-        [:div#chart] content [:div#loader]
-        [:h5.right "Data Starting from: " [:span#firstDate]])]]))
+        [:div#chart]
+        [:div#loader]
+        content
+        [:h5.right "Data Starting from: " [:span#firstDate]])
+        (include-js "/js/lib/amcharts.js"
+                    "/js/lib/spin.min.js"
+                    "/js/spinner.js"
+                    "/js/lib/underscore-min.js")]))
 
 (defpartial day-page []
-  (include-js "/js/lib/amcharts.js")
   (include-js "/js/day-graph.js")
-  (javascript-tag "$(document).ready(function(){
-                   $('#day').addClass('active')})"))
+  (javascript-tag "$('#day').addClass('active')"))
 
 (defpartial month-page []
-  (include-js "/js/lib/amcharts.js")
   (include-js "/js/month-graph.js")
-  (javascript-tag "$(document).ready(function(){
-                   $('#month').addClass('active')})"))
+  (javascript-tag "$('#month').addClass('active')"))
 
 (defpartial raw-page [& content]
   (html5

@@ -36,8 +36,11 @@ function createChart() {
     graph.lineAlpha = 0;
     graph.lineColor = "#0098AA";
     graph.fillAlphas = 0.8;
+    graph.labelText = "[[count]]";
     chart.addGraph(graph);
 
+
+    $(".spinner").hide()
     chart.write("chart");
 };
 
@@ -45,7 +48,7 @@ function generateChartData() {
     chartData = [];
     var response;
     request = $.ajax({
-        url: "/get-month-data/" + $('option:selected').text(),
+        url: "/get-month-data/" + $('option:selected').attr("data"),
         async: false,
         contentType: "application/json",
         success: function(data){
@@ -65,5 +68,4 @@ function generateChartData() {
 function reloadChart(){
     $("#chart").html("");
     createChart()
-    $('#firstDate').html(new Date(chartData[0]['date']).toDateString());
 }
