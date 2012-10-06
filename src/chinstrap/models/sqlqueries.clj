@@ -2,7 +2,8 @@
   (:use [kameleon.entities]
         [korma.core]
         [chinstrap.db])
-  (:require [clojure.tools.logging :as log]))
+  (:require [clojure.tools.logging :as log]
+            [clojure.string :as string]))
 
 (defn all-app-count
   "Returns a count of all the queried deployed components in the DB."
@@ -119,3 +120,94 @@
         (fields :name)
         (where {:id %}))ids )]})
     (order :count :desc)))
+
+(defn historical-first-bucket []
+  "This function includes data from all integration points found before 2012"
+  (select "analysis_listing"
+    (aggregate (count :*) "earlier_than_2012:")
+    (where (and
+      (= :is_public true)
+      (< :integration_date (java.sql.Timestamp/valueOf "2012-01-01 00:00:00"))
+    ))))
+
+(defn historical-second-bucket []
+  "This function includes data from all integration points found between January
+  and April 2012"
+  (select "analysis_listing"
+    (aggregate (count :*) "from_january_to_april_2012:")
+    (where (and
+      (= :is_public true)
+      (>= :integration_date (java.sql.Timestamp/valueOf "2012-01-01 00:00:00"))
+      (< :integration_date (java.sql.Timestamp/valueOf "2012-04-01 00:00:00"))
+    ))))
+
+(defn historical-third-bucket []
+  "This function includes data from all integration points found between April
+  and July 2012"
+  (select "analysis_listing"
+    (aggregate (count :*) "from_april_to_july_2012:")
+    (where (and
+      (= :is_public true)
+      (>= :integration_date (java.sql.Timestamp/valueOf "2012-04-01 00:00:00"))
+      (< :integration_date (java.sql.Timestamp/valueOf "2012-07-01 00:00:00"))
+    ))))
+
+(defn historical-last-bucket []
+  "This function includes data all integration points found after July 2012"
+  (select "analysis_listing"
+    (aggregate (count :*) "after_july_2012:")
+    (where (and
+      (= :is_public true)
+      (>= :integration_date (java.sql.Timestamp/valueOf "2012-07-01 00:00:00"))
+    ))))
+
+(defn historical-app-count []
+  (string/replace
+      (string/replace
+        (str
+          (ffirst (historical-first-bucket))
+          (ffirst (historical-second-bucket))
+          (ffirst (historical-third-bucket))
+          (ffirst (historical-last-bucket)))
+      "[" "{")
+      "]" "}"
+))
+
+(defn accumulated-second-bucket []
+  "This function includes data from all integration points prior to April 2012"
+  (select "analysis_listing"
+    (aggregate (count :*) "to_april_2012:")
+    (where (and
+      (= :is_public true)
+      (< :integration_date (java.sql.Timestamp/valueOf "2012-04-01 00:00:00"))
+    ))))
+
+(defn accumulated-third-bucket []
+  "This function includes data all integration points found between April and
+  July 2012"
+  (select "analysis_listing"
+    (aggregate (count :*) "to_july_2012:")
+    (where (and
+      (= :is_public true)
+      (< :integration_date (java.sql.Timestamp/valueOf "2012-07-01 00:00:00"))
+    ))))
+
+(defn accumulated-last-bucket []
+  "This function includes data from all integration points"
+  (select "analysis_listing"
+    (aggregate (count :*) "after_july_2012:")
+    (where (and
+      (= :is_public true)
+      (not= :integration_date nil)
+    ))))
+(defn accumulated-app-count []
+  (string/replace
+      (string/replace
+        (str
+          (ffirst (historical-first-bucket))
+          (ffirst (accumulated-second-bucket))
+          (ffirst (accumulated-third-bucket))
+          (ffirst (accumulated-last-bucket)))
+      "[" "{")
+      "]" "}"
+))

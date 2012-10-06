@@ -94,3 +94,10 @@
   (nr/json {:all (cq/all-app-count)
             :without (cq/unused-app-count)
             :with (cq/used-app-count)}))
+
+;Historical data of app count
+(defpage "/get-historical-app-count" []
+  (nr/json {:count_by_bucket (cq/historical-app-count)
+            :accumulated_count (cq/accumulated-app-count)
+            }))
+

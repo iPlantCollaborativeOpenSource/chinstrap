@@ -126,4 +126,5 @@
     [:button {:onclick "window.location = '/get-day-data/Failed';"} "Count of Failed apps - By Day"]
     [:button {:onclick "window.location = '/get-month-data/Completed';"} "Count of Completed apps - By Month"]
     [:button {:onclick "window.location = '/get-month-data/Failed';"} "Count of Failed apps - By Month"]
+    [:button {:onclick "window.location = '/get-historical-app-count';"} "Historical count of apps - By Bucket"]
 ))
