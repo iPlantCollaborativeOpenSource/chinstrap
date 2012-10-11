@@ -57,22 +57,21 @@
 
 ;AJAX call from the Javascript file 'resources/public/js/get-integrators.js for specific integrator data'.
 (defpage "/get-integrator-data/:id" {:keys [id]}
-  (nr/json
-    (first (cq/integrator-data id))
-))
+  (nr/json {
+      :data
+        (cq/integrator-data id)
+      :apps
+        (cq/integrator-details id)}))
 
 ;AJAX call from the Javascript file 'resources/public/js/integrator-script.js' for general integrator data.
 (defpage "/get-integrator-data/" []
   (let [cq-data (map :count (cq/integrator-list))]
-        ;mc-data (map :count (mg/integrator-list))]
     (nr/json {
       :average
         (/ (reduce + cq-data) (count cq-data))
       :total
         (reduce + cq-data)
-    })
-;(hash-map :id id)
-))
+    })))
 
 ;AJAX call from the Javascript file 'resources/public/js/get-apps.js'.
 (defpage "/get-apps" []

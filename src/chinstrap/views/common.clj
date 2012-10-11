@@ -11,7 +11,6 @@
       "/css/style.css")
     (include-js
       "http://code.jquery.com/jquery-1.8.0.min.js"
-      "/js/lib/exists.js"
       "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js")])
 
 (defpartial graph-nav []
