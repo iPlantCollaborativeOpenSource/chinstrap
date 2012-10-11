@@ -14,9 +14,9 @@ function getIntegrator(who) {
                 + "<h4 class='left'>Integrator ID:"
                 + "<span class='right'>"
                 + resp['data'][0]['id']
-                + "</span></h4>"
+                + "</span></h4><br>"
 
-            apps = "<table id='app-info'><thead>"
+            apps = "<table id='app-info' style='font-size:8px'><thead style='font-size: 10pt'>"
                 + "<tr><th>Name</th>"
                 + "<th>Rating</th>"
                 + "<th>Description</th>"
@@ -25,19 +25,19 @@ function getIntegrator(who) {
                 + "</thead><tbody>"
 
             for(var i = 0; i < resp['apps'].length; i++){
-                apps += "<tr><td>"
+                apps += "<tr><td style='font-size: 10pt'>"
                     + "<a href='"
-                    + resp['apps'][i]['wikiurl'] 
+                    + resp['apps'][i]['wikiurl']
                     + "'>" + resp['apps'][i]['name']
                     + "</a>"
-                    + "</td><td>"
+                    + "</td><td style='font-size: 10pt; padding: 0px; text-align:center; margin: 0px auto'>"
                     + resp['apps'][i]['average_rating']
-                    + "</td><td>"
+                    + "</td><td style='max-width: 100px; overflow: auto; font-size: 8pt;'>"
                     + resp['apps'][i]['description']
                     + "</td><td>"
                     + resp['apps'][i]['overall_job_type']
                     + "</td><td>"
-                    + new Date(resp['apps'][i]['integration_date'])
+                    + new Date(resp['apps'][i]['integration_date']).toLocaleDateString()
                     + "</td></tr>";
             }
 
