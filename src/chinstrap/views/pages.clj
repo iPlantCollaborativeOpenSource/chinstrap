@@ -48,30 +48,38 @@
     [:h3 "Discovery Environment Component Info"]
     [:br]
     [:div#inner
-      [:h3.left "With Associated Apps:" [:span#with.right]]
-      [:h3.left "Without Associated Apps:" [:span#without.right]]
+      [:h3.left "Used Components:" [:span#with.right]]
+      [:h3.left "Unused Components" [:span#without.right]]
       [:h3.left "Total Components:" [:span#all.right]]]
     [:br]
     [:div.collapsibleContainer {:title "Unused Componenent Details"}
       [:button
-        {:onClick "$('#unused').table2CSV({header:['#','App Name','Version']});"}
+        {:onClick "$('#unused').table2CSV({header:['#','App Name','Version','Integrator']});"}
         "Export to CSV"]
       [:table#unused
         [:thead
           [:tr [:th ""]
                [:th "Name"]
-               [:th "Version"]]]
+               [:th "Version"]
+               [:th "Integrator"]]]
         [:tbody
           (let [list (cq/unused-app-list) count (count list)]
-              (for
-                [i (range 1 count) :let [record (nth list i)]]
-                [:tr
-                  [:td.center i]
-                  [:td (:name record)]
-                  [:td.center (if
-                    (or (nil? (:version record))
-                        (string/blank? (:version record)))
-                    "No Version" (:version record))]]))]]]))
+            (for
+              [i (range 0 count) :let [record (nth list i)]]
+              [:tr.row
+                [:td.rank.center (inc i)]
+                [:td.component (:name record)]
+                [:td.version.center (if
+                  (or (nil? (:version record))
+                      (string/blank? (:version record)))
+                  "No Version" (:version record))]
+                [:td.integrator {:value (:integrator_name record)}
+                  (if
+                    (or (= "No name" (:integrator_name record))
+                        (= "executable" (:integrator_name record)))
+                    (:integrator_name record)
+                    [:a {:href (str "mailto://" (:email record))}
+                    (:integrator_name record)])]]))]]]))
 
 ;Page listing information about Integrators.
 (defpage "/integrators" []
@@ -96,9 +104,9 @@
         [:tbody
           (let [list (cq/integrator-list) count (count list)]
             (for
-              [i (range 1 count) :let [record (nth list i)]]
+              [i (range 0 count) :let [record (nth list i)]]
               [:tr.integrator
-                [:td.center i]
+                [:td.rank.center (inc i)]
                 [:td.name {:value (:name record)} (:name record)]
                 [:input.email {:type "hidden" :value (:email record)}]
                 [:input.id {:type "hidden" :value (:id record)}]
@@ -112,7 +120,7 @@
     [:div.select
       [:input#rb1 {:type "radio" :name "dayGroup" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
       [:input {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]
-  (template/day-page)))
+    (template/day-page)))
 
 (defpage "/graph/month" []
   (template/graph-page
@@ -126,5 +134,4 @@
     [:button {:onclick "window.location = '/get-day-data/Failed';"} "Count of Failed apps - By Day"]
     [:button {:onclick "window.location = '/get-month-data/Completed';"} "Count of Completed apps - By Month"]
     [:button {:onclick "window.location = '/get-month-data/Failed';"} "Count of Failed apps - By Month"]
-    [:button {:onclick "window.location = '/get-historical-app-count';"} "Historical count of apps - By Bucket"]
-))
+    [:button {:onclick "window.location = '/get-historical-app-count';"} "Historical count of apps - By Bucket"]))

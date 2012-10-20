@@ -16,9 +16,49 @@
   "Returns a count of components that are unused or are used in private or deleted apps" []
   (second (ffirst
     (exec-raw
-      ["SELECT COUNT(DISTINCT dc.name)
+      ["SELECT COUNT(dc.name)
         FROM deployed_components dc
         WHERE NOT EXISTS (
+          SELECT t.id FROM template t
+          LEFT JOIN transformations tx ON t.id = tx.template_id
+          LEFT JOIN transformation_steps ts ON tx.id = ts.transformation_id
+          LEFT JOIN transformation_task_steps tts ON ts.id = tts.transformation_step_id
+          LEFT JOIN transformation_activity a ON tts.transformation_task_id = a.hid
+          LEFT JOIN template_group_template tgt ON a.hid = tgt.template_id
+          LEFT JOIN template_group tg ON tgt.template_group_id = tg.hid
+          LEFT JOIN workspace w ON tg.workspace_id = w.id
+          WHERE t.component_id = dc.id
+          AND a.deleted IS FALSE
+          AND w.is_public IS TRUE);"] :results))))
+
+(defn used-app-count
+  "Returns a count of all components that are used in public apps in the DB" []
+  (second (ffirst
+    (exec-raw
+      ["SELECT COUNT(DISTINCT dc.name)
+        FROM deployed_components dc
+          LEFT JOIN template t ON dc.id = t.component_id
+          LEFT JOIN transformations tx ON t.id = tx.template_id
+          LEFT JOIN transformation_steps ts ON tx.id = ts.transformation_id
+          LEFT JOIN transformation_task_steps tts ON ts.id = tts.transformation_step_id
+          LEFT JOIN transformation_activity a ON tts.transformation_task_id = a.hid
+          LEFT JOIN template_group_template tgt ON a.hid = tgt.template_id
+          LEFT JOIN template_group tg ON tgt.template_group_id = tg.hid
+          LEFT JOIN workspace w ON tg.workspace_id = w.id
+        WHERE w.is_public IS TRUE
+        AND a.deleted IS FALSE
+        AND t.component_id IS NOT NULL;"] :results))))
+
+(defn unused-app-list
+  "Returns a list of all the deployed components in the DB that do not have
+   associated transformation activities."  []
+  (exec-raw
+    ["SELECT DISTINCT dc.name, dc.version,
+        ind.integrator_name,
+        ind.integrator_email AS email
+      FROM deployed_components dc
+      LEFT JOIN integration_data ind ON ind.id = dc.integration_data_id
+      WHERE NOT EXISTS (
         SELECT t.id FROM template t
         LEFT JOIN transformations tx ON t.id = tx.template_id
         LEFT JOIN transformation_steps ts ON tx.id = ts.transformation_id
@@ -29,44 +69,7 @@
         LEFT JOIN workspace w ON tg.workspace_id = w.id
         WHERE t.component_id = dc.id
         AND a.deleted IS FALSE
-        AND w.is_public IS TRUE);"] :results))))
-
-(defn used-app-count
-  "Returns a count of all components that are used in public apps in the DB" []
-  (second (ffirst
-    (exec-raw
-      ["SELECT COUNT(DISTINCT dc.name)
-        FROM deployed_components dc
-        LEFT JOIN template t ON dc.id = t.component_id
-        LEFT JOIN transformations tx ON t.id = tx.template_id
-        LEFT JOIN transformation_steps ts ON tx.id = ts.transformation_id
-        LEFT JOIN transformation_task_steps tts ON ts.id = tts.transformation_step_id
-        LEFT JOIN transformation_activity a ON tts.transformation_task_id = a.hid
-        LEFT JOIN template_group_template tgt ON a.hid = tgt.template_id
-        LEFT JOIN template_group tg ON tgt.template_group_id = tg.hid
-        LEFT JOIN workspace w ON tg.workspace_id = w.id
-        WHERE w.is_public IS TRUE
-        AND a.deleted IS NOT TRUE
-        AND t.component_id IS NOT NULL;"] :results))))
-
-(defn unused-app-list
-  "Returns a list of all the deployed components in the DB that do not have
-   associated transformation activities."  []
-  (exec-raw
-    ["SELECT DISTINCT dc.name, dc.version
-      FROM deployed_components dc
-      WHERE NOT EXISTS (
-      SELECT t.id FROM template t
-      LEFT JOIN transformations tx ON t.id = tx.template_id
-      LEFT JOIN transformation_steps ts ON tx.id = ts.transformation_id
-      LEFT JOIN transformation_task_steps tts ON ts.id = tts.transformation_step_id
-      LEFT JOIN transformation_activity a ON tts.transformation_task_id = a.hid
-      LEFT JOIN template_group_template tgt ON a.hid = tgt.template_id
-      LEFT JOIN template_group tg ON tgt.template_group_id = tg.hid
-      LEFT JOIN workspace w ON tg.workspace_id = w.id
-      WHERE t.component_id = dc.id
-      AND a.deleted IS FALSE
-      AND w.is_public IS TRUE)
+        AND w.is_public IS TRUE)
       ORDER BY dc.name ASC;"] :results))
 
 (defn integrator-list
@@ -101,6 +104,20 @@
       )
       GROUP BY integrator_name, integrator_email, ind.id
       ORDER BY count DESC, name ASC;"] :results))
+    ; If the id's of all integrators were the same then this
+    ;  would work.
+    ;["SELECT COUNT(ind.integrator_name) count,
+    ;  al.integrator_name AS name,
+    ;  ind.integrator_email AS email,
+    ;  ind.id
+    ;  FROM analysis_listing al
+    ;  LEFT JOIN integration_data ind
+    ;  ON al.integrator_email = ind.integrator_email
+    ;  WHERE al.is_public = true
+    ;  AND al.disabled = false
+    ;  AND al.deleted = false
+    ;  GROUP BY al.integrator_name, ind.integrator_email, ind.id
+   ;   ORDER BY count DESC, name ASC;"] :results))
 
 (defn integrator-data
    "This query returns specific data about an integrator."
