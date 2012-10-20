@@ -43,9 +43,6 @@ function generalData() {
     })
 }
 
-function integratorData() {
-    //$("#inner").html($("#integrator").val());
-}
 Mousetrap.bind(['down', 'left', 'j', 'h'], function() {
     selected = $('option:selected').next('option')
     if (selected.val()) {
