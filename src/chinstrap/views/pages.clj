@@ -68,12 +68,12 @@
               [i (range 0 count) :let [record (nth list i)]]
               [:tr.row
                 [:td.rank.center (inc i)]
-                [:td.component (:name record)]
+                [:td.component {:title (:name record)}(:name record)]
                 [:td.version.center (if
                   (or (nil? (:version record))
                       (string/blank? (:version record)))
                   "No Version" (:version record))]
-                [:td.integrator {:value (:integrator_name record)}
+                [:td.integrator {:title (:integrator_name record)}
                   (if
                     (or (= "No name" (:integrator_name record))
                         (= "executable" (:integrator_name record)))

@@ -104,20 +104,6 @@
       )
       GROUP BY integrator_name, integrator_email, ind.id
       ORDER BY count DESC, name ASC;"] :results))
-    ; If the id's of all integrators were the same then this
-    ;  would work.
-    ;["SELECT COUNT(ind.integrator_name) count,
-    ;  al.integrator_name AS name,
-    ;  ind.integrator_email AS email,
-    ;  ind.id
-    ;  FROM analysis_listing al
-    ;  LEFT JOIN integration_data ind
-    ;  ON al.integrator_email = ind.integrator_email
-    ;  WHERE al.is_public = true
-    ;  AND al.disabled = false
-    ;  AND al.deleted = false
-    ;  GROUP BY al.integrator_name, ind.integrator_email, ind.id
-   ;   ORDER BY count DESC, name ASC;"] :results))
 
 (defn integrator-data
    "This query returns specific data about an integrator."
@@ -139,7 +125,7 @@
         AND al.deleted = false
         AND ind.id = ?
         ORDER BY al.average_rating DESC"
-          [(read-string id)]] :results))
+        [(read-string id)]] :results))
 
 (defn count-apps
   "This function takes a collection of analysis_ids and queries the postgres

@@ -65,9 +65,6 @@ them or do a search on the forums if no wiki link has been provided.
 
 2. Get detailed info about a certain day on graph bubble click.
 
-3. Fix the datepicker from skipping yesterday after pushing it forward past
-today with the keybindings.
-
 ## NOTE
 
 Everything is subject to change.
