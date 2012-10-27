@@ -54,22 +54,22 @@
   (html5
     [:head
       (global "Info")
-      (include-css "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/cupertino/jquery-ui.css")
+      (include-css "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/cupertino/jquery-ui.css")
       (include-js "/js/get-info.js"
                   "/js/info-script.js"
-                  "/js/csv-parser.js"
                   "/js/lib/mousetrap.min.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#info').addClass('active');})")
-      (page content)]))
+      (page content)]
+    (include-js "/js/lib/csv-parser.js")))
 
 (defpartial apps-page [& content]
   (html5
     [:head
       (global "Apps")
       (include-js "/js/get-apps.js"
-                  "/js/collapsible-panel.js")]
+                  "/js/lib/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#apps').addClass('active');
@@ -80,33 +80,33 @@
   (html5
     [:head
       (global "Integrators")
-      (include-css "/css/chosen.css")
+      (include-css "/css/chosen.css"
+                   "/css/pagination.css")
       (include-js "/js/lib/chosen.jquery.min.js"
-                  "/js/lib/jquery.color.js"
                   "/js/get-integrators.js"
                   "/js/lib/mousetrap.min.js"
                   "/js/integrators-script.js"
-                  "/js/csv-parser.js"
-                  "/js/collapsible-panel.js")]
+                  "/js/lib/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#integrators').addClass('active')
         $('.chzn-select').chosen({max_selected_options: 1});
         $('.collapsibleContainer').collapsiblePanel()})")
-      (page content)]))
+      (page content)]
+    (include-js "/js/lib/jquery.dataTables.min.js")))
 
 (defpartial components-page [& content]
   (html5
     [:head
       (global "Components")
       (include-js "/js/get-components.js"
-                  "/js/csv-parser.js"
-                  "/js/collapsible-panel.js")]
+                  "/js/lib/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#components').addClass('active');
         $('.collapsibleContainer').collapsiblePanel();});")
-      (page content)]))
+      (page content)]
+    (include-js "/js/lib/csv-parser.js")))
 
 (defpartial graph-page [& content]
   (html5

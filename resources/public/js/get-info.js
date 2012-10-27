@@ -2,14 +2,13 @@ function getInfo() {
     $.get("/get-info/" + $.datepicker.formatDate('@', $('#date').datepicker('getDate')), function(resp) {
 
         if(resp['tools'] == "")
-            $('#inner').html( "No tools on " + $('#date').val() + ".")
+            $('#inner').html( "No tools on " + $('#date').val() + ".");
         else {
-            tools = "Tools on " + $('#date').val() + ":<hr>"
+            tools = "Tools on " + $('#date').val() + ":<hr>";
 
-            tools +=
-                "<table id='app-info'><thead>" +
+            tools += "<table id='app-info'><thead>" +
                 "<tr><th>Name</th><th>Count</th></tr>" +
-                "</thead><tbody>"
+                "</thead><tbody>";
 
             for(var i = 0; i < resp['tools'].length; i++){
                 tools +=
@@ -17,7 +16,7 @@ function getInfo() {
                     resp['tools'][i]['name'] +
                     "</td><td>" +
                     resp['tools'][i]['count'] +
-                    "</td></tr>"
+                    "</td></tr>";
             }
 
             tools +=
@@ -25,9 +24,9 @@ function getInfo() {
                 "<button class='left'" +
                 "onclick=\"$('#app-info').table2CSV(" +
                 "{header:['App Name','Count']})\">" +
-                "Export to CVS</button>"
+                "Export to CVS</button>";
 
-            $('#inner').html(tools)
+            $('#inner').html(tools);
         }
     })
-}
+};

@@ -84,9 +84,9 @@
 ;Page listing information about Integrators.
 (defpage "/integrators" []
   (template/integrators-page
-    [:h3 "Discovery Environment App Status"]
+    [:h3 "Discovery Environment Integrator Information"]
     [:br]
-    [:div#inner]
+    [:div#inner[:table#app-info]]
     [:br]
     [:select#choose.chzn-select {:data-placeholder "Select an Integrator"}
       [:option "General Data"]

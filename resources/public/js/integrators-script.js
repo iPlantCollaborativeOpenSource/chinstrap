@@ -1,28 +1,29 @@
 var selected;
+var table;
 $(document).ready(function() {
 
     $('.integrator').hover(
     function() {
         $(this).children('.name').text(
-        $(this).children('.email').attr('value'));
+            $(this).children('.email').attr('value'));
         $(this).children('.name').animate({ color: '#555' }, 100)
     },
     function() {
         $(this).children('.name').text(
-        $(this).children('.name').attr('value'))
-        $(this).children('.name').animate({ color: '#6D929B' }, 100)
+            $(this).children('.name').attr('value'));
+        $(this).children('.name').animate({ color: '#6D929B' }, 100);
     })
 
     $('.integrator').click(function() {
-        getIntegrator($(this).children('.id').attr('value'))
+        getIntegrator($(this).children('.id').attr('value'));
         selected = $('option:first-child').attr('selected', true);
-    })
+    });
 
     $('#choose').change(function() {
-        getIntegrator($('#choose').val())
-    })
+        getIntegrator($('#choose').val());
+    });
 
-})
+});
 
 function generalData() {
     $.get('get-integrator-data/', function(resp){
@@ -38,32 +39,40 @@ function generalData() {
                 + "<strong>" + resp['average'].toPrecision(2)
                 + "</strong>"
                 + " applications.</li>"
-            +"</ul>"
-        $('#inner').html(body)
+            +"</ul>";
+        $('#inner').html(body);
     })
-}
+};
 
-Mousetrap.bind(['down', 'left', 'j', 'h'], function() {
-    selected = $('option:selected').next('option')
+Mousetrap.bind(['down', 'j'], function() {
+    selected = $('option:selected').next('option');
     if (selected.val()) {
-        selected.attr('selected', true)
+        selected.attr('selected', true);
         getIntegrator(selected.val());
     }else
-        selected = $('option:selected').prev('option')
-})
+        selected = $('option:selected').prev('option');
+});
 
-Mousetrap.bind(['up', 'right', 'k', 'l'], function() {
-    selected = $('option:selected').prev('option')
+Mousetrap.bind(['up', 'k'], function() {
+    selected = $('option:selected').prev('option');
     if (selected.val()) {
-        selected.attr('selected', true)
+        selected.attr('selected', true);
         getIntegrator(selected.val());
     }else
-        selected = $('option:selected').next('option')
-})
+        selected = $('option:selected').next('option');
+});
+
+Mousetrap.bind(['right', 'l'], function() {
+    if(table) table.fnPageChange('next');
+});
+
+Mousetrap.bind(['left', 'h'], function() {
+    if(table) table.fnPageChange('previous');
+});
 
 Mousetrap.bind(['g'], function() {
     generalData();
     selected = $('option:first-child').attr('selected', true);
-})
+});
 
 generalData();
