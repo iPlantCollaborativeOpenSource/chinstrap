@@ -48,17 +48,21 @@ function getIntegrator(who) {
             apps += "</tbody></table><br>";
 
             body += apps;
+
             body += "<script>"
                     + "$('#app-info').tooltip({"
                         + "hide: 'false',"
                         + "position: {my: 'right bottom', at: 'left+40 top',"
                         + "collision: 'fit flip'}})"
                 + "</script>";
-
             $('#inner').html(body);
 
-            body += "<script>"
-                   + "var table = $('#app-info').dataTable({"
+            if(window.location.hash.toLowerCase() == '#all') {
+                body += "<button onclick='$(\"#app-info\").table2CSV();'>Export CSV"
+                    + "</button>";
+            }else{
+                body += "<script>"
+                     + "var table = $('#app-info').dataTable({"
                        + "sDom: '<\"top\"i>rt<\"bottom\"fp><\"clear\">',"
                        + "sPaginationType: 'full_numbers',"
                        + "bLengthChange: false,"
@@ -66,10 +70,8 @@ function getIntegrator(who) {
                        + "bSort: false,"
                        + "bInfo: false,"
                        + "bAutoWidth: true });"
-                 + "</script>"
-                + "<button onclick='document.write(csv_encode(table.$('tr').fnGetData(this),"
-                + "table.$('th').fnGetData(this)))' class='left'>Export CSV"
-                + "</button>";
+                    + "</script>"
+            }
 
             $('#inner').html(body);
         })

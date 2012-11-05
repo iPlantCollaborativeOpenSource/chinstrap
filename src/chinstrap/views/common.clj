@@ -89,11 +89,12 @@
                   "/js/lib/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
-        $('#integrators').addClass('active')
+        $('#integrators').addClass('active');
         $('.chzn-select').chosen({max_selected_options: 1});
-        $('.collapsibleContainer').collapsiblePanel()})")
+        $('.collapsibleContainer').collapsiblePanel();})")
       (page content)]
-    (include-js "/js/lib/jquery.dataTables.min.js")))
+    (include-js "/js/lib/jquery.dataTables.min.js"
+                "/js/lib/csv-parser.js")))
 
 (defpartial components-page [& content]
   (html5
@@ -112,9 +113,12 @@
   (html5
     [:head
       (global "Graph - by Day")
+      (include-js "/js/lib/spin.min.js"
+                  "/js/spinner.js")
       (javascript-tag "$(document).ready(function(){
-                       $('#graphs').addClass('active')})")]
-    [:body {:onload "createChart()"}
+                       $('#graphs').addClass('active');});")]
+    [:body
+      {:onload "createChart()"}
       (page
         [:h3
           [:select#type.selector {:onchange "reloadChart()"}
@@ -122,17 +126,13 @@
             [:option {:data "Completed"} "Completed"]
             [:option {:data "Failed"} "Failed"]]
         " DE Apps Over Time"]
-        [:br]
-        (graph-nav)
-        [:br]
+        [:br] (graph-nav) [:br]
         [:div#chart]
         [:div#loader]
         content
         [:h5.right "Data Starting from: " [:span#firstDate]])
-        (include-js "/js/lib/amcharts.js"
-                    "/js/lib/spin.min.js"
-                    "/js/spinner.js"
-                    "/js/lib/underscore-min.js")]))
+      (include-js "/js/lib/amcharts.js"
+                  "/js/lib/underscore-min.js")]))
 
 (defpartial day-page []
   (include-js "/js/day-graph.js")

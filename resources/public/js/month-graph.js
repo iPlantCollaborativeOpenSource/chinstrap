@@ -15,6 +15,14 @@ function createChart() {
     chart.balloon.borderThickness = 0;
     chart.balloon.cornerRadius = 3;
 
+    var init = false;
+    chart.addListener("zoomed", function (event) {
+        if(!init) {
+            $('#loader').hide();
+            init = true;
+        }
+    });
+
     // AXES
     // category
     var categoryAxis = chart.categoryAxis;
@@ -39,8 +47,7 @@ function createChart() {
     graph.labelText = "[[count]]";
     chart.addGraph(graph);
 
-
-    $(".spinner").hide()
+    //WRITE
     chart.write("chart");
 };
 

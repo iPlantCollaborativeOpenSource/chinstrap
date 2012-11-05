@@ -3,8 +3,7 @@ var chartData = [];
 var chartCursor;
 
 function createChart(){
-    $('#loader').show();
-    // generate some data first
+
     generateChartData();
 
     // SERIAL CHART
@@ -20,6 +19,14 @@ function createChart(){
 
     // listen for "dataUpdated" event (fired when chart is rendered) and call zoomChart method when it happens
     chart.addListener("dataUpdated", zoomChart);
+    // while loading hack
+    var init = false;
+    chart.addListener("zoomed", function (event) {
+        if(!init) {
+            $('#loader').hide();
+            init = true;
+        }
+    });
 
     // AXES
     // category
@@ -83,7 +90,6 @@ function createChart(){
     chart.addChartScrollbar(chartScrollbar);
 
     // WRITE
-    $('#loader').hide();
     chart.write("chart");
 };
 

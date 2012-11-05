@@ -1,8 +1,8 @@
 function getInfo() {
-    $.get("/get-info/" + $.datepicker.formatDate('@', $('#date').datepicker('getDate')), function(resp) {
-
+    date = $.datepicker.formatDate('@', $('#date').datepicker('getDate'));
+    $.get("/get-info/" + date, function(resp) {
         if(resp['tools'] == "")
-            $('#inner').html( "No tools on " + $('#date').val() + ".");
+            $('#inner').html( "No apps executed on " + $('#date').val() + ".");
         else {
             tools = "Tools on " + $('#date').val() + ":<hr>";
 
@@ -23,7 +23,7 @@ function getInfo() {
                 "</tbody></table><br>" +
                 "<button class='left'" +
                 "onclick=\"$('#app-info').table2CSV(" +
-                "{header:['App Name','Count']})\">" +
+                "{header:['Apps On: "+ $('#date').val() +"','Count']})\">" +
                 "Export to CVS</button>";
 
             $('#inner').html(tools);
