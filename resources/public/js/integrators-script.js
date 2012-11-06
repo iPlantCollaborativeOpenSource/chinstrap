@@ -2,6 +2,11 @@ var selected;
 var table;
 $(document).ready(function() {
 
+    if($('#choose').val != "General Data")
+        getIntegrator($('#choose').val());
+    else
+        generalData();
+
     $('.integrator').hover(
     function() {
         $(this).children('.name').text(
@@ -74,5 +79,3 @@ Mousetrap.bind(['g'], function() {
     generalData();
     selected = $('option:first-child').attr('selected', true);
 });
-
-generalData();
