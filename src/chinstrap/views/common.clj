@@ -10,8 +10,8 @@
       "/css/reset.css"
       "/css/style.css")
     (include-js
-      "http://code.jquery.com/jquery-1.8.2.min.js"
-      "http://code.jquery.com/ui/1.9.0/jquery-ui.min.js")])
+      "//code.jquery.com/jquery-1.8.2.min.js"
+      "//code.jquery.com/ui/1.9.0/jquery-ui.min.js")])
 
 (defpartial graph-nav []
   [:div#graph-nav
