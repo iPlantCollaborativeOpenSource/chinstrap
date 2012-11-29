@@ -63,7 +63,7 @@ function getIntegrator(who) {
             }else{
                 body += "<script>"
                      + "var table = $('#app-info').dataTable({"
-                       + "sDom: '<\"top\"i>rt<\"bottom\"fp><\"clear\">',"
+                       + "sDom: '<\"top\"i>prt<\"bottom\"f><\"clear\">',"
                        + "sPaginationType: 'full_numbers',"
                        + "bLengthChange: false,"
                        + "bFilter: false,"
