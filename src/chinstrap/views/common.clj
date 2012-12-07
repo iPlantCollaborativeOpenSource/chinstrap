@@ -54,7 +54,7 @@
   (html5
     [:head
       (global "Info")
-      (include-css "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/cupertino/jquery-ui.css")
+      (include-css "//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/cupertino/jquery-ui.css")
       (include-js "/js/get-info.js"
                   "/js/info-script.js"
                   "/js/lib/mousetrap.min.js")]
