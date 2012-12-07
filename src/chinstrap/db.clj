@@ -16,8 +16,10 @@
     (if (nil? conf-dir)
       (reset! props (cp/read-properties (file "resources/conf/test/" passed-filename)))
       (reset! props (cp/read-properties (file conf-dir filename)))))
+
   (log/warn "Configuration Data from local properties file:")
   (log/warn @props)
+
   (when-not (configuration-valid)
     (log/warn "THE CONFIGURATION IS INVALID - EXITING NOW")
     (System/exit 1)))
@@ -33,8 +35,10 @@
       (log/warn "THIS APPLICATION WILL NOT EXECUTE CORRECTLY.")
       (System/exit 1))
     (reset! props (cl/properties "chinstrap")))
+  
   (log/warn "Configuration Data loaded from the Zookeeper server:")
   (log/warn @props)
+
   (when-not (configuration-valid)
     (log/warn "THE CONFIGURATION IS INVALID - EXITING NOW")
     (System/exit 1)))
