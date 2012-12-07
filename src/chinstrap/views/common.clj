@@ -5,7 +5,7 @@
 
 (defpartial global [title]
   [:head
-    [:title (str "Chinstrap - " title)]
+    [:title (str "DE Analytics - " title)]
     (include-css
       "/css/reset.css"
       "/css/style.css")
