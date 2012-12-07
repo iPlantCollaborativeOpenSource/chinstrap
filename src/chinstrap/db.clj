@@ -18,7 +18,7 @@
       (reset! props (cp/read-properties (file conf-dir filename)))))
 
   (log/warn "Configuration Data from local properties file:")
-  (log/warn @props)
+  (log-config @props)
 
   (when-not (configuration-valid)
     (log/warn "THE CONFIGURATION IS INVALID - EXITING NOW")
@@ -37,7 +37,7 @@
     (reset! props (cl/properties "chinstrap")))
   
   (log/warn "Configuration Data loaded from the Zookeeper server:")
-  (log/warn @props)
+  (log-config @props)
 
   (when-not (configuration-valid)
     (log/warn "THE CONFIGURATION IS INVALID - EXITING NOW")

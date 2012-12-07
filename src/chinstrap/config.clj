@@ -165,3 +165,11 @@
   []
   (dorun (map #(%) @required-props))
   @configuration-is-valid)
+
+(defn log-config
+  "Logs all of the configuration values at a log level of WARN. Excludes database password from the
+   log output."
+  [props]
+  (let [not-password? #(not= (first %1) "chinstrap.postgresdb.password")]
+    (doseq [prop-pair (filter not-password? (seq props))]
+      (log/warn (first prop-pair) " = " (last prop-pair)))))
