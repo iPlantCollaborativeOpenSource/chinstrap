@@ -7,8 +7,8 @@
   [:head
     [:title (str "DE Analytics - " title)]
     (include-css
-      "/css/reset.css"
-      "/css/style.css")
+      "/de-analytics/css/reset.css"
+      "/de-analytics/css/style.css")
     (include-js
       "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
       "//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js")])
@@ -37,7 +37,7 @@
 
 (defpartial wrapper [& content]
   [:div#wrapper
-    (image {:id "logo" :alt "iPlant Logo"} "/img/logo.png")
+    (image {:id "logo" :alt "iPlant Logo"} "/de-analytics/img/logo.png")
     [:br]
     content]
   [:br])
@@ -55,21 +55,21 @@
     [:head
       (global "Info")
       (include-css "//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/cupertino/jquery-ui.css")
-      (include-js "/js/get-info.js"
-                  "/js/info-script.js"
-                  "/js/lib/mousetrap.min.js")]
+      (include-js "/de-analytics/js/get-info.js"
+                  "/de-analytics/js/info-script.js"
+                  "/de-analytics/js/lib/mousetrap.min.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#info').addClass('active');})")
       (page content)]
-    (include-js "/js/lib/csv-parser.js")))
+    (include-js "/de-analytics/js/lib/csv-parser.js")))
 
 (defpartial apps-page [& content]
   (html5
     [:head
       (global "Apps")
-      (include-js "/js/get-apps.js"
-                  "/js/lib/collapsible-panel.js")]
+      (include-js "/de-analytics/js/get-apps.js"
+                  "/de-analytics/js/lib/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#apps').addClass('active');
@@ -80,41 +80,41 @@
   (html5
     [:head
       (global "Integrators")
-      (include-css "/css/chosen.css"
-                   "/css/pagination.css")
-      (include-js "/js/lib/chosen.jquery.min.js"
-                  "/js/get-integrators.js"
-                  "/js/lib/mousetrap.min.js"
-                  "/js/integrators-script.js"
-                  "/js/lib/collapsible-panel.js")]
+      (include-css "/de-analytics/css/chosen.css"
+                   "/de-analytics/css/pagination.css")
+      (include-js "/de-analytics/js/lib/chosen.jquery.min.js"
+                  "/de-analytics/js/get-integrators.js"
+                  "/de-analytics/js/lib/mousetrap.min.js"
+                  "/de-analytics/js/integrators-script.js"
+                  "/de-analytics/js/lib/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#integrators').addClass('active');
         $('.chzn-select').chosen({max_selected_options: 1});
         $('.collapsibleContainer').collapsiblePanel();})")
       (page content)]
-    (include-js "/js/lib/jquery.dataTables.min.js"
-                "/js/lib/csv-parser.js")))
+    (include-js "/de-analytics/js/lib/jquery.dataTables.min.js"
+                "/de-analytics/js/lib/csv-parser.js")))
 
 (defpartial components-page [& content]
   (html5
     [:head
       (global "Components")
-      (include-js "/js/get-components.js"
-                  "/js/lib/collapsible-panel.js")]
+      (include-js "/de-analytics/js/get-components.js"
+                  "/de-analytics/js/lib/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#components').addClass('active');
         $('.collapsibleContainer').collapsiblePanel();});")
       (page content)]
-    (include-js "/js/lib/csv-parser.js")))
+    (include-js "/de-analytics/js/lib/csv-parser.js")))
 
 (defpartial graph-page [& content]
   (html5
     [:head
       (global "Graph - by Day")
-      (include-js "/js/lib/spin.min.js"
-                  "/js/spinner.js")
+      (include-js "/de-analytics/js/lib/spin.min.js"
+                  "/de-analytics/js/spinner.js")
       (javascript-tag "$(document).ready(function(){
                        $('#graphs').addClass('active');});")]
     [:body
@@ -131,15 +131,15 @@
         [:div#loader]
         content
         [:h5.right "Data Starting from: " [:span#firstDate]])
-      (include-js "/js/lib/amcharts.js"
-                  "/js/lib/underscore-min.js")]))
+      (include-js "/de-analytics/js/lib/amcharts.js"
+                  "/de-analytics/js/lib/underscore-min.js")]))
 
 (defpartial day-page []
-  (include-js "/js/day-graph.js")
+  (include-js "/de-analytics/js/day-graph.js")
   (javascript-tag "$('#day').addClass('active')"))
 
 (defpartial month-page []
-  (include-js "/js/month-graph.js")
+  (include-js "/de-analytics/js/month-graph.js")
   (javascript-tag "$('#month').addClass('active')"))
 
 (defpartial raw-page [& content]
