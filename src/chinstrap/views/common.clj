@@ -69,7 +69,7 @@
     [:head
       (global "Apps")
       (include-js "/de-analytics/js/get-apps.js"
-                  "/de-analytics/js/lib/collapsible-panel.js")]
+                  "/de-analytics/js/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#apps').addClass('active');
@@ -86,7 +86,7 @@
                   "/de-analytics/js/get-integrators.js"
                   "/de-analytics/js/lib/mousetrap.min.js"
                   "/de-analytics/js/integrators-script.js"
-                  "/de-analytics/js/lib/collapsible-panel.js")]
+                  "/de-analytics/js/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#integrators').addClass('active');
@@ -101,7 +101,7 @@
     [:head
       (global "Components")
       (include-js "/de-analytics/js/get-components.js"
-                  "/de-analytics/js/lib/collapsible-panel.js")]
+                  "/de-analytics/js/collapsible-panel.js")]
     [:body
       (javascript-tag "$(document).ready(function(){
         $('#components').addClass('active');
