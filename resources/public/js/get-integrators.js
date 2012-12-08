@@ -2,7 +2,7 @@ function getIntegrator(who) {
     if (!who || who == "General Data"){
         generalData();
     }else{
-        $.get('get-integrator-data/' + who, function(resp){
+        $.get('/de-analytics/get-integrator-data/' + who, function(resp){
             body = "<h3><strong>"
                 + resp['data'][0]['integrator_name']
                 + "</h3></strong>"

@@ -97,7 +97,7 @@ function generateChartData() {
     chartData = [];
     var response;
     request = $.ajax({
-        url: "/get-day-data/" + $('option:selected').attr("data"),
+        url: "/de-analytics/get-day-data/" + $('option:selected').attr("data"),
         async: false,
         contentType: "application/json",
         success: function(data){

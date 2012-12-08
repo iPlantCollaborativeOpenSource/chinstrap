@@ -1,6 +1,6 @@
 function getInfo() {
     date = $.datepicker.formatDate('@', $('#date').datepicker('getDate'));
-    $.get("/get-info/" + date, function(resp) {
+    $.get("/de-analytics/get-info/" + date, function(resp) {
         if(resp['tools'] == "")
             $('#inner').html( "No apps executed on " + $('#date').val() + ".");
         else {

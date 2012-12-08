@@ -8,10 +8,10 @@
         [chinstrap.models.ajax-endpoints]
         [hiccup.element]))
 
-(defpage "/" []
-  (render "/info"))
+(defpage "/de-analytics/" []
+  (render "/de-analytics/info"))
 
-(defpage "/info" []
+(defpage "/de-analytics/info" []
   (template/info-page
     [:h3 "Discovery Environment App Info by Day"]
     [:br]
@@ -20,7 +20,7 @@
     [:input#date.left {:onChange "getInfo()"}]))
 
 ;Page listing the count of different states of Discovery Environment Apps.
-(defpage "/apps" []
+(defpage "/de-analytics/apps" []
   (template/apps-page
     [:h3 "Discovery Environment App Status"]
     [:br]
@@ -43,7 +43,7 @@
       [:div#failed-apps]]))
 
 ;Page listing count and info of Components with no transformation activities.
-(defpage "/components" []
+(defpage "/de-analytics/components" []
   (template/components-page
     [:h3 "Discovery Environment Component Info"]
     [:br]
@@ -82,7 +82,7 @@
                     (:integrator_name record)])]]))]]]))
 
 ;Page listing information about Integrators.
-(defpage "/integrators" []
+(defpage "/de-analytics/integrators" []
   (template/integrators-page
     [:h3 "Discovery Environment Integrator Information"]
     [:br]
@@ -112,26 +112,26 @@
                 [:input.id {:type "hidden" :value (:id record)}]
                 [:td.center (:count record)]]))]]]))
 
-(defpage "/graph" []
-  (render "/graph/day"))
+(defpage "/de-analytics/graph" []
+  (render "/de-analytics/graph/day"))
 
-(defpage "/graph/day" []
+(defpage "/de-analytics/graph/day" []
   (template/graph-page
     [:div.select
       [:input#rb1 {:type "radio" :name "dayGroup" :onClick "setPanSelect()"} "Select&nbsp&nbsp"]
       [:input {:type "radio" :checked "true" :name "dayGroup" :onClick "setPanSelect()"} "Pan"]]
     (template/day-page)))
 
-(defpage "/graph/month" []
+(defpage "/de-analytics/graph/month" []
   (template/graph-page
     (template/month-page)))
 
-(defpage "/raw" []
+(defpage "/de-analytics/raw" []
   (template/raw-page
     [:h3 "Raw JSON Data:"]
     [:br]
-    [:button {:onclick "window.location = '/get-day-data/Completed';"} "Count of Completed apps - By Day"]
-    [:button {:onclick "window.location = '/get-day-data/Failed';"} "Count of Failed apps - By Day"]
-    [:button {:onclick "window.location = '/get-month-data/Completed';"} "Count of Completed apps - By Month"]
-    [:button {:onclick "window.location = '/get-month-data/Failed';"} "Count of Failed apps - By Month"]
-    [:button {:onclick "window.location = '/get-historical-app-count';"} "Historical count of apps - By Bucket"]))
+    [:button {:onclick "window.location = '/de-analytics/get-day-data/Completed';"} "Count of Completed apps - By Day"]
+    [:button {:onclick "window.location = '/de-analytics/get-day-data/Failed';"} "Count of Failed apps - By Day"]
+    [:button {:onclick "window.location = '/de-analytics/get-month-data/Completed';"} "Count of Completed apps - By Month"]
+    [:button {:onclick "window.location = '/de-analytics/get-month-data/Failed';"} "Count of Failed apps - By Month"]
+    [:button {:onclick "window.location = '/de-analytics/get-historical-app-count';"} "Historical count of apps - By Bucket"]))

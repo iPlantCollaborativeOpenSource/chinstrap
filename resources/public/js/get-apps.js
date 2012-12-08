@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 function getApps() {
-    $.get("/get-apps", function(resp) {
+    $.get("/de-analytics/get-apps", function(resp) {
 
         $('#running').html(resp['running'])
         $('#submitted').html(resp['submitted'])

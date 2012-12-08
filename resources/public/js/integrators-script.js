@@ -31,7 +31,7 @@ $(document).ready(function() {
 });
 
 function generalData() {
-    $.get('get-integrator-data/', function(resp){
+    $.get('/de-analytics/get-integrator-data/', function(resp){
         body =
             "<h3><strong>General Integrator Info</strong></h3><hr>"
             + "<ul>"

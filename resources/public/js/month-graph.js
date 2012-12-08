@@ -55,7 +55,7 @@ function generateChartData() {
     chartData = [];
     var response;
     request = $.ajax({
-        url: "/get-month-data/" + $('option:selected').attr("data"),
+        url: "/de-analytics/get-month-data/" + $('option:selected').attr("data"),
         async: false,
         contentType: "application/json",
         success: function(data){

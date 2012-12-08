@@ -16,23 +16,23 @@
 (defpartial graph-nav []
   [:div#graph-nav
     [:span.nav]
-    [:a#day.nav {:href "/graph/day"} [:li.nav "Day"]]
+    [:a#day.nav {:href "/de-analytics/graph/day"} [:li.nav "Day"]]
     [:span.nav]
-    [:a#month.nav {:href "/graph/month"} [:li.nav "Month"]]
+    [:a#month.nav {:href "/de-analytics/graph/month"} [:li.nav "Month"]]
     [:span.nav]])
 
 (defpartial navbar []
   [:div#navbar
     [:span.nav]
-    [:a#info.nav {:href "/info"} [:li.nav "Info"]]
+    [:a#info.nav {:href "/de-analytics/info"} [:li.nav "Info"]]
     [:span.nav]
-    [:a#apps.nav {:href "/apps"} [:li.nav "Apps"]]
+    [:a#apps.nav {:href "/de-analytics/apps"} [:li.nav "Apps"]]
     [:span.nav]
-    [:a#components.nav {:href "/components"} [:li.nav "Components"]]
+    [:a#components.nav {:href "/de-analytics/components"} [:li.nav "Components"]]
     [:span.nav]
-    [:a#integrators.nav {:href "/integrators"} [:li.nav "Integrators"]]
+    [:a#integrators.nav {:href "/de-analytics/integrators"} [:li.nav "Integrators"]]
     [:span.nav]
-    [:a#graphs.nav {:href "/graph"} [:li.nav "Graphs"]]
+    [:a#graphs.nav {:href "/de-analytics/graph"} [:li.nav "Graphs"]]
     [:span.nav]])
 
 (defpartial wrapper [& content]
