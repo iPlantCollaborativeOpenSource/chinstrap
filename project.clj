@@ -1,4 +1,4 @@
-(defproject chinstrap "0.1.0-SNAPSHOT"
+(defproject chinstrap "0.2.0-SNAPSHOT"
   :description "Diagnostic and status front-end for backend data"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.iplantc/clojure-commons "1.1.0-SNAPSHOT"]
