@@ -4,7 +4,6 @@
                  [org.iplantc/clojure-commons "1.4.0-SNAPSHOT"]
                  [org.iplantc/kameleon "0.1.0-SNAPSHOT"]
                  [clj-time "0.4.4"]
-                 [org.clojure/data.json "0.1.2"]
                  [com.novemberain/monger "1.1.2"]
                  [korma/korma "0.3.0-RC2"]
                  [log4j/log4j "1.2.16"]
