@@ -1,6 +1,6 @@
 (defproject chinstrap "0.2.1-SNAPSHOT"
   :description "Diagnostic and status front-end for backend data"
-  :dependencies [[org.clojure/clojure "1.5.0"]
+  :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.iplantc/clojure-commons "1.4.1-SNAPSHOT"]
                  [org.iplantc/kameleon "0.1.1-SNAPSHOT"]
                  [clj-time "0.4.5"]
